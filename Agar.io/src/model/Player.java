@@ -16,11 +16,11 @@ public class Player extends Circle {
 
 	}
 
-	public void move() {
+	public void move(int x, int y) {
 
 	}
 
-	public void grow() {
+	public void grow (Circle food) {
 
 	}
 

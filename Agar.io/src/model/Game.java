@@ -8,6 +8,10 @@ public class Game {
 	private ArrayList<Circle> foods;
 	private ArrayList<User> users;
 	
+	public Game() {
+		this.foods = new ArrayList<Circle>();
+		this.users = new ArrayList<User>();
+	}
 	
 	public void load_Useres() {
 		File archivo = new File("");
@@ -32,4 +36,15 @@ public class Game {
 		} catch (IOException e) {
 		}
 	}
+	
+	public void add_User(String nickname, String password, String email) {
+		User usr =  new User(nickname, password, email);
+		users.add(usr);
+	}
+	
+	public void itialize_Foods() {
+		
+	}
+	
+	
 }
