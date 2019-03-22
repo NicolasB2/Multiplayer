@@ -1,13 +1,15 @@
 package model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
 
 	private String nickname;
 	private String password;
 	private String email;
 	private Player player;
 	
-	public User(String nickname, String password, String email) {
+	public User(String nickname, String password, String email){
 		
 		this.nickname = nickname;
 		this.password = password;
@@ -29,8 +31,4 @@ public class User {
 	public Player getPlayer() {
 		return player;
 	}
-	
-	
-	
-	
 }
