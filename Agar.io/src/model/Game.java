@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Game {
 
+	private static String USERS_PATH = "./Sources/Users.txt";
 	private ArrayList<Circle> foods;
 	private ArrayList<User> users;
 	
@@ -13,12 +14,13 @@ public class Game {
 		this.users = new ArrayList<User>();
 	}
 	
+	
 	public void load_Useres() {
-		File archivo = new File("");
+		File archivo = new File(USERS_PATH);
 		if (archivo.exists()) {
 			try {
 				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo));
-				users = (ArrayList<User>) ois.readObject();
+				users = (ArrayList<User>)ois.readObject();
 				ois.close();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -29,7 +31,7 @@ public class Game {
 	public void save_Users() {
 		try {
 			
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(""));
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USERS_PATH));
 			oos.writeObject(users);
 			oos.close();
 			
@@ -44,6 +46,10 @@ public class Game {
 	
 	public void itialize_Foods() {
 		
+	}
+	
+	public String[] get_Podium() {
+		return null;
 	}
 	
 	
