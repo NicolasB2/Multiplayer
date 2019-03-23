@@ -5,11 +5,8 @@ import java.awt.Point;
 
 public class Player extends Circle {
 
-	public final static String ALIVE = "ALIVE";
-	public final static String GAME_OVER = "GAME_OVER";
-	public String state;
-	
 	private String name;
+	private boolean alive;
 
 	public Player(Color color, Point position, int radius) {
 		super(color, position, radius);
@@ -23,5 +20,23 @@ public class Player extends Circle {
 	public void grow (Circle food) {
 
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
+	}
+	
+	
 
 }
