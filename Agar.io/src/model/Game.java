@@ -15,6 +15,7 @@ public class Game {
 	public Game() {
 		this.foods = new ArrayList<Circle>();
 		this.users = new ArrayList<User>();
+		save_Users();
 		load_Useres();
 	}
 	
@@ -72,6 +73,10 @@ public class Game {
 		users.add(usr);
 	}
 	
+	public void add(User per) {
+		users.add(per);
+	}
+	
 	public void itialize_Foods() {
 		
 	}
@@ -79,6 +84,18 @@ public class Game {
 	public String[] get_Podium() {
 		return null;
 	}
+	
+	
+	//Test Serializable User
+	public static void main(String[] args) {
+		
+		Game test = new Game();
+		test.add_User("deibi", "12345","elDeibi@hotmail.com");
+		test.add_User("DaniG", "0987654321", "daniG@gmail.com");
+		test.add_User("Sarris", "0987612345", "laSarris@hotmail.com");
+		test.add_User("Naicolas", "5432167890", "elBiober@hotmail.com");
+	}
+	
 	
 	
 }
