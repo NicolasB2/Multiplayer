@@ -1,14 +1,14 @@
 package model;
 
-import java.awt.Color;
-import java.awt.Point;
+import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
 
 public class Player extends Circle {
 
 	private String name;
 	private boolean alive;
 
-	public Player(Color color, Point position, int radius) {
+	public Player(Color color, Point2D position, int radius) {
 		super(color, position, radius);
 
 	}
@@ -17,8 +17,8 @@ public class Player extends Circle {
 
 	}
 
-	public void grow (Circle food) {
-
+	public void grow(Circle food) {
+		this.setRadius(this.getRadius() + food.getRadius());
 	}
 
 	public String getName() {
@@ -36,7 +36,5 @@ public class Player extends Circle {
 	public void setAlive(boolean alive) {
 		this.alive = alive;
 	}
-	
-	
 
 }
