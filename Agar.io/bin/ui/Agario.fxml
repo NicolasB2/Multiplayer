@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseMoved="#mouseMoved" prefHeight="500.0" prefWidth="700.0" stylesheets="@../../resources/css/style.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.Controller">
+   <children>
+      <Circle fx:id="player" layoutX="344.0" layoutY="250.0" radius="30.0" stroke="#325f86" strokeType="INSIDE" strokeWidth="1.5">
+         <fill>
+            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+               <stops>
+                  <Stop color="#65c1ee" />
+                  <Stop color="#65c1ee" offset="0.007662835249042145" />
+                  <Stop color="#4683bb" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Circle>
+   </children>
 </AnchorPane>
-

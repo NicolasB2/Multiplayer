@@ -11,16 +11,19 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("Agario.fxml"));
 
-		Scene scene = new Scene(root);
-
+		Scene scene = new Scene(root);			
 		stage.setTitle("Agar.io");
 		stage.setScene(scene);
+//		stage.setFullScreen(true);
+		stage.setMaximized(true);
 		stage.setResizable(false);
 		stage.show();
+
 	}
 
 	public static void main(String[] args) {
 		launch(args);
+
 	}
 
 }
