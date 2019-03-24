@@ -1,2 +1,2 @@
 # Agar.io
-Multiplayer with server client
+Multiplayer game with server-client architecture.
