@@ -23,12 +23,19 @@ public class Controller {
 
 	@FXML
 	void initialize() {
-		game = new Game();
+		game = new Game(player);
 		food = game.getFood();
 
 		for (int i = 0; i < food.size(); i++) {
+			final int b = i;
 			pane.getChildren().add(food.get(i));
+			pane.getChildren().get(i).setOnMouseEntered(e -> {
+				game.getTestPlayer().getAvatar().eat((Circle)pane.getChildren().get(b));
+				
+			});
 		}
+
+		player.toFront();
 	}
 
 	@FXML
@@ -41,6 +48,6 @@ public class Controller {
 
 	@FXML
 	void mouseC(MouseEvent event) {
-		System.out.println(event.getX() + " " + event.getY());
+
 	}
 }

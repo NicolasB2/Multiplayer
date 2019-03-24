@@ -14,6 +14,10 @@ public class FoodThread extends Thread {
 		this.game = game;
 	}
 
+	/**
+	 * Creates a new circle and adds it to the food ArrayList every 2.5 seconds. The
+	 * circle has a radius of 10 and a random color.
+	 */
 	public void run() {
 
 		try {

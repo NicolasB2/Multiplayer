@@ -11,24 +11,35 @@ import threads.FoodThread;
 
 public class Game {
 	public final static int FOOD_RADIUS = 10;
-	private static String USERS_PATH = "./resources/data/users.txt";
-	private static String SCORE_PATH = "./resources/data/scores.txt";
+	private final static String USERS_PATH = "./resources/data/users.txt";
+	private final static String SCORE_PATH = "./resources/data/scores.txt";
 
-	private ArrayList<Player> users;
+	private ArrayList<Player> players;
 	private ArrayList<Circle> food;
 	private LocalTime startTime;
 	private LocalTime endTime;
 
 	private boolean isOn;
+	private Player testPlayer;
 
-	public Game() {
+	public Game(Circle c) {
 
-		users = new ArrayList<Player>();
+		players = new ArrayList<Player>();
 		food = new ArrayList<Circle>();
 		saveUsers();
 		loadUsers();
 		loadInitialFood();
 
+		testPlayer = new Player("Saris", "123", "prueba@vcorreo.com");
+		testPlayer.setAvatar(c);
+	}
+
+	public Player getTestPlayer() {
+		return testPlayer;
+	}
+
+	public void setTestPlayer(Player testPlayer) {
+		this.testPlayer = testPlayer;
 	}
 
 	private void loadInitialFood() {
@@ -45,7 +56,7 @@ public class Game {
 			Circle c = new Circle(randomX, randomY, FOOD_RADIUS, Color.rgb(r, g, b));
 			food.add(c);
 		}
-		
+
 		isOn = true;
 		FoodThread f = new FoodThread(this);
 		f.start();
@@ -56,7 +67,7 @@ public class Game {
 		if (archivo.exists()) {
 			try {
 				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo));
-				users = (ArrayList<Player>) ois.readObject();
+				players = (ArrayList<Player>) ois.readObject();
 				ois.close();
 
 			} catch (Exception e) {
@@ -68,7 +79,7 @@ public class Game {
 	private void saveUsers() {
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USERS_PATH));
-			oos.writeObject(users);
+			oos.writeObject(players);
 			oos.close();
 
 		} catch (IOException e) {
@@ -80,7 +91,7 @@ public class Game {
 		if (archivo.exists()) {
 			try {
 				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo));
-				users = (ArrayList<Player>) ois.readObject();
+				players = (ArrayList<Player>) ois.readObject();
 				ois.close();
 
 			} catch (Exception e) {
@@ -92,7 +103,7 @@ public class Game {
 	private void saveScores() {
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SCORE_PATH));
-			oos.writeObject(users);
+			oos.writeObject(players);
 			oos.close();
 
 		} catch (IOException e) {
@@ -101,15 +112,11 @@ public class Game {
 
 	public void registerUser(String nickname, String password, String email) {
 		Player usr = new Player(nickname, password, email);
-		users.add(usr);
+		players.add(usr);
 	}
 
 	public boolean isOn() {
 		return isOn;
-	}
-
-	public void setOn(boolean isOn) {
-		this.isOn = isOn;
 	}
 
 	public ArrayList<Circle> getFood() {

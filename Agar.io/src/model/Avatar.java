@@ -7,16 +7,19 @@ public class Avatar {
 	private Circle icon;
 	private boolean isAlive;
 
-	public Avatar(Circle icon) {
-		this.icon = icon;
-
+	public Avatar(Circle c) {
+		icon = c;
 	}
 
 	public void move(int x, int y) {
 
 	}
 
-	public void grow(Circle food) {
+	public void eat(Circle food) {
+		if (food.intersects(icon.getBoundsInLocal())) {
+			System.out.println("yeeees");
+		}
+		icon.setRadius(icon.getRadius() + (food.getRadius() / 4));
 
 	}
 

@@ -19,8 +19,6 @@ public class Main extends Application {
 		stage.setResizable(false);
 		stage.show();
 
-		System.out.println(stage.getHeight() + " " + stage.getWidth());
-
 	}
 
 	public static void main(String[] args) {
