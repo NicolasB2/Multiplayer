@@ -1,40 +1,42 @@
 package model;
 
-import javafx.geometry.Point2D;
-import javafx.scene.paint.Color;
+import java.io.Serializable;
 
-public class Player extends Circle {
+import javafx.scene.shape.Circle;
 
-	private String name;
-	private boolean alive;
+public class Player implements Serializable{
 
-	public Player(Color color, Point2D position, int radius) {
-		super(color, position, radius);
-
+	private String nickname;
+	private String password;
+	private String email;
+	private Avatar player; 
+	
+	public Player(String nickname, String password, String email){
+		
+		this.nickname = nickname;
+		this.password = password;
+		this.email = email;
 	}
 
-	public void move(int x, int y) {
-
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void grow(Circle food) {
-		this.setRadius(this.getRadius() + food.getRadius());
+	public String getPassword() {
+		return password;
 	}
 
-	public String getName() {
-		return name;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public Avatar getPlayer() {
+		return player;
 	}
 
-	public boolean isAlive() {
-		return alive;
+	public void setPlayer(Avatar player) {
+		this.player = player;
 	}
 
-	public void setAlive(boolean alive) {
-		this.alive = alive;
-	}
-
+	
 }
