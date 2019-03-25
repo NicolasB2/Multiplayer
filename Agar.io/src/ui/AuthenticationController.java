@@ -24,7 +24,7 @@ public class AuthenticationController {
 	private PasswordField txtPass;
 
 	@FXML
-	private Button butLogin;
+	private javafx.scene.control.Button butLogin;
 
 	@FXML
 	void validateLogin() {
@@ -52,7 +52,7 @@ public class AuthenticationController {
 			// Send message
 			System.out.println("Incorrect Login");
 			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Alert.");
+			alert.setTitle("Alert");
 			alert.setHeaderText("Incorrect Login");
 		}
 	}
