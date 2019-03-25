@@ -5,10 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Game;
 
 public class Main extends Application {
+
 	@Override
 	public void start(Stage stage) throws Exception {
+
 		Parent root = FXMLLoader.load(getClass().getResource("Agario.fxml"));
 
 		Scene scene = new Scene(root);
