@@ -122,7 +122,7 @@ public class Game {
 			InputStream buffer = new BufferedInputStream(file);
 			ObjectInput input = new ObjectInputStream(buffer);
 			
-			users = (ArrayList<Player>)input.readObject();
+			players = (ArrayList<Player>)input.readObject();
 					
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -135,8 +135,8 @@ public class Game {
 		
 		readSerializable();
 		boolean correct = false;
-		for(int i=0; i<users.size();i++) {
-			Player compare = users.get(i);
+		for(int i=0; i<players.size();i++) {
+			Player compare = players.get(i);
 			if(compare.getEmail().equals(email)&& compare.getPassword().equals(passwork)) {	
 				correct=true;
 			}

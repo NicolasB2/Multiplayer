@@ -1,14 +1,23 @@
 package ui;
 
 import java.awt.Button;
+import java.awt.Event;
 import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import org.hamcrest.Condition.Step;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import model.Game;
 
 public class Controller {
@@ -69,15 +78,38 @@ public class Controller {
 	void validateLogin() {
 		if(game.validateLogin(txtEmail.getText(), txtPass.getText())) {
 			//Open game 
+			try {
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Agario.fxml"));
+				Parent root = (Parent) fxmlLoader.load();
+				Stage stage = new Stage();
+				stage.setTitle("Agar.io");
+				stage.setScene(new Scene(root));
+				stage.show();
+				
+			} catch (Exception e) {
+				System.out.println("Can't load Agar.io window");
+			}
+			
+			
 		}else {
 			//Send message
 		}
 	}
 
 	@FXML
-	void openCreateAccount() {
-		// Open window registrer
-
+	void openCreateAccount(ActionEvent event){
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Registrer.fxml"));
+			Parent root = (Parent) fxmlLoader.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.setTitle("Registrer");
+			stage.show();
+			
+		} catch (Exception e) {
+			System.out.println("Can't load registrer window");
+		}
+		
 	}
 
 	// Registrer
@@ -100,5 +132,18 @@ public class Controller {
 		game.registerUser(txtRegistrerUser.getText(), txtRegistrerPass.getText(), txtRegistrerEmail.getText());
 		//Close this window
 		//Open window Login
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
+			Parent root = (Parent) fxmlLoader.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.setTitle("Login");
+			stage.show();
+			
+		} catch (Exception e) {
+			System.out.println("Can't load Login window");
+		}
+		
+		
 	}
 }
