@@ -114,6 +114,37 @@ public class Game {
 		Player usr = new Player(nickname, password, email);
 		players.add(usr);
 	}
+	
+	
+	public void readSerializable() {
+		try {
+			InputStream file = new FileInputStream("users.txt");
+			InputStream buffer = new BufferedInputStream(file);
+			ObjectInput input = new ObjectInputStream(buffer);
+			
+			users = (ArrayList<Player>)input.readObject();
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+	public boolean validateLogin(String email, String passwork) {
+		
+		readSerializable();
+		boolean correct = false;
+		for(int i=0; i<users.size();i++) {
+			Player compare = users.get(i);
+			if(compare.getEmail().equals(email)&& compare.getPassword().equals(passwork)) {	
+				correct=true;
+			}
+		}
+		return correct;
+				
+	}
+	
 
 	public boolean isOn() {
 		return isOn;

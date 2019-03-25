@@ -1,8 +1,11 @@
-/model/
-/tests/
-/ui/
+/controller/
 /data/
-/images/
-/css/
-/threads/
 /diagrams/
+/model/
+/threads/
+<<<<<<< HEAD
+/diagrams/
+=======
+/ui/
+/Registrer.fxml
+>>>>>>> ffd4268b4446595e309d7b6583bdb9272a4f8071
