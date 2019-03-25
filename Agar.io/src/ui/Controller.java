@@ -13,6 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -72,11 +74,16 @@ public class Controller {
 	private PasswordField txtPass;
 
 	@FXML
-	private Button butLogin;
+	private javafx.scene.control.Button butLogin;
 
 	@FXML
 	void validateLogin() {
 		if(game.validateLogin(txtEmail.getText(), txtPass.getText())) {
+			
+			//Close thisWindow
+			Stage thisStage = (Stage) butLogin.getScene().getWindow();
+			thisStage.close();
+			
 			//Open game 
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Agario.fxml"));
@@ -93,11 +100,15 @@ public class Controller {
 			
 		}else {
 			//Send message
+			System.out.println("Incorrect Login");
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Alert.");
+			alert.setHeaderText("Incorrect Login");
 		}
 	}
 
 	@FXML
-	void openCreateAccount(ActionEvent event){
+	void openCreateAccount(){
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Registrer.fxml"));
 			Parent root = (Parent) fxmlLoader.load();
@@ -124,13 +135,15 @@ public class Controller {
 	private PasswordField txtRegistrerPass;
 	
 	@FXML
-	private Button butCreateAccount;
+	private javafx.scene.control.Button butCreateAccount;
 
 	@FXML
 	void createAccount() {
 		//create account
 		game.registerUser(txtRegistrerUser.getText(), txtRegistrerPass.getText(), txtRegistrerEmail.getText());
 		//Close this window
+		Stage thisStage = (Stage) butCreateAccount.getScene().getWindow();
+		thisStage.close();
 		//Open window Login
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
