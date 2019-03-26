@@ -1,7 +1,11 @@
 package ui;
 
+import java.io.IOException;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -14,7 +18,7 @@ import model.Game;
 
 public class AuthenticationController {
 
-	private Game game;
+	private Game game = new Game();
 	// Login
 
 	@FXML
@@ -27,9 +31,9 @@ public class AuthenticationController {
 	private javafx.scene.control.Button butLogin;
 
 	@FXML
-	void validateLogin() {
+	void validateLogin(ActionEvent event)throws IOException {
 
-		if (game.validateLogin(txtEmail.getText(), txtPass.getText())) {
+//		if (game.validateLogin(txtEmail.getText(), txtPass.getText())) {
 
 			// Close thisWindow
 			Stage thisStage = (Stage) butLogin.getScene().getWindow();
@@ -37,35 +41,40 @@ public class AuthenticationController {
 
 			// Open game
 			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Agario.fxml"));
-				Parent root = (Parent) fxmlLoader.load();
-				Stage stage = new Stage();
-				stage.setTitle("Agar.io");
-				stage.setScene(new Scene(root));
-				stage.show();
+				Parent register_parent = FXMLLoader.load(getClass().getResource("Agario.fxml"));
+		        Scene register_scene = new Scene(register_parent);
+		        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				
+		        app_stage.hide(); //optional
+	            app_stage.setScene(register_scene);
+	            app_stage.show();
+	            app_stage.centerOnScreen();
 
 			} catch (Exception e) {
 				System.out.println("Can't load Agar.io window");
 			}
 
-		} else {
-			// Send message
-			System.out.println("Incorrect Login");
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Alert");
-			alert.setHeaderText("Incorrect Login");
-		}
+//		} else {
+//			// Send message
+//			System.out.println("Incorrect Login");
+//			Alert alert = new Alert(AlertType.INFORMATION);
+//			alert.setTitle("Alert");
+//			alert.setHeaderText("Incorrect Login");
+//		}
 	}
 
 	@FXML
-	void openCreateAccount() {
+	void openCreateAccount(ActionEvent event)throws IOException {
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Registrer.fxml"));
-			Parent root = (Parent) fxmlLoader.load();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.setTitle("Registrer");
-			stage.show();
+			
+			Parent register_parent = FXMLLoader.load(getClass().getResource("Register.fxml"));
+	        Scene register_scene = new Scene(register_parent);
+	        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			
+	        app_stage.hide(); //optional
+            app_stage.setScene(register_scene);
+            app_stage.show();
+            app_stage.centerOnScreen();
 
 		} catch (Exception e) {
 			System.out.println("Can't load registrer window");
@@ -88,25 +97,27 @@ public class AuthenticationController {
 	private javafx.scene.control.Button butCreateAccount;
 
 	@FXML
-	void createAccount() {
+	void createAccount(ActionEvent event)throws IOException {
 		// create account
-		game.registerUser(txtRegistrerUser.getText(), txtRegistrerPass.getText(), txtRegistrerEmail.getText());
+			game.registerUser(txtRegistrerUser.getText(), txtRegistrerPass.getText(), txtRegistrerEmail.getText());
 
 		// Close this window
 		Stage thisStage = (Stage) butCreateAccount.getScene().getWindow();
 		thisStage.close();
 		// Open window Login
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
-			Parent root = (Parent) fxmlLoader.load();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.setTitle("Login");
-			stage.show();
+			Parent register_parent = FXMLLoader.load(getClass().getResource("Login.fxml"));
+	        Scene register_scene = new Scene(register_parent);
+	        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			
+	        app_stage.hide(); //optional
+            app_stage.setScene(register_scene);
+            app_stage.show();
+            app_stage.centerOnScreen();
 
 		} catch (Exception e) {
 			System.out.println("Can't load Login window");
 		}
-
-	}
+		}
+	
 }

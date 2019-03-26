@@ -14,7 +14,7 @@ public class Game {
 	private final static String USERS_PATH = "./resources/data/users.txt";
 	private final static String SCORE_PATH = "./resources/data/scores.txt";
 
-	private ArrayList<Player> players;
+	private ArrayList<Player> players= new ArrayList<Player>();
 	private ArrayList<Circle> food;
 	private LocalTime startTime;
 	private LocalTime endTime;
@@ -22,9 +22,10 @@ public class Game {
 	private boolean isOn;
 	private Player testPlayer;
 
+
 	public Game(Circle c) {
 
-		players = new ArrayList<Player>();
+	
 		food = new ArrayList<Circle>();
 		saveUsers();
 		loadUsers();
@@ -118,6 +119,7 @@ public class Game {
 
 	public void registerUser(String nickname, String password, String email) {
 		Player usr = new Player(nickname, password, email);
+		
 		players.add(usr);
 	}
 
