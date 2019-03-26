@@ -5,17 +5,11 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity"
-	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-	onMouseClicked="#mouseC" onMouseMoved="#mouseMoved" prefHeight="500.0"
-	prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1"
-	xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.GameController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseMoved="#mouseMoved" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.GameController">
 	<children>
-		<Circle fx:id="player" layoutX="344.0" layoutY="250.0"
-			radius="30.0" stroke="#325f86" strokeType="INSIDE" strokeWidth="1.5">
+		<Circle fx:id="player" layoutX="344.0" layoutY="250.0" radius="30.0" stroke="#325f86" strokeType="INSIDE" strokeWidth="1.5">
 			<fill>
-				<RadialGradient centerX="0.5" centerY="0.5"
-					radius="0.5">
+				<RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
 					<stops>
 						<Stop color="#65c1ee" />
 						<Stop color="#65c1ee" offset="0.007662835249042145" />

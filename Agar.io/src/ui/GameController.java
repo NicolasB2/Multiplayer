@@ -19,6 +19,7 @@ import model.Game;
 public class GameController {
 
 	private Game game;
+	private ArrayList<Circle> food;
 
 	@FXML
 	private AnchorPane pane;
@@ -27,23 +28,32 @@ public class GameController {
 	private Circle player;
 
 	@FXML
-	private ArrayList<Circle> food;
-
-	@FXML
 	void initialize() {
-		game = new Game(player);
-		food = game.getFood();
+		game = new Game();
+		game.getTestPlayer().setAvatar(player);
+		food = new ArrayList<Circle>();
 
-		for (int i = 0; i < food.size(); i++) {
-			final int b = i;
-			pane.getChildren().add(food.get(i));
-			pane.getChildren().get(i).setOnMouseEntered(e -> {
-				game.getTestPlayer().getAvatar().eat((Circle)pane.getChildren().get(b));
-				
-			});
+		for (int i = 0; i < game.getFood().size(); i++) {
+			food.add(game.getFood().get(i));
 		}
+		paintFood();
+	}
 
-		player.toFront();
+	private void paintFood() {
+
+		for (int i = 0; i < game.getFood().size(); i++) {
+			final int pos = i;
+
+			pane.getChildren().add(food.get(i));
+			food.get(i).setOnMouseEntered(e -> {
+
+				game.getTestPlayer().getAvatar().eat(food.get(pos));
+				pane.getChildren().remove(food.get(pos));
+				game.getFood().remove(food.get(pos));
+
+			});
+
+		}
 	}
 
 	@FXML
@@ -54,10 +64,4 @@ public class GameController {
 
 	}
 
-	@FXML
-	void mouseC(MouseEvent event) {
-
-	}
-
-	
 }

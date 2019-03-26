@@ -14,7 +14,7 @@ public class Game {
 	private final static String USERS_PATH = "./resources/data/users.txt";
 	private final static String SCORE_PATH = "./resources/data/scores.txt";
 
-	private ArrayList<Player> players= new ArrayList<Player>();
+	private ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Circle> food;
 	private LocalTime startTime;
 	private LocalTime endTime;
@@ -22,23 +22,15 @@ public class Game {
 	private boolean isOn;
 	private Player testPlayer;
 
+	public Game() {
 
-	public Game(Circle c) {
-
-	
 		food = new ArrayList<Circle>();
 		saveUsers();
 		loadUsers();
-		loadInitialFood();
+		initializeFood();
+		setOn(true);
 
 		testPlayer = new Player("Saris", "123", "prueba@vcorreo.com");
-		testPlayer.setAvatar(c);
-	}
-
-	public Game() {
-
-		saveUsers();
-		loadUsers();
 	}
 
 	public Player getTestPlayer() {
@@ -49,7 +41,7 @@ public class Game {
 		this.testPlayer = testPlayer;
 	}
 
-	private void loadInitialFood() {
+	private void initializeFood() {
 		for (int i = 0; i < 150; i++) {
 
 			double randomX = Math.floor(Math.random() * (1371 - 1) + 1);
@@ -119,7 +111,7 @@ public class Game {
 
 	public void registerUser(String nickname, String password, String email) {
 		Player usr = new Player(nickname, password, email);
-		
+
 		players.add(usr);
 	}
 
@@ -153,6 +145,10 @@ public class Game {
 
 	public boolean isOn() {
 		return isOn;
+	}
+
+	public void setOn(boolean isOn) {
+		this.isOn = isOn;
 	}
 
 	public ArrayList<Circle> getFood() {
