@@ -25,8 +25,8 @@ public class Game {
 	public Game() {
 
 		food = new ArrayList<Circle>();
-		saveUsers();
-		loadUsers();
+//		saveUsers();
+//		loadUsers();
 		initializeFood();
 		setOn(true);
 
@@ -111,13 +111,13 @@ public class Game {
 
 	public void registerUser(String nickname, String password, String email) {
 		Player usr = new Player(nickname, password, email);
-
 		players.add(usr);
+		saveUsers();
 	}
 
 	public void readSerializable() {
 		try {
-			InputStream file = new FileInputStream("users.txt");
+			InputStream file = new FileInputStream(USERS_PATH);
 			InputStream buffer = new BufferedInputStream(file);
 			ObjectInput input = new ObjectInputStream(buffer);
 
@@ -129,14 +129,16 @@ public class Game {
 
 	}
 
-	public boolean validateLogin(String email, String passwork) {
+	public boolean validateLogin(String email, String password) {
 
 		readSerializable();
 		boolean correct = false;
 		for (int i = 0; i < players.size(); i++) {
 			Player compare = players.get(i);
-			if (compare.getEmail().equals(email) && compare.getPassword().equals(passwork)) {
+			
+			if (compare.getEmail().equals(email) && compare.getPassword().equals(password)) {
 				correct = true;
+				
 			}
 		}
 		return correct;

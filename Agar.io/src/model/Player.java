@@ -6,6 +6,11 @@ import javafx.scene.shape.Circle;
 
 public class Player implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String nickname;
 	private String password;
 	private String email;

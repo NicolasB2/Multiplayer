@@ -12,7 +12,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 	
-		Parent root = FXMLLoader.load(getClass().getResource("Agario.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 
 		Scene scene = new Scene(root);
 		

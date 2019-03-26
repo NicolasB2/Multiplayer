@@ -33,7 +33,7 @@ public class AuthenticationController {
 	@FXML
 	void validateLogin(ActionEvent event)throws IOException {
 
-//		if (game.validateLogin(txtEmail.getText(), txtPass.getText())) {
+		if (game.validateLogin(txtEmail.getText(), txtPass.getText())) {
 
 			// Close thisWindow
 			Stage thisStage = (Stage) butLogin.getScene().getWindow();
@@ -54,13 +54,13 @@ public class AuthenticationController {
 				System.out.println("Can't load Agar.io window");
 			}
 
-//		} else {
-//			// Send message
-//			System.out.println("Incorrect Login");
-//			Alert alert = new Alert(AlertType.INFORMATION);
-//			alert.setTitle("Alert");
-//			alert.setHeaderText("Incorrect Login");
-//		}
+		} else {
+			// Send message
+			System.out.println("Incorrect Login");
+			//Alert alert = new Alert(AlertType.INFORMATION);
+			//alert.setTitle("Alert");
+			//alert.setHeaderText("Incorrect Login");
+		}
 	}
 
 	@FXML

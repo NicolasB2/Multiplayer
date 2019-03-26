@@ -1,6 +1,4 @@
-/controller/
-/data/
-/diagrams/
-/model/
 /threads/
 /ui/
+/model/
+/data/
