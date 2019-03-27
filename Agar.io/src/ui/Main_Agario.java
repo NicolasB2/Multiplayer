@@ -2,11 +2,11 @@ package ui;
 
 import javax.swing.JFrame;
 
-import controller.Game;
+import controller.Login;
 
 public class Main_Agario extends JFrame {
 
-	private Game connectionModel;
+	private Login connectionModel;
 
 	public Main_Agario() {
 

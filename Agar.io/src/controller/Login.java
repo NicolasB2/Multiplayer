@@ -8,55 +8,17 @@ import java.util.Random;
 import model.Player;
 import threads.FoodThread;
 
-public class Game {
+public class Login {
 	public final static int FOOD_RADIUS = 10;
 	private final static String USERS_PATH = "./resources/data/users.txt";
 	private final static String SCORE_PATH = "./resources/data/scores.txt";
 
 	private ArrayList<Player> players = new ArrayList<Player>();
-//	private ArrayList<Circle> food;
-	private LocalTime startTime;
-	private LocalTime endTime;
 
-	private boolean isOn;
-	private Player testPlayer;
+	public Login() {
 
-	public Game() {
-
-//		food = new ArrayList<Circle>();
-		initializeFood();
-		setOn(true);
-
-		testPlayer = new Player("Saris", "123", "prueba@vcorreo.com");
 	}
 
-	public Player getTestPlayer() {
-		return testPlayer;
-	}
-
-	public void setTestPlayer(Player testPlayer) {
-		this.testPlayer = testPlayer;
-	}
-
-	private void initializeFood() {
-		for (int i = 0; i < 150; i++) {
-
-			double randomX = Math.floor(Math.random() * (1371 - 1) + 1);
-			double randomY = Math.floor(Math.random() * (774 - 1) + 1);
-
-			Random rand = new Random();
-			int r = rand.nextInt(255);
-			int g = rand.nextInt(255);
-			int b = rand.nextInt(255);
-
-//			Circle c = new Circle(randomX, randomY, FOOD_RADIUS, Color.rgb(r, g, b));
-//			food.add(c);
-		}
-
-		isOn = true;
-		FoodThread f = new FoodThread(this);
-		f.start();
-	}
 
 	private void loadUsers() {
 		File archivo = new File(USERS_PATH);
@@ -142,21 +104,14 @@ public class Game {
 
 	}
 
-	public boolean isOn() {
-		return isOn;
-	}
 
-	public void setOn(boolean isOn) {
-		this.isOn = isOn;
-	}
+	public static void main(String[] args) {
 
-//	public static void main(String[] args) {
-//
-//		Game test = new Game();
-//		test.registerUser("deibi", "12345", "elDeibi@hotmail.com");
-//		test.registerUser("DaniG", "0987654321", "daniG@gmail.com");
-//		test.registerUser("Sarris", "0987612345", "laSarris@hotmail.com");
-//		test.registerUser("Naicolas", "5432167890", "elBiober@hotmail.com");
-//	}
+		Login test = new Login();
+		test.registerUser("deibi", "12345", "elDeibi@hotmail.com");
+		test.registerUser("DaniG", "0987654321", "daniG@gmail.com");
+		test.registerUser("Sarris", "0987612345", "laSarris@hotmail.com");
+		test.registerUser("Naicolas", "5432167890", "elBiober@hotmail.com");
+	}
 
 }

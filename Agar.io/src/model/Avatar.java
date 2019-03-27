@@ -4,8 +4,6 @@ public class Avatar {
 
 	private boolean isAlive;
 
-
-
 	public boolean isAlive() {
 		return isAlive;
 	}
@@ -13,5 +11,4 @@ public class Avatar {
 	public void setAlive(boolean isAlive) {
 		this.isAlive = isAlive;
 	}
-
-}
+} 

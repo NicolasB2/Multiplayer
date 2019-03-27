@@ -2,7 +2,7 @@ package threads;
 
 import java.util.Random;
 
-import controller.Game;
+import model.Game;
 
 public class FoodThread extends Thread {
 
@@ -28,8 +28,6 @@ public class FoodThread extends Thread {
 				int r = rand.nextInt(255);
 				int g = rand.nextInt(255);
 				int b = rand.nextInt(255);
-
-				
 
 				sleep(2500);
 
