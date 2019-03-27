@@ -5,8 +5,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Random;
 
+import controller.FoodThread;
 import model.Player;
-import threads.FoodThread;
 
 public class Game {
 	public final static int FOOD_RADIUS = 10;

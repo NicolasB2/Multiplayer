@@ -1,4 +1,4 @@
-package threads;
+package controller;
 
 import java.util.Random;
 

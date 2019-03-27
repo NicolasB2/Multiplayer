@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import model.Player;
-import threads.FoodThread;
 
 public class Login {
 	public final static int FOOD_RADIUS = 10;
