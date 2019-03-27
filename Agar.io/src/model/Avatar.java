@@ -2,59 +2,130 @@ package model;
 
 import java.awt.Color;
 import java.util.Random;
-
 import ui.Main_Agario;
 
 public class Avatar {
 
-	 public static final int INIT_MASS = 150;
-	    public static final int MAX_RANGE_COLOR = 256;
-	    private static final Color COLOR_VIRUS = Color.GREEN;
-	    
-	    private double centerX, centerY;
-//	    private int mass;
-	    
-	    private Color color;
-	    private static Random rand = new Random();
-	    private boolean virus;
-	    private int id; //PARA CUANDO SEAN VIRUS
-	    
-//	    private int timeCreation;
-//	    private boolean principal;
-	    
-	    public Avatar(){
-	        this.centerX = rand.nextInt(3*Main_Agario.WINDOW_WIDTH/4)+ Main_Agario.WINDOW_WIDTH/8;
-	        this.centerY = rand.nextInt(3*Main_Agario.WINDOW_HEIGHT/4)+ Main_Agario.WINDOW_HEIGHT/8;
-	        int r = rand.nextInt(MAX_RANGE_COLOR);
-	        int g = rand.nextInt(MAX_RANGE_COLOR);
-	        int b = rand.nextInt(MAX_RANGE_COLOR);
-	        this.color = new Color(r,g,b);
-//	        this.mass = INIT_MASS;
-//	        this.timeCreation = 0;
-	    }
-	    
-	    public Avatar(int xMax, int yMax){
-	        this.centerX = rand.nextInt(3*xMax/4)+ xMax/8;
-	        this.centerY = rand.nextInt(3*yMax/4)+ yMax/8;
-	        int r = rand.nextInt(MAX_RANGE_COLOR);
-	        int g = rand.nextInt(MAX_RANGE_COLOR);
-	        int b = rand.nextInt(MAX_RANGE_COLOR);
-	        this.color = new Color(r,g,b);
-//	        this.mass = INIT_MASS;
-//	        this.timeCreation = 0;
-	    }
-	    
-	    public Avatar(int xMax, int yMax,boolean virus){
-	        //ONLY FOR VIRUS
-	        this.centerX = rand.nextInt(xMax-4)+4;
-	        this.centerY = rand.nextInt(yMax-4)+4;
-	        int r = rand.nextInt(MAX_RANGE_COLOR);
-	        int g = rand.nextInt(MAX_RANGE_COLOR);
-	        int b = rand.nextInt(MAX_RANGE_COLOR);
-	        this.color = new Color(r,g,b);
-//	        this.mass = INIT_MASS/2;
-	        this.virus = virus;
-//	        this.timeCreation = 0;
-	    }
+	public static final int INIT_RADIOUS = 150;
+	public static final int INIT_SPEED = 4;
+	public static final int MAX_COLOR = 256;
 
-} 
+	private static Random random = new Random();
+
+	private double centerX;
+	private double centerY;
+	private double radious;
+	private double speed;
+	private boolean avatar;
+	private boolean alive;
+	private Color color;
+	private int id;
+
+	public void set_color() {
+		int r = random.nextInt(MAX_COLOR);
+		int g = random.nextInt(MAX_COLOR);
+		int b = random.nextInt(MAX_COLOR);
+		this.color = new Color(r, g, b);
+	}
+
+	public Avatar() {
+		this.centerX = random.nextInt(3 * Main_Agario.WINDOW_WIDTH / 4) + Main_Agario.WINDOW_WIDTH / 8;
+		this.centerY = random.nextInt(3 * Main_Agario.WINDOW_HEIGHT / 4) + Main_Agario.WINDOW_HEIGHT / 8;
+		this.avatar = false;
+	}
+
+	public Avatar(int xMax, int yMax) {
+		this.centerX = random.nextInt(xMax);
+		this.centerY = random.nextInt(yMax);
+		this.avatar = true;
+	}
+
+	public double getRadious() {
+		return radious;
+	}
+
+	public void setRadious(double radious) {
+		this.radious = radious;
+	}
+
+	public void increaseRadious(double increase) {
+		this.radious += increase;
+	}
+	
+	public double getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+
+	public boolean isAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(boolean avatar) {
+		this.avatar = avatar;
+	}
+
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void move(double x, double y) {
+		this.centerX += x;
+		this.centerY += y;
+	}
+
+	public void calculate_speed() {
+		this.setSpeed(INIT_SPEED / this.radious);
+	}
+
+	private double distance(double xi, double yi, double xf, double yf) {
+		return Math.sqrt((yf - yi) * (yf - yi) + (xf - xi) * (xf - xi));
+	}
+	
+	public boolean collision(Avatar other) {
+		double d = distance(this.centerX, this.centerY, other.centerX, other.centerY);
+		if (d < this.radious + other.getRadious()) {
+			if (this.radious > other.getRadious()) {
+				return true;
+			} else if (this.radious < other.radious) {
+				return false;
+			} else
+				return false;
+		} else {
+			return false;
+		}
+	}
+
+	public void check_Collision(Avatar other) {	
+		boolean c = collision(other);
+		if (c == true){
+            this.increaseRadious(other.getRadious());
+        } else if (c == false){
+            other.increaseRadious(this.radious);
+        }
+	}
+
+}

@@ -24,8 +24,7 @@ public class Client_Connection {
 	public static final String TRUSTTORE_LOCATION = "C:/Program Files (x86)/Java/jre1.8.0_181/bin/keystore.jks";
 
 	public Client_Connection() throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println("SSLClientSocket Started");
+
 		System.setProperty("javax.net.ssl.trustStore", TRUSTTORE_LOCATION);
 		SSLSocketFactory sf = (SSLSocketFactory) SSLSocketFactory.getDefault();
 		
