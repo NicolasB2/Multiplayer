@@ -2,7 +2,7 @@ package ui;
 
 import javax.swing.JFrame;
 
-import model.Game;
+import controller.Game;
 
 public class Main_Agario extends JFrame {
 

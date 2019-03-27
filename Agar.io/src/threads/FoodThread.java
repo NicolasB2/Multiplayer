@@ -1,7 +1,8 @@
 package threads;
 
 import java.util.Random;
-import model.Game;
+
+import controller.Game;
 
 public class FoodThread extends Thread {
 

@@ -1,9 +1,11 @@
-package model;
+package controller;
 
 import java.io.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Random;
+
+import model.Player;
 import threads.FoodThread;
 
 public class Game {
