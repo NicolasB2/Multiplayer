@@ -20,22 +20,22 @@ public class Client {
 
 	public Client() {
 
-//		this.port = port;
-//		this.serverIp = serverIp;
-//		this.nickname = nickname;
-//
-//		try {
-//			System.out.println("Welcome to the nicolás chat");
-//			socket = new Socket(serverIp, port);
-//			System.out.println("_________________________________");
-//			isClientConected = true;
-//			receive = new Client_Receive_Thread(this);
-//			receive.start();
-//			send = new Client_Send_Thread(this);
-//			send.start();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		this.port = port;
+		this.serverIp = serverIp;
+		this.nickname = nickname;
+
+		try {
+			System.out.println("Welcome to the nicolás chat");
+			socket = new Socket(serverIp, port);
+			System.out.println("_________________________________");
+			isClientConected = true;
+			receive = new Client_Receive_Thread(this);
+			receive.start();
+			send = new Client_Send_Thread(this);
+			send.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 

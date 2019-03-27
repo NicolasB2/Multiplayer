@@ -10,7 +10,7 @@ import threads.FoodThread;
 
 public class Game {
 	public final static int FOOD_RADIUS = 10;
-	private ArrayList<Avatar> avatars
+	private ArrayList<Avatar> avatars;
 	private LocalTime startTime;
 	private LocalTime endTime;
 	private boolean isOn;
@@ -30,8 +30,8 @@ public class Game {
 			int g = rand.nextInt(255);
 			int b = rand.nextInt(255);
 
-			Avatar a = new Avatar()
-			food.add(c);
+			Avatar a = new Avatar();
+			avatars.add(a);
 		}
 
 		isOn = true;
