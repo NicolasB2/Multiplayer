@@ -3,8 +3,11 @@ package conection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+
+import javax.net.ssl.SSLSocketFactory;
 
 public class Client {
 
@@ -18,25 +21,37 @@ public class Client {
 	private Client_Receive_Thread receive;//thread which allow receive strings 
 	private Client_Send_Thread send;////thread which allow send strings 
 
+	public static final String TRUSTTORE_LOCATION = "C:/Program Files (x86)/Java/jre1.8.0_181/bin/keystore.jks";
+	
 	public Client() {
+		
+		// TODO Auto-generated method stub
+				System.out.println("SSLClientSocket Started");
+				System.setProperty("javax.net.ssl.trustStore", TRUSTTORE_LOCATION);
+				SSLSocketFactory sf = (SSLSocketFactory) SSLSocketFactory.getDefault();
+				
+				try {
+					this.socket = sf.createSocket("localhost", 8000);
+					PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+					BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+					Scanner scanner = new Scanner(System.in);
+					while(true)
+					{
+						System.out.println("Enter text: ");
+						String inputLine = scanner.nextLine();
+						if("quit".equalsIgnoreCase(inputLine)) 
+						{
+							break;
+						}
+						out.println(inputLine);
+						System.out.println("Server response: "+  br.readLine());
+					}
+					System.out.println("SSLServerSocket Terminated");
 
-		this.port = port;
-		this.serverIp = serverIp;
-		this.nickname = nickname;
-
-		try {
-			System.out.println("Welcome to the nicolás chat");
-			socket = new Socket(serverIp, port);
-			System.out.println("_________________________________");
-			isClientConected = true;
-			receive = new Client_Receive_Thread(this);
-			receive.start();
-			send = new Client_Send_Thread(this);
-			send.start();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	}
 
 	
