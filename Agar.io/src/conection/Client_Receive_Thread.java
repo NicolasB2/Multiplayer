@@ -1,4 +1,4 @@
-package controller;
+package conection;
 
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
