@@ -2,8 +2,6 @@ package model;
 
 import java.io.Serializable;
 
-import javafx.scene.shape.Circle;
-
 public class Player implements Serializable {
 
 	/**
@@ -28,8 +26,8 @@ public class Player implements Serializable {
 		return avatar;
 	}
 
-	public void setAvatar(Circle c) {
-		avatar = new Avatar(c);
+	public void setAvatar() {
+//		avatar = new Avatar(c);
 	}
 
 	public String getNickname() {

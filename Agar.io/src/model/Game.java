@@ -4,9 +4,6 @@ import java.io.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Random;
-
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import threads.FoodThread;
 
 public class Game {
@@ -15,7 +12,7 @@ public class Game {
 	private final static String SCORE_PATH = "./resources/data/scores.txt";
 
 	private ArrayList<Player> players = new ArrayList<Player>();
-	private ArrayList<Circle> food;
+//	private ArrayList<Circle> food;
 	private LocalTime startTime;
 	private LocalTime endTime;
 
@@ -24,9 +21,7 @@ public class Game {
 
 	public Game() {
 
-		food = new ArrayList<Circle>();
-//		saveUsers();
-//		loadUsers();
+//		food = new ArrayList<Circle>();
 		initializeFood();
 		setOn(true);
 
@@ -52,8 +47,8 @@ public class Game {
 			int g = rand.nextInt(255);
 			int b = rand.nextInt(255);
 
-			Circle c = new Circle(randomX, randomY, FOOD_RADIUS, Color.rgb(r, g, b));
-			food.add(c);
+//			Circle c = new Circle(randomX, randomY, FOOD_RADIUS, Color.rgb(r, g, b));
+//			food.add(c);
 		}
 
 		isOn = true;
@@ -153,15 +148,6 @@ public class Game {
 		this.isOn = isOn;
 	}
 
-	public ArrayList<Circle> getFood() {
-		return food;
-	}
-
-	public void setFood(ArrayList<Circle> food) {
-		this.food = food;
-	}
-
-	// Test Serializable User
 //	public static void main(String[] args) {
 //
 //		Game test = new Game();

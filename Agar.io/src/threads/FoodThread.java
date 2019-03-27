@@ -1,9 +1,6 @@
 package threads;
 
 import java.util.Random;
-
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import model.Game;
 
 public class FoodThread extends Thread {
@@ -31,8 +28,7 @@ public class FoodThread extends Thread {
 				int g = rand.nextInt(255);
 				int b = rand.nextInt(255);
 
-				Circle c = new Circle(randomX, randomY, game.FOOD_RADIUS, Color.rgb(r, g, b));
-				game.getFood().add(c);
+				
 
 				sleep(2500);
 
