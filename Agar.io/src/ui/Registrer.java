@@ -4,11 +4,13 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class Registrer extends JFrame implements ActionListener {
 
@@ -60,11 +62,13 @@ public class Registrer extends JFrame implements ActionListener {
 		setResizable(false);
 		
 		
-		lbTitle = new JLabel("Sing up now");
-		lbTitle.setFont(new java.awt.Font("Calibri", 1, 18));
+		lbTitle = new JLabel("Registration", SwingConstants.CENTER);
+		lbTitle.setFont(new java.awt.Font("Calibri", 1, 20));
 		
 		txtUser = new JPlaceholderTextField("User");
+		txtUser.setFont(new java.awt.Font("Calibri", 1, 18));
 		txtEmail = new JPlaceholderTextField("Email");
+		txtEmail.setFont(new java.awt.Font("Calibri", 1, 18));
 		txtPass = new JPasswordField();
 		
 		labelEmpty1 = new JLabel(" ");
@@ -75,17 +79,38 @@ public class Registrer extends JFrame implements ActionListener {
 		labelEmpty6 = new JLabel(" ");
 		labelEmpty7 = new JLabel(" ");
 		labelEmpty8 = new JLabel(" ");
-		labelEmpty9 = new JLabel(" ");
+		
+		
+		String path = "/icons/user.png";
+		java.net.URL url = this.getClass().getResource(path);
+		ImageIcon icon = new ImageIcon(url);
+		labelEmpty9 = new JLabel("", SwingConstants.CENTER);
+		labelEmpty9.setIcon(icon);
+		
 		labelEmpty10 = new JLabel(" ");
 		labelEmpty11 = new JLabel(" ");
 		labelEmpty12 = new JLabel(" ");
 		labelEmpty13 = new JLabel(" ");
-		labelEmpty14 = new JLabel(" ");
+		
+		
+		String path2 = "/icons/correo.png";
+		java.net.URL url2 = this.getClass().getResource(path2);
+		ImageIcon icon2 = new ImageIcon(url2);
+		labelEmpty14 = new JLabel("", SwingConstants.CENTER);
+		labelEmpty14.setIcon(icon2);
+		
 		labelEmpty15 = new JLabel(" ");
 		labelEmpty16 = new JLabel(" ");
 		labelEmpty17 = new JLabel(" ");
 		labelEmpty18 = new JLabel(" ");
-		labelEmpty19 = new JLabel(" ");
+		
+		
+		String path3 = "/icons/password.png";
+		java.net.URL url3 = this.getClass().getResource(path3);
+		ImageIcon icon3 = new ImageIcon(url3);
+		labelEmpty19 = new JLabel("", SwingConstants.CENTER);
+		labelEmpty19.setIcon(icon3);
+		
 		labelEmpty20 = new JLabel(" ");
 		labelEmpty21 = new JLabel(" ");
 		labelEmpty22 = new JLabel(" ");
@@ -96,6 +121,7 @@ public class Registrer extends JFrame implements ActionListener {
 		
 		
 		butRegistrer= new JButton("Sing me up");
+		butRegistrer.setFont(new java.awt.Font("Calibri", 1, 15));
 		butRegistrer.setActionCommand(REGISTRER);
 		butRegistrer.addActionListener(this);
 		

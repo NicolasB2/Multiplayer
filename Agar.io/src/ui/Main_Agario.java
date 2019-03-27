@@ -46,9 +46,11 @@ public class Main_Agario extends JFrame {
 	
 	public static void main(String[] args) {
 
-	
-		Login ventLogin = new Login();
-		ventLogin.setVisible(true);
+		Registrer ventRegistrer = new Registrer();
+		ventRegistrer.setVisible(true);
+		
+		//Login ventLogin = new Login();
+		//ventLogin.setVisible(true);
 	}
 
 }
