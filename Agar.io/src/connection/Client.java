@@ -37,10 +37,10 @@ public class Client {
 			while (!exit) {
 				String line = b.readLine();
 				os.writeObject(line);
-				os.flush();
+//				os.flush();
 
-				String s = (String) is.readObject();
-				System.out.println(s);
+//				String s = (String) is.readObject();
+//				System.out.println(s);
 			}
 
 		} catch (Exception ex) {

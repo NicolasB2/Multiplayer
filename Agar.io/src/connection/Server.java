@@ -28,8 +28,10 @@ public class Server {
 			while (true) {
 				SSLSocket sslsocket = (SSLSocket) s.accept();
 				System.out.println("New Client accepted");
-				ListenerThread t = new ListenerThread(sslsocket);
+				ServerListenerThread t = new ServerListenerThread(sslsocket);
 				t.start();
+//				ServerSenderThread sst = new ServerSenderThread(sslsocket,this);
+//				sst.start();
 			}
 
 		} catch (Exception ex) {
