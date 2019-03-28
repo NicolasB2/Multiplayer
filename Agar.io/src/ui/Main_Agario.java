@@ -10,44 +10,32 @@ public class Main_Agario extends JFrame {
 	public static final int WINDOW_HEIGHT = 800;
 	public static final int WINDOW_POS_X = 50;
 	public static final int WINDOW_POS_Y = 50;
-	private Login connectionModel;
+
+	private Login_GUI loginWindow;
+	private Space space;
+	private String nickName;
+	private int id;
+	// falta: connection with moving
 
 	public Main_Agario() {
+		initComponents();
+		this.loginWindow = new Login_GUI();
+		this.loginWindow.setVisible(true);
 
 	}
 
-	public String validateLogin(String email, String password) {
-		String message = "Invalid login";
-		if (connectionModel.validateLogin(email, password)) {
-			message = "Valid login";
-		}
-
-		return message;
-
+	private void initComponents() {
+		
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setVisible(false);
+		this.setBounds(WINDOW_POS_X, WINDOW_POS_Y, WINDOW_WIDTH, WINDOW_HEIGHT);
+		this.setResizable(false);
+	    this.setFocusable(true);
+	    this.setLocationRelativeTo(null);
 	}
-
-	public void openRegistrer() {
-		Registrer ventRegistrer = new Registrer();
-		ventRegistrer.setVisible(true);
-
-	}
-
-	public void openGame() {
-
-	}
-
-	public void creatAccount(String nickname, String password, String email) {
-		connectionModel.registerUser(nickname, password, email);
-
-	}
-
-	public static void main(String[] args) {
-
-		Registrer ventRegistrer = new Registrer();
-		ventRegistrer.setVisible(true);
-
-		// Login ventLogin = new Login();
-		// ventLogin.setVisible(true);
-	}
-
 }
+
+
+
+
+	

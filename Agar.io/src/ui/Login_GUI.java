@@ -17,8 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-
-public class Login extends JFrame implements ActionListener {
+public class Login_GUI extends JFrame implements ActionListener {
 
 	public static final String LOGIN = "Login";
 	public static final String GO_REGISTRER = "Go registrer";
@@ -57,7 +56,7 @@ public class Login extends JFrame implements ActionListener {
 
 	private Main_Agario connection;
 
-	public Login() {
+	public Login_GUI() {
 
 		setTitle("Agar.io");
 		setSize(333, 333);
@@ -66,15 +65,13 @@ public class Login extends JFrame implements ActionListener {
 
 		lbTitle = new JLabel("Sing in", SwingConstants.CENTER);
 		lbTitle.setFont(new java.awt.Font("Calibri", 1, 28));
-		
+
 		lbTextRegistrer = new JLabel("Don't have account?", SwingConstants.CENTER);
 		lbTextRegistrer.setFont(new java.awt.Font("Calibri", 1, 18));
-		
 
 		txtEmail = new JPlaceholderTextField("Email");
 		txtEmail.setFont(new java.awt.Font("Calibri", 1, 18));
 		txtPass = new JPasswordField();
-		
 
 		labelEmpty1 = new JLabel(" ");
 		labelEmpty2 = new JLabel(" ");
@@ -84,31 +81,24 @@ public class Login extends JFrame implements ActionListener {
 		labelEmpty6 = new JLabel(" ");
 		labelEmpty7 = new JLabel(" ");
 		labelEmpty8 = new JLabel(" ");
-		
+
 		String path = "/icons/user.png";
 		java.net.URL url = this.getClass().getResource(path);
 		ImageIcon icon = new ImageIcon(url);
 		labelEmpty9 = new JLabel("", SwingConstants.CENTER);
 		labelEmpty9.setIcon(icon);
-		
-		
-		
-		
+
 		labelEmpty10 = new JLabel(" ");
 		labelEmpty11 = new JLabel(" ");
 		labelEmpty12 = new JLabel(" ");
 		labelEmpty13 = new JLabel(" ");
-		
-		
+
 		String path2 = "/icons/password.png";
 		java.net.URL url2 = this.getClass().getResource(path2);
 		ImageIcon icon2 = new ImageIcon(url2);
 		labelEmpty14 = new JLabel("", SwingConstants.CENTER);
 		labelEmpty14.setIcon(icon2);
-		
-		
-		
-		
+
 		labelEmpty15 = new JLabel(" ");
 		labelEmpty16 = new JLabel(" ");
 		labelEmpty17 = new JLabel(" ");
@@ -183,15 +173,7 @@ public class Login extends JFrame implements ActionListener {
 
 		if (comand.equals(LOGIN)) {
 
-			String message = connection.validateLogin(getEmail(), getPassword());
-			JOptionPane.showMessageDialog(null, message);
-
-			if (message.equals("Valid login")) {
-				connection.openGame();
-			}
-
 		} else if (comand.equals(GO_REGISTRER)) {
-			connection.openRegistrer();
 		}
 
 	}

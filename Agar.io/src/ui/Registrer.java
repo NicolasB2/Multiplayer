@@ -182,7 +182,6 @@ public class Registrer extends JFrame implements ActionListener {
 		String comand = e.getActionCommand();
 		
 		if(comand.equals(REGISTRER)) {
-			connection.creatAccount(getRegistrerUser(), getRegistrerPass(), getRegistrerEmail());
 		}
 		
 		

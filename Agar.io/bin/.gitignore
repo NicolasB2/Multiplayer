@@ -1,3 +1,5 @@
+/.classpath
+/.project
 /conection/
 /controller/
 /data/
@@ -5,6 +7,3 @@
 /icons/
 /model/
 /ui/
-/.classpath
-/.project
-/threads/
