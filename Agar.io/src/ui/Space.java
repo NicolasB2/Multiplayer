@@ -80,10 +80,10 @@ public class Space extends Canvas {
 
 	}
 
-	public void paintPlayer(Game avatars, Graphics g) throws RemoteException {
-		for (int i = 0; i < avatars.avatars.size(); i++) {
+	public void paintPlayer(Game game, Graphics g) throws RemoteException {
+		for (int i = 0; i < game.avatars.size(); i++) {
 			try {
-				Avatar a = avatars.avatars.get(i); // getPlayerIterator
+				Avatar a = game.avatars.get(i); // getPlayerIterator
 
 			} catch (Exception e) {
 				// TODO: handle exception
