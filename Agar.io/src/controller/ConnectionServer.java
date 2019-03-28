@@ -69,6 +69,13 @@ public class ConnectionServer {
 
 	}
 	
-	
+	public static void main(String[] args) {
+		try {
+			ConnectionServer cs= new ConnectionServer();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }

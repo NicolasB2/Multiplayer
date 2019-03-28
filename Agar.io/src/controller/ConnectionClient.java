@@ -64,4 +64,14 @@ public class ConnectionClient {
 	public void play_game() {
 
 	}
+	
+	public static void main(String[] args) {
+		try {
+			ConnectionClient cc = new ConnectionClient();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }
