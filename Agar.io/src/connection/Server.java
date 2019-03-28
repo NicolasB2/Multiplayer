@@ -1,91 +1,46 @@
 package connection;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.ArrayList;
+import java.io.*;
+import java.security.*;
+import java.security.cert.CertificateException;
+
+import javax.net.ssl.*;
+
+
 
 public class Server {
 
-	private ArrayList<Server_Receive_Thread> serverRecive;
-	private Server_Send_Thread serverSend;
 
-	private ArrayList<String> messeges;
-	private ArrayList<Socket> sockets;
+public static void main(String[] args) {
 
-	private static ServerSocket serverSocket;
-	private boolean sendMulticast;
 
-	private int sender;
+	String ksPassword = "123456";
+	String ctPassword = "123456";
+    String ksName = "./resources/data/MyServer.jks";
+    char ksPass[] = ksPassword.toCharArray();
+    char ctPass[] = ctPassword.toCharArray();
 
-	public Server(int port, int number_clients) {
+    KeyStore ks;
+    try {
+        ks = KeyStore.getInstance("JKS");
+        ks.load(new FileInputStream(ksName), ksPass);
+        KeyManagerFactory kmf = 
+        KeyManagerFactory.getInstance("SunX509");
+        kmf.init(ks, ctPass);
+        SSLContext sc = SSLContext.getInstance("TLS");
+        sc.init(kmf.getKeyManagers(), null, null);
+        SSLServerSocketFactory ssf = sc.getServerSocketFactory();
+        SSLServerSocket s   = (SSLServerSocket) ssf.createServerSocket(8000);                
 
-		try {
+        while(true){                
+            SSLSocket sslsocket = (SSLSocket) s.accept();
+            System.out.println("New Client accepted");
+            ListenerThread t = new ListenerThread(sslsocket);
+            t.start();;      
+        }
 
-			System.out.println("Server on line");
-			serverSocket = new ServerSocket(port);
-			sendMulticast = false;
-			sender = -1;
-
-			sockets = new ArrayList<>();
-			messeges = new ArrayList<>();
-
-			serverRecive = new ArrayList<>();
-
-			for (int i = 0; i < number_clients; i++) {
-				Socket s = serverSocket.accept();
-				sockets.add(s);
-				System.out.println("Client was connected");
-				serverRecive.add(new Server_Receive_Thread(this, s, i));
-			}
-
-			serverSend = new Server_Send_Thread(this);
-			serverSend.start();
-
-			for (int i = 0; i < serverRecive.size(); i++) {
-				serverRecive.get(i).start();
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public ArrayList<Socket> getSockets() {
-		return sockets;
-	}
-
-	public boolean isSendMulticast() {
-		return sendMulticast;
-	}
-
-	public void setSendMulticast(boolean sendMulticast) {
-		this.sendMulticast = sendMulticast;
-	}
-
-	public int getSender() {
-		return sender;
-	}
-
-	public void setSender(int sender) {
-		this.sender = sender;
-	}
-
-	public void newMessege(String mensajeObtenidoCliente) {
-		messeges.add(mensajeObtenidoCliente);
-	}
-
-	public String lastMessage() {
-		if (messeges.size() > 0) {
-			return messeges.get(messeges.size() - 1);
-		}
-		return "";
-	}
-
-	public static void main(String[] args) {
-
-		Server s = new Server(8000, 3);
-
-	}
+    } catch (KeyStoreException | IOException | NoSuchAlgorithmException | CertificateException | UnrecoverableKeyException | KeyManagementException ex) {
+        
+    }        
+} 
 }
