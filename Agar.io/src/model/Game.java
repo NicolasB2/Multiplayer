@@ -9,6 +9,7 @@ import java.util.Random;
 
 import controller.ThreadFood;
 import controller.ThreadMoving;
+import controller.ThreadTime;
 import controller.Player;
 import controller.ThreadCollision;
 
@@ -20,8 +21,9 @@ public class Game {
 	
 	public ArrayList<Avatar> food;
 	public ArrayList<Avatar> avatars;
-	private Long start;
+	public Long start;
 	private boolean isOn;
+	private boolean timeout;
 
 	public Game() {
 		
@@ -29,12 +31,20 @@ public class Game {
 		this.avatars = new ArrayList<Avatar>();
 		StartTime();
 		isOn = false;
+		timeout = false;
+		
+		ThreadTime t = new ThreadTime(this);
+		t.start();
 	}
 
 	public void startGame(int id) {
 		isOn = true;
+		timeout = false;
 		StartTime();
 		initializeFood();
+		
+		ThreadTime t = new ThreadTime(this);
+		t.start();
 		
 		ThreadFood f = new ThreadFood(this);
 		f.start();
@@ -48,25 +58,6 @@ public class Game {
 	
 	public void StartTime() {
 		start = System.currentTimeMillis();
-	}
-	
-	public boolean itsTimeOut() {
-		Long corrently = System.currentTimeMillis();
-		Long minus = corrently-start;
-		
-		if(isOn) {
-			if (minus==END_TIME) {
-				return true;
-			}
-		}
-		
-		if(!isOn){
-			if (minus==WAIT_TIME) {
-				return true;
-			}
-		}
-		
-		return false;
 	}
 	
 	private void initializeFood() {
@@ -136,4 +127,13 @@ public class Game {
 		this.isOn = isOn;
 	}
 
+	public boolean isTimeout() {
+		return timeout;
+	}
+
+	public void setTimeout(boolean timeout) {
+		this.timeout = timeout;
+	}
+
+	
 }
