@@ -4,11 +4,11 @@ import java.util.Random;
 
 import model.Game;
 
-public class FoodThread extends Thread {
+public class ThreadFood extends Thread {
 
 	private Game game;
 
-	public FoodThread(Game game) {
+	public ThreadFood(Game game) {
 		this.game = game;
 	}
 

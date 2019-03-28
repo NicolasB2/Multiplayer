@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 
-import controller.FoodThread;
+import controller.ThreadFood;
 import controller.Player;
 
 public class Game {
@@ -16,8 +16,8 @@ public class Game {
 	public final static int END_TIME = 300000;
 	public final static int FOOD_RADIUS = 10;
 	
-	private ArrayList<Avatar> food;
-	private ArrayList<Avatar> avatars;
+	public ArrayList<Avatar> food;
+	public ArrayList<Avatar> avatars;
 	private Long start;
 	private boolean isOn;
 
@@ -73,11 +73,11 @@ public class Game {
 		}
 
 		isOn = true;
-		FoodThread f = new FoodThread(this);
+		ThreadFood f = new ThreadFood(this);
 		f.start();
 	}
 
-	private void deleteFood() {
+	public void deleteFood() {
 		ArrayList<Integer> aux = new ArrayList<Integer>();
 		for (int i = 0; i < food.size(); i++) {
 			if (food.get(i).isAlive()) {
@@ -91,7 +91,7 @@ public class Game {
 
 	}
 
-	private void deleteAvatars() {
+	public void deleteAvatars() {
 		ArrayList<Integer> aux = new ArrayList<Integer>();
 		for (int i = 0; i < avatars.size(); i++) {
 			if (avatars.get(i).isAlive()) {
@@ -126,24 +126,6 @@ public class Game {
 		}	
 	}
 	
-	public void checkCollisions() {
-		for (int i = 0; i < avatars.size(); i++) {
-
-			for (int j = 0; j < food.size(); j++) {
-				avatars.get(i).check_Collision(food.get(j));
-			}
-		}
-		
-		for (int i = 0; i < avatars.size(); i++) {
-
-			for (int j = i; j < avatars.size(); j++) {
-				avatars.get(i).check_Collision(food.get(j));
-			}
-		}
-		
-		deleteAvatars();
-		deleteFood();
-	}
 
 	public boolean isOn() {
 		return isOn;
