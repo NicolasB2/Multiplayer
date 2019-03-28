@@ -21,7 +21,7 @@ public class ConnectionClient {
 	
 //	private Client_Receive_Thread receive;
 //	private Client_Send_Thread send;
-	public static final String TRUSTTORE_LOCATION = "C:/Program Files (x86)/Java/jre1.8.0_181/bin/keystore.jks";
+	public static final String TRUSTTORE_LOCATION = "./resources/data/MyServer.jks";
 
 	public ConnectionClient() throws Exception {
 

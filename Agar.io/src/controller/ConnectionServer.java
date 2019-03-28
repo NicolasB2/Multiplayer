@@ -20,7 +20,7 @@ public class ConnectionServer {
 	private Server_Receive_Thread receive;
 	private Server_Send_Thread send;
 	
-	public static final String KEYSTORE_LOCATION = "C:/Program Files (x86)/Java/jre1.8.0_181/bin/keystore.jks";
+	public static final String KEYSTORE_LOCATION = "./resources/data/MyServer.jks";
 	public static final String KEYSTORE_PASSWORD = "123456";
 	
 	public ConnectionServer() throws Exception {
