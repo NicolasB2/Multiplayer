@@ -1,6 +1,8 @@
-package model;
+package controller;
 
 import java.io.Serializable;
+
+import model.Avatar;
 
 public class Player implements Serializable {
 

@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.Random;
 
 import controller.FoodThread;
-import model.Player;
+import controller.Player;
 
 public class Game {
 	

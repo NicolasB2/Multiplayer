@@ -5,8 +5,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Random;
 
-import model.Player;
-
 public class Login {
 	public final static int FOOD_RADIUS = 10;
 	private final static String USERS_PATH = "./resources/data/users.txt";
