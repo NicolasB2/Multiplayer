@@ -1,4 +1,4 @@
-package conection;
+package connection;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

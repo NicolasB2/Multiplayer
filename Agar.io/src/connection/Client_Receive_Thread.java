@@ -1,4 +1,4 @@
-package conection;
+package connection;
 
 import java.io.BufferedWriter;
 import java.io.DataInputStream;

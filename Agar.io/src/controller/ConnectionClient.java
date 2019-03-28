@@ -10,10 +10,10 @@ import java.util.Scanner;
 
 import javax.net.ssl.SSLSocketFactory;
 
-import conection.Client_Receive_Thread;
-import conection.Client_Send_Thread;
+import connection.Client_Receive_Thread;
+import connection.Client_Send_Thread;
 
-public class Client_Connection {
+public class ConnectionClient {
 
 	private static String SERVER_IP= "localhost";
 	private static int  PORT= 8000;
@@ -23,7 +23,7 @@ public class Client_Connection {
 //	private Client_Send_Thread send;
 	public static final String TRUSTTORE_LOCATION = "C:/Program Files (x86)/Java/jre1.8.0_181/bin/keystore.jks";
 
-	public Client_Connection() throws Exception {
+	public ConnectionClient() throws Exception {
 
 		System.setProperty("javax.net.ssl.trustStore", TRUSTTORE_LOCATION);
 		SSLSocketFactory sf = (SSLSocketFactory) SSLSocketFactory.getDefault();
