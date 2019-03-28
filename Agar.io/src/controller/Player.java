@@ -2,7 +2,7 @@ package controller;
 
 import java.io.Serializable;
 
-import model.Avatar;
+
 
 public class Player implements Serializable {
 
@@ -14,7 +14,7 @@ public class Player implements Serializable {
 	private String nickname;
 	private String password;
 	private String email;
-	private Avatar avatar;
+	
 
 	public Player(String nickname, String password, String email) {
 
@@ -24,13 +24,6 @@ public class Player implements Serializable {
 
 	}
 
-	public Avatar getAvatar() {
-		return avatar;
-	}
-
-	public void setAvatar() {
-//		avatar = new Avatar(c);
-	}
 
 	public String getNickname() {
 		return nickname;

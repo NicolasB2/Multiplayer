@@ -1,4 +1,4 @@
-package controller;
+package connection;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -7,9 +7,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import javax.net.ssl.SSLServerSocketFactory;
-
-import connection.Server_Receive_Thread;
-import connection.Server_Send_Thread;
 
 public class ConnectionServer {
 

@@ -71,15 +71,7 @@ public class Game {
 	
 	private void initializeFood() {
 		for (int i = 0; i < 150; i++) {
-
-			double randomX = Math.floor(Math.random() * (1371 - 1) + 1);
-			double randomY = Math.floor(Math.random() * (774 - 1) + 1);
-
-			Random rand = new Random();
-			int r = rand.nextInt(255);
-			int g = rand.nextInt(255);
-			int b = rand.nextInt(255);
-
+			
 			Avatar a = new Avatar();
 			food.add(a);
 		}
@@ -90,7 +82,7 @@ public class Game {
 	public void deleteFood() {
 		ArrayList<Integer> aux = new ArrayList<Integer>();
 		for (int i = 0; i < food.size(); i++) {
-			if (food.get(i).isAlive()) {
+			if (!food.get(i).isAlive()) {
 				aux.add(i);
 			}
 		}
@@ -104,7 +96,7 @@ public class Game {
 	public void deleteAvatars() {
 		ArrayList<Integer> aux = new ArrayList<Integer>();
 		for (int i = 0; i < avatars.size(); i++) {
-			if (avatars.get(i).isAlive()) {
+			if (!avatars.get(i).isAlive()) {
 				aux.add(i);
 			}
 		}

@@ -1,4 +1,4 @@
-package controller;
+package connection;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,9 +9,6 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 
 import javax.net.ssl.SSLSocketFactory;
-
-import connection.Client_Receive_Thread;
-import connection.Client_Send_Thread;
 
 public class ConnectionClient {
 
