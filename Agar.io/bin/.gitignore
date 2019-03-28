@@ -5,3 +5,6 @@
 /icons/
 /model/
 /ui/
+/.classpath
+/.project
+/threads/

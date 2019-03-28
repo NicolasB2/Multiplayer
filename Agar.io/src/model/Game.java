@@ -8,7 +8,9 @@ import java.util.Calendar;
 import java.util.Random;
 
 import controller.ThreadFood;
+import controller.ThreadMoving;
 import controller.Player;
+import controller.ThreadCollision;
 
 public class Game {
 	
@@ -29,9 +31,19 @@ public class Game {
 		isOn = false;
 	}
 
-	public void startGame() {
+	public void startGame(int id) {
 		isOn = true;
 		StartTime();
+		initializeFood();
+		
+		ThreadFood f = new ThreadFood(this);
+		f.start();
+		
+		ThreadCollision c = new ThreadCollision(this);
+		c.start();
+		
+		ThreadMoving m = new ThreadMoving(id,this);
+		m.start();
 	}
 	
 	public void StartTime() {
@@ -73,8 +85,6 @@ public class Game {
 		}
 
 		isOn = true;
-		ThreadFood f = new ThreadFood(this);
-		f.start();
 	}
 
 	public void deleteFood() {
@@ -125,7 +135,6 @@ public class Game {
 			avar.move(x, y);
 		}	
 	}
-	
 
 	public boolean isOn() {
 		return isOn;
