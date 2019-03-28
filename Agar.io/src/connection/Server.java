@@ -8,8 +8,7 @@ public class Server {
 
 	public static int PORT = 8000;
 	
-	public static void main(String[] args) {
-
+	public Server() {
 		String Password = "123456";
 		String ksName = "./resources/data/MyServer.jks";
 		char Pass[] = Password.toCharArray();
@@ -23,7 +22,7 @@ public class Server {
 			SSLContext sc = SSLContext.getInstance("TLS");
 			sc.init(kmf.getKeyManagers(), null, null);
 			SSLServerSocketFactory ssf = sc.getServerSocketFactory();
-			SSLServerSocket s = (SSLServerSocket) ssf.createServerSocket(8000);
+			SSLServerSocket s = (SSLServerSocket) ssf.createServerSocket(PORT);
 
 			System.out.println("****** Server online ******");
 			while (true) {
@@ -36,5 +35,9 @@ public class Server {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+	}
+	public static void main(String[] args) {
+Server s = new Server();
+		
 	}
 }

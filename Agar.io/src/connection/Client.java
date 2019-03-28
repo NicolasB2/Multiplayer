@@ -15,8 +15,7 @@ public class Client {
 	public final static int PORT = 8000;
 	public final static String SERVER_ADRESS = "localhost";
 	
-	public static void main(String[] args) {
-
+	public Client() {
 		System.setProperty("javax.net.ssl.trustStore", "./resources/data/MyClient.jks");
 		ObjectOutputStream os = null;
 		ObjectInputStream is = null;
@@ -24,7 +23,7 @@ public class Client {
 
 		try {
 			SSLSocketFactory f = (SSLSocketFactory) SSLSocketFactory.getDefault();
-			sslsocket = (SSLSocket) f.createSocket("localhost", 8000);
+			sslsocket = (SSLSocket) f.createSocket(SERVER_ADRESS,PORT);
 
 			sslsocket.startHandshake();
 			System.out.println("Authentication done");
@@ -55,5 +54,9 @@ public class Client {
 
 			}
 		}
+	}
+	public static void main(String[] args) {
+
+		Client c = new Client();
 	}
 }
