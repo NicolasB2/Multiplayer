@@ -27,7 +27,7 @@ public void run() {
             String p = (String) is.readObject();
             System.out.println("We got: " + p);
 
-            os.writeObject(p.concat(p));
+            os.writeObject("thanks");
             os.flush();
 
         }//while         

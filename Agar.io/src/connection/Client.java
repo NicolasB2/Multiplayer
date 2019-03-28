@@ -8,9 +8,13 @@ import java.io.ObjectOutputStream;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
+import javax.print.DocFlavor.STRING;
 
 public class Client {
 
+	public final static int PORT = 8000;
+	public final static String SERVER_ADRESS = "localhost";
+	
 	public static void main(String[] args) {
 
 		System.setProperty("javax.net.ssl.trustStore", "./resources/data/MyClient.jks");
@@ -30,22 +34,18 @@ public class Client {
 
 			BufferedReader b = new BufferedReader(new InputStreamReader(System.in));
 			boolean exit = false;
+			
 			while (!exit) {
-				System.out.print("> ");
 				String line = b.readLine();
 				os.writeObject(line);
 				os.flush();
 
 				String s = (String) is.readObject();
 				System.out.println(s);
+			}
 
-			} // while
-
-		} // main
-		catch (IOException ex) {
-
-		} catch (ClassNotFoundException ex) {
-
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		} finally {
 
 			try {
