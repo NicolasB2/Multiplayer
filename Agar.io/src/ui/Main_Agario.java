@@ -3,6 +3,7 @@ package ui;
 import javax.swing.JFrame;
 
 import controller.Login;
+import model.Game;
 
 public class Main_Agario extends JFrame {
 
@@ -17,6 +18,7 @@ public class Main_Agario extends JFrame {
 	private int id;
 	// falta: connection with moving
 
+	
 	public Main_Agario() {
 		initComponents();
 		this.loginWindow = new Login_GUI();
