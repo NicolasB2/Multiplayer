@@ -12,6 +12,7 @@ public class Avatar {
 
 	private static Random random = new Random();
 
+	private String nickName;
 	private double centerX;
 	private double centerY;
 	private double radious;
@@ -35,12 +36,13 @@ public class Avatar {
 		this.alive = true;
 	}
 
-	public Avatar(int id, int xMax, int yMax) {
+	public Avatar(String nickName, int id, int xMax, int yMax) {
 		this.centerX = random.nextInt(xMax);
 		this.centerY = random.nextInt(yMax);
 		this.avatar = true;
 		this.alive = true;
 		this.id = id;
+		this.nickName = nickName;
 	}
 
 	public void move(double x, double y) {
