@@ -7,7 +7,7 @@ import ui.Main_Agario;
 
 public class Avatar {
 
-	public static final int INIT_RADIOUS = 150;
+	
 	public static final int INIT_SPEED = 4;
 	public static final int MAX_COLOR = 256;
 
