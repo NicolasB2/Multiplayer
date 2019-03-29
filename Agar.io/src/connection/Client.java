@@ -18,7 +18,7 @@ public class Client {
 	public Client() {
 		System.setProperty("javax.net.ssl.trustStore", "./resources/data/MyClient.jks");
 		ObjectOutputStream os = null;
-		ObjectInputStream is = null;
+		
 		SSLSocket sslsocket = null;
 
 		try {
@@ -29,26 +29,24 @@ public class Client {
 			System.out.println("Authentication done");
 
 			os = new ObjectOutputStream(sslsocket.getOutputStream());
-			is = new ObjectInputStream(sslsocket.getInputStream());
-
+			ClientListenerThread clt = new ClientListenerThread(sslsocket);
+			clt.start();
 			BufferedReader b = new BufferedReader(new InputStreamReader(System.in));
 			boolean exit = false;
 			
-			while (!exit) {
-				String line = b.readLine();
-				os.writeObject(line);
-				os.flush();
-
-				String s = (String) is.readObject();
-				System.out.println(s);
-			}
+//			while (!exit) {
+//				String line = b.readLine();
+//				os.writeObject(line);
+//				os.flush();
+//
+//				
+//			}
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
 
 			try {
-				is.close();
 				sslsocket.close();
 			} catch (IOException ex) {
 

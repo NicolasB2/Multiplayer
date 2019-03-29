@@ -1,8 +1,12 @@
 package connection;
 
+import javax.net.ssl.SSLSocket;
+
 public class ClientSenderThread extends Thread {
 
-	public ClientSenderThread() {
+	SSLSocket sslsocket;
+	
+	public ClientSenderThread(SSLSocket sslsocket) {
 		// TODO Auto-generated constructor stub
 	}
 	
