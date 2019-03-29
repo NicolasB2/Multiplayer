@@ -1,7 +1,4 @@
 package connection;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 
 import javax.net.ssl.SSLSocket;
@@ -14,25 +11,21 @@ public class ServerSenderThread extends Thread{
 	public ServerSenderThread(SSLSocket sslsocket,Server server) {
 		this.server = server;
 		this.sslsocket = sslsocket;
-		ObjectOutputStream os = null;
 	}
 	
 	@Override
 	public void run() {
 		ObjectOutputStream os = null;
-		BufferedReader br  = new BufferedReader(new InputStreamReader(System.in));
-		String line = "";
 		try {
 			
 			os = new ObjectOutputStream(sslsocket.getOutputStream());
 			while (true) {
-				line = br.readLine();
-				 os.writeObject(br);
-		            os.flush();
+				sleep(10000);
+				 os.writeObject("hello friend");
 			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}finally{
 			try {
 				 os.close();

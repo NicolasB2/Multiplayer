@@ -24,21 +24,19 @@ public class ServerListenerThread extends Thread {
 			os = new ObjectOutputStream(sslsocket.getOutputStream());
 
 			while (true) {
+				if(is.read()>0) {
 				String p = (String) is.readObject();
 				System.out.print("We got: ");
 				System.out.println(p);
-
-//				os.writeObject("thanks");
-//				os.flush();
-
-			} // while
+				}
+			}
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
 			try {
 				is.close();
-//				os.close();
+
 				this.sslsocket.close();
 			} catch (IOException ex) {
 

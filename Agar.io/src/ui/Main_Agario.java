@@ -1,5 +1,7 @@
 package ui;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 
 import controller.Login;
@@ -16,13 +18,18 @@ public class Main_Agario extends JFrame {
 	private Space space;
 	private String nickName;
 	private int id;
+	
+	private Game players;
+	private Game food;
+	
+	
 	// falta: connection with moving
 
 	
 	public Main_Agario() {
 		initComponents();
-		this.loginWindow = new Login_GUI();
-		this.loginWindow.setVisible(true);
+		//this.loginWindow = new Login_GUI();
+		//this.loginWindow.setVisible(true);
 
 	}
 
@@ -34,6 +41,11 @@ public class Main_Agario extends JFrame {
 		this.setResizable(false);
 	    this.setFocusable(true);
 	    this.setLocationRelativeTo(null);
+	    
+	    
+	    this.space = new Space(this.players, food, new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+	    
+	    
 	}
 }
 

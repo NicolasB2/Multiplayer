@@ -35,12 +35,12 @@ public class Client {
 			boolean exit = false;
 			
 			while (!exit) {
-				String line = b.readLine();
-				os.writeObject(line);
+//				String line = b.readLine();
+//				os.writeObject(line);
 //				os.flush();
 
-//				String s = (String) is.readObject();
-//				System.out.println(s);
+				String s = (String) is.readObject();
+				System.out.println(s);
 			}
 
 		} catch (Exception ex) {
