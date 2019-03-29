@@ -1,5 +1,8 @@
 package model;
 
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.io.*;
 import java.sql.Date;
 import java.time.LocalTime;
@@ -24,6 +27,7 @@ public class Game {
 	public Long start;
 	private boolean isOn;
 	private boolean timeout;
+	private Font font; 
 
 	public Game() {
 		
@@ -135,5 +139,27 @@ public class Game {
 		this.timeout = timeout;
 	}
 
+	
+
+	public void render(Graphics g, double scale) {
+		for(int i=0; i < avatars.size();i++  ) {
+			avatars.get(i).render(g, scale);		
+			}
+		Avatar avatar = avatars.get(0);
+		if(avatar != null ) {
+			double x = avatar.getCenterX();
+			double y = avatar.getCenterY();
+			int r = (int) avatar.getRadious();
+			this.font = new Font("Calibri",Font.BOLD,r/2);
+			FontMetrics metrics = g.getFontMetrics(font);
+			int xt= (int) x-metrics.stringWidth(avatar.getNickName())/2;
+			int yt = (int) (y+ r/4);
+			g.setFont(font);
+			g.drawString(avatar.getNickName(), xt, yt);
+		}
+		
+		
+	}
+	
 	
 }

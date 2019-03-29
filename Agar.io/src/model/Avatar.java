@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.Random;
 import ui.Main_Agario;
 
@@ -134,4 +135,39 @@ public class Avatar {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public double getCenterX() {
+		return centerX;
+	}
+
+	public void setCenterX(double centerX) {
+		this.centerX = centerX;
+	}
+
+	public double getCenterY() {
+		return centerY;
+	}
+
+	public void setCenterY(double centerY) {
+		this.centerY = centerY;
+	}
+
+	public void render(Graphics g, double scale) {
+		double r = this.getRadious();
+		g.setColor(this.color);
+		g.fillOval((int) (this.centerX -r), (int) (this.centerY -r), (int)(2*r),(int) (2*r));
+		g.setColor(Color.BLACK);
+		g.drawOval((int) (this.centerX - r), (int) (this.centerY -r), (int)(2*r), (int)(2*r));
+	}
+	
+	
 }

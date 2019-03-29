@@ -84,7 +84,7 @@ public class Space extends Canvas {
 		for (int i = 0; i < game.avatars.size(); i++) {
 			try {
 				Avatar a = game.avatars.get(i); // getPlayerIterator
-
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -94,7 +94,7 @@ public class Space extends Canvas {
 	public void paintFood(Game food, Graphics g) throws RemoteException {
 		for (int i = 0; i < food.food.size(); i++) {
 			try {
-
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
