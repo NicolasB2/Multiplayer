@@ -7,7 +7,8 @@ import javax.net.ssl.*;
 public class Server {
 
 	public static int PORT = 8000;
-	
+	public String message = "";
+
 	public Server() {
 		String Password = "123456";
 		String ksName = "./resources/data/MyServer.jks";
@@ -28,7 +29,7 @@ public class Server {
 			while (true) {
 				SSLSocket sslsocket = (SSLSocket) s.accept();
 				System.out.println("New Client accepted");
-				ListenerThread t = new ListenerThread(sslsocket);
+				ListenerThread t = new ListenerThread(sslsocket, this);
 				t.start();
 			}
 
@@ -36,8 +37,9 @@ public class Server {
 			ex.printStackTrace();
 		}
 	}
+
 	public static void main(String[] args) {
-Server s = new Server();
-		
+		Server s = new Server();
+
 	}
 }

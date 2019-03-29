@@ -14,7 +14,7 @@ public class Client {
 
 	public final static int PORT = 8000;
 	public final static String SERVER_ADRESS = "localhost";
-	
+
 	public Client() {
 		System.setProperty("javax.net.ssl.trustStore", "./resources/data/MyClient.jks");
 		ObjectOutputStream os = null;
@@ -23,7 +23,7 @@ public class Client {
 
 		try {
 			SSLSocketFactory f = (SSLSocketFactory) SSLSocketFactory.getDefault();
-			sslsocket = (SSLSocket) f.createSocket(SERVER_ADRESS,PORT);
+			sslsocket = (SSLSocket) f.createSocket(SERVER_ADRESS, PORT);
 
 			sslsocket.startHandshake();
 			System.out.println("Authentication done");
@@ -33,7 +33,7 @@ public class Client {
 
 			BufferedReader b = new BufferedReader(new InputStreamReader(System.in));
 			boolean exit = false;
-			
+
 			while (!exit) {
 				String line = b.readLine();
 				os.writeObject(line);
@@ -55,6 +55,7 @@ public class Client {
 			}
 		}
 	}
+
 	public static void main(String[] args) {
 
 		Client c = new Client();
