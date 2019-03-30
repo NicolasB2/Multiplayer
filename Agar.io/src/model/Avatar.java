@@ -163,7 +163,8 @@ public class Avatar {
 		this.centerY = centerY;
 	}
 
-	public void render(Graphics g, double scale) {
+	public void render(Graphics g, double scale) {		
+		
 		double r = this.getRadious();
 		g.setColor(this.color);
 		g.fillOval((int) (this.centerX -r), (int) (this.centerY -r), (int)(2*r),(int) (2*r));

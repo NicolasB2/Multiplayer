@@ -45,8 +45,7 @@ public class Space extends Canvas {
 
 	@Override
 	public void paint(Graphics g) {
-		
-		
+
 //		if (gAux == null || dimAux == null || dimPanel.width != dimAux.width || dimPanel.height != dimAux.height) {
 //			dimAux = dimPanel;
 //			
@@ -75,14 +74,14 @@ public class Space extends Canvas {
 
 		if (main.getGame().getAvatars() != null) {
 			try {
-				this.paintPlayer(main.getGame().getAvatars() , g);
+				this.paintPlayer(main.getGame().getAvatars(), g);
 			} catch (Exception e) {
 				Logger.getLogger(Space.class.getName()).log(Level.SEVERE, null, e);
 
 			}
 		}
-		
-		if(food == null) {
+
+		if (food == null) {
 			System.out.println("food null");
 		}
 
@@ -97,25 +96,39 @@ public class Space extends Canvas {
 
 	}
 
-	public void setID(int value){
-        this.id = value;
-    }
-	
+	public void setID(int value) {
+		this.id = value;
+	}
+
 	private void paintOwnScore() {
-		
+
 	}
-	
+
 	private void paintLaderBoard() {
-		
+
 	}
-	
+
 	public void paintPlayer(ArrayList<Avatar> avatars, Graphics g) throws RemoteException {
+		
 		for (int i = 0; i < avatars.size(); i++) {
+			System.out.println(avatars.get(i).getNickName());
 			try {
 				Avatar a = avatars.get(i);
-				a.render(g, 1);
+				//				a.render(g, 1);			
+				
+				double r = a.getRadious();
+				System.out.println(r + " ");
+				g.setColor(a.getColor());
+				g.fillOval((int) (a.getCenterX() - r), (int) (a.getCenterY() - r), (int) (2 * r), (int) (2 * r));
+				g.setColor(Color.BLACK);
+				g.drawOval((int) (a.getCenterX() - r), (int) (a.getCenterY() - r), (int) (2 * r), (int) (2 * r));
+
+				
+				
+				
 			} catch (Exception e) {
-				System.out.print("Problem in paintPlayer");;
+				System.out.print("Problem in paintPlayer");
+				;
 				e.printStackTrace();
 			}
 		}
@@ -126,8 +139,10 @@ public class Space extends Canvas {
 			try {
 				Avatar f = food.get(i);
 				f.render(g, 1);
+				
 			} catch (Exception e) {
-				System.out.print("Problem in paintFood");;
+				System.out.print("Problem in paintFood");
+				;
 				e.printStackTrace();
 			}
 		}

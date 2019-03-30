@@ -35,10 +35,7 @@ public class Game {
 		
 		this.food = new ArrayList<Avatar>();
 		this.avatars = new ArrayList<Avatar>();
-		
-		
-		avatars.add(new Avatar("deibi", 1, 10, 10));
-		avatars.add(new Avatar("sarris", 2, 4, 5));
+		avatars.add(new Avatar("deibi", 1, 50, 50));
 		
 		initializeFood();
 		
