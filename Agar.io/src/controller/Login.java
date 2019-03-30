@@ -16,7 +16,6 @@ public class Login {
 
 	}
 
-
 	private void loadUsers() {
 		File archivo = new File(USERS_PATH);
 		if (archivo.exists()) {
@@ -91,16 +90,15 @@ public class Login {
 		boolean correct = false;
 		for (int i = 0; i < players.size(); i++) {
 			Player compare = players.get(i);
-			
+
 			if (compare.getEmail().equals(email) && compare.getPassword().equals(password)) {
 				correct = true;
-				
+
 			}
 		}
 		return correct;
 
 	}
-
 
 	public static void main(String[] args) {
 
