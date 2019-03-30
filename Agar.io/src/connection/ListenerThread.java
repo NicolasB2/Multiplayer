@@ -26,19 +26,12 @@ public class ListenerThread extends Thread {
 			os = new ObjectOutputStream(sslsocket.getOutputStream());
 
 			while (true) {
-				String p = (String) is.readObject();
-				System.out.println("We got: " + p);
-				server.message += p+"\n" ;
-				
-				os.writeObject(server.message);
-				os.flush();
 
-			} // while
+				login(is, os);
+			}
 
-		} catch (IOException ex) {
-
-		} catch (ClassNotFoundException ex) {
-
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		} finally {
 			try {
 				is.close();
@@ -48,5 +41,14 @@ public class ListenerThread extends Thread {
 
 			}
 		}
-	}// run
+	}
+
+	private void login(ObjectInputStream is, ObjectOutputStream os) throws Exception {
+		String p = (String) is.readObject();
+		System.out.println("We got: " + p);
+		server.message += p + "\n";
+
+		os.writeObject(server.message);
+		os.flush();
+	}
 }
