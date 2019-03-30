@@ -165,7 +165,7 @@ public class Login_GUI extends JFrame implements ActionListener {
 	}
 
 	public String getPassword() {
-		return txtPass.getText();
+		return txtPass.getSelectedText();
 	}
 
 	@Override

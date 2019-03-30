@@ -21,17 +21,17 @@ public class ThreadCollision extends Thread {
 	}
 	
 	public void checkCollisions() {
-		for (int i = 0; i < game.avatars.size(); i++) {
+		for (int i = 0; i < game.getAvatars().size(); i++) {
 
-			for (int j = 0; j < game.food.size(); j++) {
-				 game.avatars.get(i).check_Collision( game.food.get(j));
+			for (int j = 0; j < game.getFood().size(); j++) {
+				game.getAvatars().get(i).check_Collision( game.getFood().get(j));
 			}
 		}
 		
-		for (int i = 0; i <  game.avatars.size(); i++) {
+		for (int i = 0; i <  game.getAvatars().size(); i++) {
 
-			for (int j = i; j <  game.avatars.size(); j++) {
-				 game.avatars.get(i).check_Collision( game.food.get(j));
+			for (int j = i; j <  game.getAvatars().size(); j++) {
+				game.getAvatars().get(i).check_Collision( game.getFood().get(j));
 			}
 		}
 		
