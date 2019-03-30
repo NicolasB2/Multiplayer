@@ -80,6 +80,10 @@ public class Space extends Canvas {
 
 	}
 
+	public void setID(int value){
+        this.id = value;
+    }
+	
 	public void paintPlayer(Game game, Graphics g) throws RemoteException {
 		for (int i = 0; i < game.avatars.size(); i++) {
 			try {

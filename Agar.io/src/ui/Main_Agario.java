@@ -6,8 +6,11 @@ import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
+
 
 import controller.Login;
 import model.Game;
@@ -31,8 +34,32 @@ public class Main_Agario extends JFrame {
 
 	public Main_Agario() {
 		initComponents();
-		// this.loginWindow = new Login_GUI();
-		// this.loginWindow.setVisible(true);
+		this.loginWindow = new Login_GUI();
+		this.loginWindow.setVisible(true);
+
+	}
+
+	public void play() {
+
+		// esperar que se logee el usuario y pasen los 2 min de espera
+
+		this.createBufferStrategy(2);
+		this.setLocationRelativeTo(null);
+		this.setIgnoreRepaint(false);
+		
+		//Add player
+		
+		
+		
+		
+		 while(true){
+	            this.space.repaint();
+	            try {
+	                Thread.sleep(10);
+	            } catch (InterruptedException ex) {
+	                Logger.getLogger(Main_Agario.class.getName()).log(Level.SEVERE, null, ex);
+	            }
+	        }
 
 	}
 
