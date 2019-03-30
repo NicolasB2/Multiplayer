@@ -58,6 +58,9 @@ public class ListenerThread extends Thread {
 		}
 	}
 
+	public void singin(String nickname,String email, String password) {
+		server.singin(nickname, email, password);
+	}
 	private void play(ObjectInputStream is, ObjectOutputStream os) throws Exception {
 		while (true) {
 			String p = (String) is.readObject();

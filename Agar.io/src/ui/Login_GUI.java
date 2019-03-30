@@ -174,6 +174,7 @@ public class Login_GUI extends JFrame implements ActionListener {
 		if (comand.equals(LOGIN)) {
 
 		} else if (comand.equals(GO_REGISTRER)) {
+			
 		}
 
 	}
