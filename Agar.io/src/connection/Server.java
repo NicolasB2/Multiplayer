@@ -55,6 +55,8 @@ public class Server {
 		login.registerUser(nickname, password, email);
 	}
 	
+	
+	
 	public static void main(String[] args) {
 		Server s = new Server();
 

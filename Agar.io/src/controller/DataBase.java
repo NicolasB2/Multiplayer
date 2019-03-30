@@ -41,19 +41,6 @@ public class DataBase {
 		} catch (IOException e) {
 		}
 	}
-	private void loadUsers() {
-		File archivo = new File(USERS_PATH);
-		if (archivo.exists()) {
-			try {
-				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo));
-				players = (ArrayList<Player>) ois.readObject();
-				ois.close();
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
 
 	private void saveUsers() {
 		try {
