@@ -9,7 +9,9 @@ import model.Game;
 
 public class Server {
 
+	public final static String EXIT = "EXIT";
 	public final static String LOGIN = "LOGIN";
+	public final static String SING_IN = "SING_IN";
 	public final static String PLAY = "PLAY";
 	public static int PORT = 8000;
 	private Login login;
@@ -47,6 +49,7 @@ public class Server {
 
 	public boolean validateLogin(String email, String password) {
 		return login.validateLogin(email, password);
+//		return true;
 	}
 	
 	public void singin (String nickname,String email, String password) {

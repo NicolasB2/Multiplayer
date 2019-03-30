@@ -43,19 +43,18 @@ public class ListenerThread extends Thread {
 
 	private void login(ObjectInputStream is, ObjectOutputStream os) throws Exception {
 		boolean log = false;
-		while (!log) {
 
 			String email = (String) is.readObject();
 			System.out.println("We got: " + email);
 			String password = (String) is.readObject();
 			System.out.println("We got: " + password);
-//		server.message += p + "\n";
 			log = server.validateLogin(email, password);
 			if (log) {
-				os.writeObject(server.PLAY);
+				os.writeObject(Server.PLAY);
+			}else {
+				os.writeObject(Server.EXIT);
 			}
 			os.flush();
-		}
 	}
 
 	public void singin(String nickname,String email, String password) {
