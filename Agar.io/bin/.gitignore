@@ -1,4 +1,9 @@
+/.classpath
+/.project
 /connection/
 /controller/
+/data/
+/diagrams/
+/icons/
 /model/
 /ui/
