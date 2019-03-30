@@ -17,6 +17,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import connection.ClientConnection;
+
 public class Login_GUI extends JFrame implements ActionListener {
 
 	public static final String LOGIN = "Login";
@@ -172,11 +174,16 @@ public class Login_GUI extends JFrame implements ActionListener {
 		String comand = e.getActionCommand();
 
 		if (comand.equals(LOGIN)) {
-
+			ClientConnection cc = new ClientConnection(true,getEmail(),getPassword());
 		} else if (comand.equals(GO_REGISTRER)) {
-			
+
 		}
 
+	}
+
+	public static void main(String[] args) {
+		Login_GUI lg = new Login_GUI();
+		lg.setVisible(true);
 	}
 
 }

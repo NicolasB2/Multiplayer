@@ -10,12 +10,12 @@ import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import javax.print.DocFlavor.STRING;
 
-public class Client {
+public class ClientConnection {
 
 	public final static int PORT = 8000;
 	public final static String SERVER_ADRESS = "localhost";
 
-	public Client() {
+	public ClientConnection(boolean x, String email,String password) {
 		System.setProperty("javax.net.ssl.trustStore", "./resources/data/MyClient.jks");
 		ObjectOutputStream os = null;
 		ObjectInputStream is = null;
@@ -32,11 +32,9 @@ public class Client {
 			is = new ObjectInputStream(sslsocket.getInputStream());
 
 			BufferedReader b = new BufferedReader(new InputStreamReader(System.in));
-			String email = b.readLine();
-			String password = b.readLine();
-			
-			login(os, is, email, password);
-			System.out.println("good");
+			if(x) {
+				login(os, is, email, password);
+			}
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -71,6 +69,6 @@ public class Client {
 	}
 	public static void main(String[] args) {
 
-		Client c = new Client();
+//		ClientConnection c = new ClientConnection("","","");
 	}
 }
