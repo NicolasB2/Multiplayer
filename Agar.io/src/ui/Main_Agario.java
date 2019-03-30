@@ -47,10 +47,7 @@ public class Main_Agario extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setIgnoreRepaint(false);
 		
-		//Add player
-		
-		
-		
+	
 		
 		 while(true){
 	            this.space.repaint();
