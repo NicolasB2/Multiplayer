@@ -32,24 +32,11 @@ public class Client {
 			is = new ObjectInputStream(sslsocket.getInputStream());
 
 			BufferedReader b = new BufferedReader(new InputStreamReader(System.in));
-			boolean log = false;
-
-			while (!log) {
-				System.out.print("email");
-				String line = b.readLine();
-				os.writeObject(line);
-				System.out.print("password");
-				line = b.readLine();
-				os.writeObject(line);
-				os.flush();
-
-				String s = (String) is.readObject();
-				System.out.println(s);
-			}
+			String email = b.readLine();
+			String password = b.readLine();
 			
-			while(true) {
-				
-			}
+			login(os, is, email, password);
+			System.out.println("good");
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -64,6 +51,24 @@ public class Client {
 		}
 	}
 
+	public void login (ObjectOutputStream os,
+	ObjectInputStream is,String email,String password) throws Exception {
+		boolean log = false;
+
+		while (!log) {
+			System.out.print("email: "+email);
+			os.writeObject(email);
+			System.out.print("password:"+ password);
+			os.writeObject(password);
+			os.flush();
+
+			String s = (String) is.readObject();
+			System.out.println(s);
+			if(s.equals(Server.PLAY)) {
+				log=true;
+			}
+		}
+	}
 	public static void main(String[] args) {
 
 		Client c = new Client();

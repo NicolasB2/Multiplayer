@@ -40,8 +40,8 @@ public class Server {
 		}
 	}
 
-	public String validateLogin(String email, String password) {
-		return "Loggin";
+	public boolean validateLogin(String email, String password) {
+		return true;
 	}
 	public static void main(String[] args) {
 		Server s = new Server();
