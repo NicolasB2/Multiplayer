@@ -56,8 +56,10 @@ public class Registrer extends JFrame implements ActionListener {
 	
 	private Main_Agario connection;
 	
-	public Registrer() {
+	public Registrer(Main_Agario connection) {
 	
+		this.connection = connection;
+		
 		setTitle("Agar.io");
 		setSize(333, 333);
 		setLocationRelativeTo(null);
@@ -185,6 +187,7 @@ public class Registrer extends JFrame implements ActionListener {
 		
 		if(comand.equals(REGISTRER)) {
 			ClientConnection cc = new ClientConnection(getRegistrerUser(),getRegistrerEmail(),getRegistrerPass());
+			connection.closeRegistre();
 		}
 		
 		

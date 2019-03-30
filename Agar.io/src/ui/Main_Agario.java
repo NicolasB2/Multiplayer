@@ -23,6 +23,7 @@ public class Main_Agario extends JFrame {
 	public static final int WINDOW_POS_Y = 50;
 
 	private Login_GUI loginWindow;
+	private Registrer registrerWindow;
 	private Space space;
 	private String nickName;
 	private int id;
@@ -33,11 +34,9 @@ public class Main_Agario extends JFrame {
 
 	public Main_Agario() {
 		game = new Game();
-		initComponents();
-//		this.loginWindow = new Login_GUI();
-//		this.loginWindow.setVisible(true);
-		this.id = 1;
-		this.space = new Space(this, game.getAvatar(id), game.getAvatars(),  new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+		//initComponents();
+		this.loginWindow = new Login_GUI(this);
+		this.loginWindow.setVisible(true);
 
 	}
 
@@ -97,8 +96,22 @@ public class Main_Agario extends JFrame {
 		}
 	}
 
+	public void openWindowRegistrer() {
+		registrerWindow = new Registrer(this);
+		registrerWindow.setVisible(true);
+		
+	}
+	
+	public void closeRegistre() {
+		registrerWindow.setVisible(false);
+	}
+	
+	
 	public static void main(String[] args) {
 		Main_Agario m = new Main_Agario();
 		m.setVisible(true);
 	}
+	
+	
+	
 }

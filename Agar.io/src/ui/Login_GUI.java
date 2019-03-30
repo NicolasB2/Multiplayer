@@ -58,8 +58,10 @@ public class Login_GUI extends JFrame implements ActionListener {
 
 	private Main_Agario connection;
 
-	public Login_GUI() {
+	public Login_GUI(Main_Agario connection) {
 
+		this.connection = connection;
+		
 		setTitle("Agar.io");
 		setSize(333, 333);
 		setLocationRelativeTo(null);
@@ -165,7 +167,7 @@ public class Login_GUI extends JFrame implements ActionListener {
 	}
 
 	public String getPassword() {
-		return txtPass.getSelectedText();
+		return txtPass.getText();
 	}
 
 	@Override
@@ -176,16 +178,10 @@ public class Login_GUI extends JFrame implements ActionListener {
 		if (comand.equals(LOGIN)) {
 			ClientConnection cc = new ClientConnection(getEmail(),getPassword());
 		} else if (comand.equals(GO_REGISTRER)) {
-			
-			
-			
+			connection.openWindowRegistrer();
 		}
 
 	}
 
-	public static void main(String[] args) {
-		Login_GUI lg = new Login_GUI();
-		lg.setVisible(true);
-	}
 
 }
