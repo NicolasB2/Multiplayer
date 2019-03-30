@@ -4,7 +4,7 @@ import java.io.*;
 import java.security.*;
 import javax.net.ssl.*;
 
-import controller.Login;
+import controller.DataBase;
 import model.Game;
 
 public class Server {
@@ -14,11 +14,11 @@ public class Server {
 	public final static String SING_IN = "SING_IN";
 	public final static String PLAY = "PLAY";
 	public static int PORT = 8000;
-	private Login login;
+	private DataBase login;
 	public String message = "";
 
 	public Server() {
-		login = new Login();
+		login = new DataBase();
 		String Password = "123456";
 		String ksName = "./resources/data/MyServer.jks";
 		char Pass[] = Password.toCharArray();

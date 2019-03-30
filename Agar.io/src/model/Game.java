@@ -16,8 +16,12 @@ import controller.ThreadTime;
 import controller.Player;
 import controller.ThreadCollision;
 
-public class Game {
+public class Game implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public final static int WAIT_TIME = 120000;
 	public final static int END_TIME = 300000;
 	public final static int FOOD_RADIUS = 10;

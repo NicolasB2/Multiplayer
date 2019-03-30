@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 
-import controller.Login;
+import controller.DataBase;
 import model.Game;
 
 public class Main_Agario extends JFrame {

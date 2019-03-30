@@ -46,17 +46,6 @@ public class Space extends Canvas {
 	@Override
 	public void paint(Graphics g) {
 
-//		if (gAux == null || dimAux == null || dimPanel.width != dimAux.width || dimPanel.height != dimAux.height) {
-//			dimAux = dimPanel;
-//			
-//			dibujoAux = createImage(main.WIDTH, main.HEIGHT);
-//			
-//			gAux = dibujoAux.getGraphics();
-//		}
-//			if(gAux != null) {
-//				System.out.println("NO ME MATO");
-//			}
-//			
 
 		// Paint background
 		g.setColor(new Color(220, 220, 220));

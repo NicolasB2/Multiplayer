@@ -5,17 +5,42 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Login {
+import model.Game;
+
+public class DataBase {
 	public final static int FOOD_RADIUS = 10;
 	private final static String USERS_PATH = "./resources/data/users.txt";
 	private final static String SCORE_PATH = "./resources/data/scores.txt";
-
+	private final static String GAME_PATH = "./resources/data/scores.txt";
 	private ArrayList<Player> players = new ArrayList<Player>();
 
-	public Login() {
+
+	public DataBase() {
 
 	}
 
+	public void loadGame(Game game){
+		File archivo = new File(GAME_PATH);
+		if (archivo.exists()) {
+			try {
+				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo));
+				game = (Game) ois.readObject();
+				ois.close();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public void saveGame(Game game) {
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(GAME_PATH));
+			oos.writeObject(game);
+			oos.close();
+
+		} catch (IOException e) {
+		}
+	}
 	private void loadUsers() {
 		File archivo = new File(USERS_PATH);
 		if (archivo.exists()) {
@@ -102,7 +127,7 @@ public class Login {
 
 	public static void main(String[] args) {
 
-		Login test = new Login();
+		DataBase test = new DataBase();
 		test.registerUser("deibi", "12345", "elDeibi@hotmail.com");
 		test.registerUser("DaniG", "0987654321", "daniG@gmail.com");
 		test.registerUser("Sarris", "0987612345", "laSarris@hotmail.com");
