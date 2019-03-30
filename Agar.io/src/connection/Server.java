@@ -49,7 +49,6 @@ public class Server {
 
 	public boolean validateLogin(String email, String password) {
 		return login.validateLogin(email, password);
-//		return true;
 	}
 	
 	public void singin (String nickname,String email, String password) {

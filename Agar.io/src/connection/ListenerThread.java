@@ -25,8 +25,13 @@ public class ListenerThread extends Thread {
 			is = new ObjectInputStream(sslsocket.getInputStream());
 			os = new ObjectOutputStream(sslsocket.getOutputStream());
 
-			login(is, os);
-//				play(is, os);
+			String key = (String) is.readObject();
+			if (key.equals(Server.LOGIN)) {
+				login(is, os);
+			}
+			if (key.equals(Server.SING_IN)) {
+				singin(is, os);
+			}
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -44,22 +49,31 @@ public class ListenerThread extends Thread {
 	private void login(ObjectInputStream is, ObjectOutputStream os) throws Exception {
 		boolean log = false;
 
-			String email = (String) is.readObject();
-			System.out.println("We got: " + email);
-			String password = (String) is.readObject();
-			System.out.println("We got: " + password);
-			log = server.validateLogin(email, password);
-			if (log) {
-				os.writeObject(Server.PLAY);
-			}else {
-				os.writeObject(Server.EXIT);
-			}
-			os.flush();
+		String email = (String) is.readObject();
+		System.out.println("We got: " + email);
+		String password = (String) is.readObject();
+		System.out.println("We got: " + password);
+		log = server.validateLogin(email, password);
+		if (log) {
+			os.writeObject(Server.PLAY);
+		} else {
+			os.writeObject(Server.EXIT);
+		}
+		os.flush();
 	}
 
-	public void singin(String nickname,String email, String password) {
+	public void singin(ObjectInputStream is, ObjectOutputStream os) throws Exception {
+		String nickname = (String) is.readObject();
+		System.out.println("We got: " + nickname);
+		String email = (String) is.readObject();
+		System.out.println("We got: " + email);
+		String password = (String) is.readObject();
+		System.out.println("We got: " + password);
 		server.singin(nickname, email, password);
+		os.writeObject(Server.LOGIN);
+		os.flush();
 	}
+
 	private void play(ObjectInputStream is, ObjectOutputStream os) throws Exception {
 		while (true) {
 			String p = (String) is.readObject();

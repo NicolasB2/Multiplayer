@@ -12,6 +12,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import connection.ClientConnection;
+
 public class Registrer extends JFrame implements ActionListener {
 
 	public static final  String REGISTRER = "Registrer";
@@ -182,6 +184,7 @@ public class Registrer extends JFrame implements ActionListener {
 		String comand = e.getActionCommand();
 		
 		if(comand.equals(REGISTRER)) {
+			ClientConnection cc = new ClientConnection(getRegistrerUser(),getRegistrerEmail(),getRegistrerPass());
 		}
 		
 		

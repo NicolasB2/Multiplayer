@@ -174,9 +174,11 @@ public class Login_GUI extends JFrame implements ActionListener {
 		String comand = e.getActionCommand();
 
 		if (comand.equals(LOGIN)) {
-			ClientConnection cc = new ClientConnection(true,getEmail(),getPassword());
+			ClientConnection cc = new ClientConnection(getEmail(),getPassword());
 		} else if (comand.equals(GO_REGISTRER)) {
-
+			
+			
+			
 		}
 
 	}
