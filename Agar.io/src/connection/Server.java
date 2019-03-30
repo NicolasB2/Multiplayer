@@ -40,6 +40,9 @@ public class Server {
 		}
 	}
 
+	public String validateLogin(String email, String password) {
+		return "Loggin";
+	}
 	public static void main(String[] args) {
 		Server s = new Server();
 

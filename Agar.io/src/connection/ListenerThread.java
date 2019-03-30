@@ -48,11 +48,13 @@ public class ListenerThread extends Thread {
 		boolean log = false;
 		while (!log) {
 			
-		String p = (String) is.readObject();
-		System.out.println("We got: " + p);
-		server.message += p + "\n";
+		String email = (String) is.readObject();
+		System.out.println("We got: " + email);
+		String password = (String) is.readObject();
+		System.out.println("We got: " + password);
+//		server.message += p + "\n";
 
-		os.writeObject(server.message);
+		os.writeObject(server.validateLogin(email, password));
 		os.flush();
 		}
 	}

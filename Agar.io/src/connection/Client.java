@@ -35,7 +35,11 @@ public class Client {
 			boolean log = false;
 
 			while (!log) {
+				System.out.print("email");
 				String line = b.readLine();
+				os.writeObject(line);
+				System.out.print("password");
+				line = b.readLine();
 				os.writeObject(line);
 				os.flush();
 
