@@ -27,15 +27,17 @@ public class Main_Agario extends JFrame {
 	private String nickName;
 	private int id;
 
-	private Game players;
-	private Game food;
+	private Game game;
 
 	// falta: connection with moving
 
 	public Main_Agario() {
+		game = new Game();
 		initComponents();
-		this.loginWindow = new Login_GUI();
-		this.loginWindow.setVisible(true);
+//		this.loginWindow = new Login_GUI();
+//		this.loginWindow.setVisible(true);
+		this.id = 1;
+		this.space = new Space(this, game.getAvatar(id), game.getAvatars(),  new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 
 	}
 
@@ -71,7 +73,7 @@ public class Main_Agario extends JFrame {
 
 		// Add player with socket
 
-		this.space = new Space(this.players, food, new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+		this.space = new Space(this,game.getAvatar(id), game.getFood(), new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 		this.space.setFocusable(false);
 		this.setIgnoreRepaint(false);
 		this.add((Component) this.space);
@@ -83,6 +85,10 @@ public class Main_Agario extends JFrame {
 		 */ // For the split
 
 	}
+	
+	public Game getGame() {
+		return game;
+	}
 
 	@Override
 	public void paint(Graphics g) {
@@ -91,4 +97,8 @@ public class Main_Agario extends JFrame {
 		}
 	}
 
+	public static void main(String[] args) {
+		Main_Agario m = new Main_Agario();
+		m.setVisible(true);
+	}
 }

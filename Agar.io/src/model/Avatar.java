@@ -31,10 +31,12 @@ public class Avatar {
 	}
 
 	public Avatar() {
-		this.centerX = random.nextInt(3 * Main_Agario.WINDOW_WIDTH / 4) + Main_Agario.WINDOW_WIDTH / 8;
-		this.centerY = random.nextInt(3 * Main_Agario.WINDOW_HEIGHT / 4) + Main_Agario.WINDOW_HEIGHT / 8;
+		this.centerX = random.nextInt(3 * Main_Agario.WINDOW_WIDTH/4) + Main_Agario.WINDOW_WIDTH / 8;
+		this.centerY = random.nextInt(3 * Main_Agario.WINDOW_HEIGHT/4) + Main_Agario.WINDOW_HEIGHT / 8;
 		this.avatar = false;
 		this.alive = true;
+		radious = 5;
+		set_color();
 	}
 
 	public Avatar(String nickName, int id, int xMax, int yMax) {

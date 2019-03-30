@@ -22,8 +22,8 @@ public class Game {
 	public final static int END_TIME = 300000;
 	public final static int FOOD_RADIUS = 10;
 	
-	public ArrayList<Avatar> food;
-	public ArrayList<Avatar> avatars;
+	private ArrayList<Avatar> food;
+	private ArrayList<Avatar> avatars;
 	
 	
 	private boolean isOn;
@@ -35,6 +35,14 @@ public class Game {
 		
 		this.food = new ArrayList<Avatar>();
 		this.avatars = new ArrayList<Avatar>();
+		
+		
+		avatars.add(new Avatar("deibi", 1, 10, 10));
+		avatars.add(new Avatar("sarris", 2, 4, 5));
+		
+		initializeFood();
+		
+		
 		StartTime();
 		isOn = false;
 		timeout = false;
@@ -150,6 +158,22 @@ public class Game {
 	}
 
 	
+
+	public ArrayList<Avatar> getFood() {
+		return food;
+	}
+
+	public void setFood(ArrayList<Avatar> food) {
+		this.food = food;
+	}
+
+	public ArrayList<Avatar> getAvatars() {
+		return avatars;
+	}
+
+	public void setAvatars(ArrayList<Avatar> avatars) {
+		this.avatars = avatars;
+	}
 
 	public void render(Graphics g, double scale) {
 		for(int i=0; i < avatars.size();i++  ) {
