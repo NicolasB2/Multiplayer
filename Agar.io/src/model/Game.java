@@ -18,9 +18,6 @@ import controller.ThreadCollision;
 
 public class Game {
 	
-	public final static String LOGIN = "LOGIN";
-	public final static String PLAY = "PLAY";
-	
 	public final static int WAIT_TIME = 120000;
 	public final static int END_TIME = 300000;
 	public final static int FOOD_RADIUS = 10;

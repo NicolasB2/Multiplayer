@@ -6,6 +6,8 @@ import javax.net.ssl.*;
 
 public class Server {
 
+	public final static String LOGIN = "LOGIN";
+	public final static String PLAY = "PLAY";
 	public static int PORT = 8000;
 	public String message = "";
 

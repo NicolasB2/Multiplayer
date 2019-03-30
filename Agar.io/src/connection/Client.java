@@ -32,15 +32,19 @@ public class Client {
 			is = new ObjectInputStream(sslsocket.getInputStream());
 
 			BufferedReader b = new BufferedReader(new InputStreamReader(System.in));
-			boolean exit = false;
+			boolean log = false;
 
-			while (!exit) {
+			while (!log) {
 				String line = b.readLine();
 				os.writeObject(line);
 				os.flush();
 
 				String s = (String) is.readObject();
 				System.out.println(s);
+			}
+			
+			while(true) {
+				
 			}
 
 		} catch (Exception ex) {

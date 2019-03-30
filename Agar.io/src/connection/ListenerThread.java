@@ -25,10 +25,11 @@ public class ListenerThread extends Thread {
 			is = new ObjectInputStream(sslsocket.getInputStream());
 			os = new ObjectOutputStream(sslsocket.getOutputStream());
 
-			while (true) {
+			
 
 				login(is, os);
-			}
+				play(is, os);
+			
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -44,11 +45,26 @@ public class ListenerThread extends Thread {
 	}
 
 	private void login(ObjectInputStream is, ObjectOutputStream os) throws Exception {
+		boolean log = false;
+		while (!log) {
+			
 		String p = (String) is.readObject();
 		System.out.println("We got: " + p);
 		server.message += p + "\n";
 
 		os.writeObject(server.message);
 		os.flush();
+		}
+	}
+	
+	private void play(ObjectInputStream is, ObjectOutputStream os) throws Exception {
+		while (true) {
+		String p = (String) is.readObject();
+		System.out.println("We got: " + p);
+		server.message += p + "\n";
+
+		os.writeObject(server.message);
+		os.flush();
+		}
 	}
 }
