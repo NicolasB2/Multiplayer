@@ -18,16 +18,21 @@ import controller.ThreadCollision;
 
 public class Game {
 	
+	public final static String LOGIN = "LOGIN";
+	public final static String PLAY = "PLAY";
+	
 	public final static int WAIT_TIME = 120000;
 	public final static int END_TIME = 300000;
 	public final static int FOOD_RADIUS = 10;
 	
 	public ArrayList<Avatar> food;
 	public ArrayList<Avatar> avatars;
-	public Long start;
+	
+	
 	private boolean isOn;
 	private boolean timeout;
 	private Font font; 
+	public Long start;
 
 	public Game() {
 		
@@ -58,6 +63,14 @@ public class Game {
 		
 		ThreadMoving m = new ThreadMoving(id,this);
 		m.start();
+	}
+	
+	public String send_Game() {
+		return "";
+	}
+	
+	public void read_Game(String g) {
+		
 	}
 	
 	public void StartTime() {
