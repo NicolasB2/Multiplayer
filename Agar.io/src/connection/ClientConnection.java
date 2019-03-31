@@ -10,14 +10,13 @@ import java.io.OutputStream;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
-import javax.print.DocFlavor.STRING;
 
 import ui.Login_GUI;
 import ui.Main_Agario;
 
 public class ClientConnection {
-
 	public final static int PORT = 8000;
+//	public final static String SERVER_ADRESS = "192.168.0.7";
 	public final static String SERVER_ADRESS = "localhost";
 	public Login_GUI gui;
 	private Main_Agario main;
@@ -131,7 +130,7 @@ public class ClientConnection {
 		String nick = (String) is.readObject();
 		this.main.setPlayer(nick,Integer.parseInt(id));
 		
-		OutputStream out = new FileOutputStream("src/sources/saveGame.txt");
+		OutputStream out = new FileOutputStream("./resources/data/saveGame.txt");
 
 		byte[] bytes = new byte[16 * 1024];
 

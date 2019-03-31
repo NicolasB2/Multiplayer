@@ -11,7 +11,7 @@ public class DataBase {
 	public final static int FOOD_RADIUS = 10;
 	public final static String USERS_PATH = "./resources/data/users.txt";
 	public final static String SCORE_PATH = "./resources/data/scores.txt";
-	public final static String GAME_PATH = "./resources/data/scores.txt";
+	public final static String GAME_PATH = "./resources/data/game.txt";
 	private ArrayList<Player> players = new ArrayList<Player>();
 
 
