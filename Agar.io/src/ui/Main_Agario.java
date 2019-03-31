@@ -12,8 +12,6 @@ import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 
-
-
 import controller.DataBase;
 import controller.ThreadCollision;
 import controller.ThreadFood;
@@ -21,7 +19,6 @@ import controller.ThreadMoving;
 import controller.hilo;
 import model.Avatar;
 import model.Game;
-
 
 public class Main_Agario extends JFrame {
 
@@ -35,25 +32,21 @@ public class Main_Agario extends JFrame {
 	private Space space;
 	private String nickName;
 	private int id;
-	
+
 	private ThreadMoving moving;
 	private ThreadCollision collision;
 	private ThreadFood tfood;
 
-
-	
 	private Game game;
 
 	// falta: connection with moving
 
 	public Main_Agario() {
-		game = new Game();
-		initComponents();
-		// this.loginWindow = new Login_GUI(this);
-		// this.loginWindow.setVisible(true);
-		setPlayer("dani flow latino", 1);
-		game.startGame(1);
-		play();
+
+		this.loginWindow = new Login_GUI(this);
+		this.loginWindow.setVisible(true);
+
+//		play();
 	}
 
 	public void setPlayer(String nick, int id) {
@@ -64,24 +57,23 @@ public class Main_Agario extends JFrame {
 
 	public void play() {
 
-		// esperar que se logee el usuario y pasen los 2 min de espera
-
-		
-		hilo h = new hilo(space);
-		h.start();
-		
-
-	}
-
-	private void initComponents() {
-
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(false);
 		this.setBounds(WINDOW_POS_X, WINDOW_POS_Y, WINDOW_WIDTH, WINDOW_HEIGHT);
 		this.setResizable(false);
 		this.setFocusable(true);
 		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+		game = new Game();
+		initGame();
+		setPlayer("dani flow latino", 1);
+		game.startGame(1);
+		hilo h = new hilo(space);
+		h.start();
 
+	}
+
+	private void initGame() {
 		// Add player with socket
 		ArrayList<Avatar> players = game.getAvatars();
 		ArrayList<Avatar> food = game.getFood();
@@ -90,7 +82,6 @@ public class Main_Agario extends JFrame {
 		this.space.setFocusable(false);
 		this.setIgnoreRepaint(false);
 		this.add((Component) this.space);
-
 	}
 
 	public Game getGame() {
@@ -116,7 +107,7 @@ public class Main_Agario extends JFrame {
 
 	public static void main(String[] args) {
 		Main_Agario m = new Main_Agario();
-		m.setVisible(true);
+		m.setVisible(false);
 	}
 
 }

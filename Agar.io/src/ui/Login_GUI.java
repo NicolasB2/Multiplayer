@@ -23,6 +23,7 @@ public class Login_GUI extends JFrame implements ActionListener {
 
 	public static final String LOGIN = "Login";
 	public static final String GO_REGISTRER = "Go registrer";
+	public boolean loginCorrect;
 
 	private JLabel labelEmpty1;
 	private JLabel labelEmpty2;
@@ -61,7 +62,7 @@ public class Login_GUI extends JFrame implements ActionListener {
 	public Login_GUI(Main_Agario connection) {
 
 		this.connection = connection;
-		
+		this.loginCorrect =false;
 		setTitle("Agar.io");
 		setSize(333, 333);
 		setLocationRelativeTo(null);
@@ -176,7 +177,14 @@ public class Login_GUI extends JFrame implements ActionListener {
 		String comand = e.getActionCommand();
 
 		if (comand.equals(LOGIN)) {
-			ClientConnection cc = new ClientConnection(getEmail(),getPassword());
+			ClientConnection cc = new ClientConnection(getEmail(),getPassword(),this);
+			if(loginCorrect) {
+				this.setVisible(false);
+				JOptionPane.showMessageDialog(null, "Welcome to Agar.io");
+				connection.play();
+			}else {
+				JOptionPane.showMessageDialog(null, "Login Incorrect");
+			}
 		} else if (comand.equals(GO_REGISTRER)) {
 			connection.openWindowRegistrer();
 		}

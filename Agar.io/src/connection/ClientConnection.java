@@ -10,16 +10,20 @@ import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import javax.print.DocFlavor.STRING;
 
+import ui.Login_GUI;
+
 public class ClientConnection {
 
 	public final static int PORT = 8000;
 	public final static String SERVER_ADRESS = "localhost";
+	public Login_GUI gui;
 	private boolean isloogin;
 	private String email;
 	private String password;
 	private String nickname;
 
-	public ClientConnection( String email, String password) {
+	public ClientConnection( String email, String password,Login_GUI gui) {
+		this.gui = gui;
 		this.isloogin = true;
 		this.email = email;
 		this.password = password;
@@ -78,6 +82,9 @@ public class ClientConnection {
 		os.flush();
 
 		String s = (String) is.readObject();
+		if(s.equals(Server.PLAY)) {
+			this.gui.loginCorrect = true;
+		}
 		System.out.println(s);
 
 	}
