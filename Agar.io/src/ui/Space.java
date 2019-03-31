@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -87,17 +88,23 @@ public class Space extends Canvas {
 		paintLeaderBoard(main.getGame().getTop(), g);
 
 	}
-//	public void setID(int value) {
-//		this.id = value;
-//	}
+
 
 	public void paintPlayer(ArrayList<Avatar> avatars, Graphics g) throws RemoteException {
 		
 		for (int i = 0; i < avatars.size(); i++) {
 			try {
 				Avatar a = avatars.get(i);
-				render(g, 1,a);			
+				render(g, 1,a);	
 				
+				double x = a.getCenterX();
+	            double y = a.getCenterY();
+	            double r = a.getRadious();
+	            g.setFont(new Font("Ubuntu",Font.BOLD,(int)r/2));
+	            FontMetrics metrics = g.getFontMetrics(g.getFont());
+	            int xt =(int) x - metrics.stringWidth(a.getNickName())/2;
+	            int yt = (int) (y + r/4) ;
+	            g.drawString(a.getNickName(), xt , yt);
 				
 			} catch (Exception e) {
 				System.out.print("Problem in paintPlayer");

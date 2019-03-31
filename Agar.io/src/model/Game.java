@@ -210,9 +210,6 @@ public class Game implements Serializable {
 		        } else {
 		            return top;
 		        }
-		        
-		        
-			 
 		}
 	
 	public String reportScores() {
