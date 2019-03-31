@@ -50,7 +50,7 @@ public class Main_Agario extends JFrame {
 	public void setPlayer(String nick, int id) {
 		this.id = id;
 		this.nickName = nick;
-		space.setID(id);
+//		space.setID(id);
 	}
 
 	public void play() {

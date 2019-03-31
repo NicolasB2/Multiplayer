@@ -87,8 +87,6 @@ public class ClientConnection {
 		System.out.println(s);
 		if(s.equals(Server.PLAY)) {
 			this.gui.loginCorrect = true;
-			this.nick = (String) is.readObject();
-			this.id = (String) is.readObject();
 		}
 
 	}
@@ -108,15 +106,7 @@ public class ClientConnection {
 		System.out.println(s);
 
 	}
-	public String getNick() {
-		return nick;
-		
-	}
-
-	public String getId() {
-		return id;
-		
-	}
+	
 	public static void main(String[] args) {
 
 //		ClientConnection c = new ClientConnection("","","");

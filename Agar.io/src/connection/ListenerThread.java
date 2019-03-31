@@ -32,9 +32,9 @@ public class ListenerThread extends Thread {
 			if (key.equals(Server.SING_IN)) {
 				singin(is, os);
 			}
-//			if(key.equals(Server.PLAY)){
-//				play(is, os);
-//			}
+			if(key.equals(Server.PLAY)){
+				play(is, os);
+			}
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -77,6 +77,11 @@ public class ListenerThread extends Thread {
 		server.singin(nickname, email, password);
 		os.writeObject(Server.LOGIN);
 		os.flush();
+	}
+	
+	private void play(ObjectInputStream is, ObjectOutputStream os) {
+		
+		
 	}
 
 }

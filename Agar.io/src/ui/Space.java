@@ -83,17 +83,9 @@ public class Space extends Canvas {
 		}
 
 	}
-	public void setID(int value) {
-		this.id = value;
-	}
-
-	private void paintOwnScore() {
-
-	}
-
-	private void paintLaderBoard() {
-
-	}
+//	public void setID(int value) {
+//		this.id = value;
+//	}
 
 	public void paintPlayer(ArrayList<Avatar> avatars, Graphics g) throws RemoteException {
 		

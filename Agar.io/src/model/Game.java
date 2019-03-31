@@ -134,6 +134,7 @@ public class Game implements Serializable {
 	}
 
 	public void move(double x, double y, int id) {
+		System.out.println(id);
 		Avatar avar  = getAvatar(id);
 		if(avar!=null) {
 			avar.move(x, y);
