@@ -21,9 +21,8 @@ public class hilo extends Thread {
 		while (true) {
 
 			try {
-	                Thread.sleep(10);
 	                this.space.repaint();
-
+	                sleep(150);
 			} catch (Exception ex) {
 				System.out.println("Error");
 				Logger.getLogger(Main_Agario.class.getName()).log(Level.SEVERE, null, ex);

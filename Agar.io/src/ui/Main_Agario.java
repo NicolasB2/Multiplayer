@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 
 
 import controller.DataBase;
+import controller.ThreadCollision;
+import controller.ThreadFood;
 import controller.ThreadMoving;
 import controller.hilo;
 import model.Avatar;
@@ -33,8 +35,13 @@ public class Main_Agario extends JFrame {
 	private Space space;
 	private String nickName;
 	private int id;
+	
 	private ThreadMoving moving;
+	private ThreadCollision collision;
+	private ThreadFood tfood;
 
+
+	
 	private Game game;
 
 	// falta: connection with moving
@@ -45,6 +52,7 @@ public class Main_Agario extends JFrame {
 		// this.loginWindow = new Login_GUI(this);
 		// this.loginWindow.setVisible(true);
 		setPlayer("dani flow latino", 1);
+		game.startGame(1);
 		play();
 	}
 
@@ -62,8 +70,14 @@ public class Main_Agario extends JFrame {
 //		this.setLocationRelativeTo(null);
 //		this.setIgnoreRepaint(false);
 
-		this.moving = new ThreadMoving(this.id, game);
-		moving.start();
+//		this.moving = new ThreadMoving(this.id, game);
+//		moving.start();
+//		
+//		this.collision = new ThreadCollision(game,this.id);
+//		collision.start();
+//		
+//		this.tfood = new ThreadFood(game);
+//		tfood.start();
 		
 		hilo h = new hilo(space);
 		h.start();

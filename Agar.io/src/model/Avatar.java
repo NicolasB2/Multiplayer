@@ -32,8 +32,8 @@ public class Avatar {
 	}
 
 	public Avatar() {
-		this.centerX = random.nextInt(3 * Main_Agario.WINDOW_WIDTH/4) + Main_Agario.WINDOW_WIDTH / 8;
-		this.centerY = random.nextInt(3 * Main_Agario.WINDOW_HEIGHT/4) + Main_Agario.WINDOW_HEIGHT / 8;
+		this.centerX = random.nextInt(Main_Agario.WINDOW_WIDTH - 15 ) + 15;
+		this.centerY = random.nextInt(Main_Agario.WINDOW_HEIGHT -15) + 15;
 		this.avatar = false;
 		this.alive = true;
 		radious = 5;
@@ -41,8 +41,8 @@ public class Avatar {
 	}
 
 	public Avatar(String nickName, int id) {
-		this.centerX = Math.floor(Math.random()*(Space.WIDTH-30+1)+30);
-		this.centerY = Math.floor(Math.random()*(Space.HEIGHT-30+1)+30);
+		this.centerX = random.nextInt(Main_Agario.WINDOW_WIDTH - 15 ) + 15;
+		this.centerY = random.nextInt(Main_Agario.WINDOW_HEIGHT -15) + 15;
 		this.avatar = true;
 		this.alive = true;
 		this.id = id;
@@ -83,12 +83,10 @@ public class Avatar {
 	public void check_Collision(Avatar other) {	
 		boolean c = collision(other);
 		if (c == true){
-            this.increaseRadious(other.getRadious());
+            this.increaseRadious(other.getRadious()/3);
             other.setAlive(false);
-        } else if (c == false){
-            other.increaseRadious(this.radious);
-            this.setAlive(false);
-        }
+        } 
+        
 	}
 
 	public double getRadious() {

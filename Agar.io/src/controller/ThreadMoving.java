@@ -36,8 +36,17 @@ public class ThreadMoving extends Thread {
 	//verificar
 	private void updatePositionMouse() {
 		Point mouse = MouseInfo.getPointerInfo().getLocation();
-		this.xFinal = (mouse.x -game.getAvatar(1).getCenterX())/100;
-		this.yFinal = (mouse.y-game.getAvatar(1).getCenterY())/100; 
-		System.out.println(xFinal+"---"+-yFinal);
+		this.xFinal = (mouse.x -game.getAvatar(1).getCenterX())/250;
+		this.yFinal = (mouse.y-game.getAvatar(1).getCenterY())/250; 
+		
+		if(this.xFinal<0) {
+			this.xFinal-=4;
+		}
+		if(this.yFinal<0) {
+			this.yFinal-=4;
+		}
+		if(this.yFinal>1) {
+			this.yFinal+=4;
+		}
 	}
 }

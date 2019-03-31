@@ -42,7 +42,6 @@ public class Game implements Serializable {
 		this.avatars = new ArrayList<Avatar>();
 		
 		avatars.add(new Avatar("deibi", 1));
-		initializeFood();
 		StartTime();
 		isOn = false;
 		timeout = false;
@@ -63,7 +62,7 @@ public class Game implements Serializable {
 		ThreadFood f = new ThreadFood(this);
 		f.start();
 		
-		ThreadCollision c = new ThreadCollision(this);
+		ThreadCollision c = new ThreadCollision(this,id);
 		c.start();
 		
 		ThreadMoving m = new ThreadMoving(id,this);
@@ -83,7 +82,7 @@ public class Game implements Serializable {
 	}
 	
 	private void initializeFood() {
-		for (int i = 0; i < 150; i++) {
+		for (int i = 0; i < 100; i++) {
 			
 			Avatar a = new Avatar();
 			food.add(a);
@@ -101,7 +100,8 @@ public class Game implements Serializable {
 		}
 
 		for (int i = 0; i < aux.size(); i++) {
-			food.remove(aux.get(i));
+			this.food.remove((int)aux.get(i));
+			System.out.println(aux.get(0));
 		}
 
 	}
@@ -115,7 +115,7 @@ public class Game implements Serializable {
 		}
 
 		for (int i = 0; i < aux.size(); i++) {
-			avatars.remove(aux.get(i));
+			avatars.remove((int)aux.get(i));
 		}
 
 	}
