@@ -33,6 +33,7 @@ public class ListenerThread extends Thread {
 				singin(is, os);
 			}
 			if(key.equals(Server.PLAY)){
+				System.out.println("entro a la condicon del sever");
 				play(is, os);
 			}
 
@@ -77,9 +78,10 @@ public class ListenerThread extends Thread {
 		os.flush();
 	}
 	
-	private void play(ObjectInputStream is, ObjectOutputStream os) {
+	private void play(ObjectInputStream is, ObjectOutputStream os) throws Exception {
 		
-		
+		os.writeObject(server.nextId());
+		os.flush();
 	}
 
 }

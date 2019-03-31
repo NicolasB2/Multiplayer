@@ -60,7 +60,6 @@ public class Server {
 
 	public void initilizateGame() {
 		connectionGame.startGame();
-		System.out.println("se inicializa el juego");
 	}
 
 	public boolean validateLogin(String email, String password) {
@@ -84,6 +83,11 @@ public class Server {
 		return ConnectionDB.findNickName(email);
 	}
 
+	public String nextId() {
+		return connectionGame.getIdAvailable()+"";
+	}
+	
+	
 	public static void main(String[] args) {
 		Server s = new Server();
 

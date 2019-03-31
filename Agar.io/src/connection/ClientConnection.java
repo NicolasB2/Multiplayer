@@ -21,11 +21,9 @@ public class ClientConnection {
 	private String email;
 	private String password;
 	private String nickname;
-	private String nick;
-	private String id;
 
-	//login
-	public ClientConnection( String email, String password,Login_GUI gui, String commands) {
+	// login
+	public ClientConnection(String email, String password, Login_GUI gui, String commands) {
 		this.gui = gui;
 		this.commands = commands;
 		this.email = email;
@@ -33,20 +31,21 @@ public class ClientConnection {
 		connection();
 	}
 
-	//register
-	public ClientConnection(String nickname, String email,  String password,  String commands) {
+	// register
+	public ClientConnection(String nickname, String email, String password, String commands) {
 		this.commands = commands;
 		this.password = password;
 		this.nickname = nickname;
 		this.email = email;
 		connection();
 	}
-	
-	//play
-	public ClientConnection(  String commands) {
+
+	// play
+	public ClientConnection(String commands) {
 		this.commands = commands;
 		connection();
 	}
+
 	private void connection() {
 		System.setProperty("javax.net.ssl.trustStore", "./resources/data/MyClient.jks");
 		ObjectOutputStream os = null;
@@ -58,7 +57,6 @@ public class ClientConnection {
 			sslsocket = (SSLSocket) f.createSocket(SERVER_ADRESS, PORT);
 
 			sslsocket.startHandshake();
-			System.out.println("Authentication done");
 
 			os = new ObjectOutputStream(sslsocket.getOutputStream());
 			is = new ObjectInputStream(sslsocket.getInputStream());
@@ -67,10 +65,10 @@ public class ClientConnection {
 			if (commands.equals(Server.LOGIN)) {
 				login(os, is);
 			}
-			if (commands.equals(Server.SING_IN)){
+			if (commands.equals(Server.SING_IN)) {
 				register(os, is);
 			}
-			if (commands.equals(Server.PLAY)){
+			if (commands.equals(Server.PLAY)) {
 				play(os, is);
 			}
 		} catch (Exception ex) {
@@ -86,9 +84,11 @@ public class ClientConnection {
 		}
 	}
 
-	private void play(ObjectOutputStream os, ObjectInputStream is) {
+	private void play(ObjectOutputStream os, ObjectInputStream is) throws Exception {
+		os.writeObject(Server.PLAY);
+		String s = (String) is.readObject();
 		
-		
+
 	}
 
 	public void login(ObjectOutputStream os, ObjectInputStream is) throws Exception {
@@ -97,31 +97,37 @@ public class ClientConnection {
 		os.writeObject(email);
 		os.writeObject(password);
 		os.flush();
-
+		System.out.println("Login email: "+email);
+		System.out.println("Login pasword: "+password);
 		String s = (String) is.readObject();
 		System.out.println(s);
-		if(s.equals(Server.LOGIN_OK)) {
+		if (s.equals(Server.LOGIN_OK)) {
 			this.gui.loginCorrect = true;
 		}
 
 	}
-	
+
 	public void register(ObjectOutputStream os, ObjectInputStream is) throws Exception {
 
 		os.writeObject(Server.SING_IN);
 		os.writeObject(nickname);
 		os.writeObject(email);
 		os.writeObject(password);
+		
+		System.out.println("Register: "+nickname);
+		System.out.println("Register: "+email);
+		System.out.println("Register: "+ password);
 		os.flush();
 
 		String s = (String) is.readObject();
 		System.out.println(s);
 
 	}
-	
+
 	public static void main(String[] args) {
 
 //		ClientConnection c = new ClientConnection("","","");
+	
 	}
 
 }
