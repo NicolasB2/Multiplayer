@@ -11,7 +11,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
+import connection.ClientConnection;
+import connection.Server;
 import controller.DataBase;
 import controller.ThreadCollision;
 import controller.ThreadFood;
@@ -48,14 +51,20 @@ public class Main_Agario extends JFrame {
 	}
 
 	public void setPlayer(String nick, int id) {
+		
 		this.id = id;
 		this.nickName = nick;
 		game.addAvatar(nick, id);
-		game.startGame(this.id);
+		game.startGame();
+		ThreadMoving m = new ThreadMoving(id,this.getGame());
+		m.start();
 	}
 
+	
 	public void play() {
-
+		ClientConnection cc = new ClientConnection(Server.PLAY);
+		game = new Game();
+		setPlayer("dani",5);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(false);
 		this.setBounds(WINDOW_POS_X, WINDOW_POS_Y, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -63,11 +72,9 @@ public class Main_Agario extends JFrame {
 		this.setFocusable(true);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
-		game = new Game();
 		initGame();
 		hilo h = new hilo(space);
 		h.start();
-
 	}
 
 	private void initGame() {

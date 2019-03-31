@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import connection.ClientConnection;
+import connection.Server;
 
 public class Registrer extends JFrame implements ActionListener {
 
@@ -186,7 +187,7 @@ public class Registrer extends JFrame implements ActionListener {
 		String comand = e.getActionCommand();
 		
 		if(comand.equals(REGISTRER)) {
-			ClientConnection cc = new ClientConnection(getRegistrerUser(),getRegistrerEmail(),getRegistrerPass());
+			ClientConnection cc = new ClientConnection(getRegistrerUser(),getRegistrerEmail(),getRegistrerPass(),Server.SING_IN);
 			connection.closeRegistre();
 		}
 		

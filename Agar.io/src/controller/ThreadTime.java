@@ -1,32 +1,28 @@
 package controller;
 
+import connection.Server;
 import model.Game;
 
 public class ThreadTime extends Thread {
-	private Game game;
 
-	public ThreadTime(Game game) {
-		this.game = game;
+	private Server connectionServer;
+	private int timeOut;
+
+	public ThreadTime(Server server, int timeOut) {
+
+		connectionServer = server;
+		this.timeOut = timeOut;
+
 	}
 
 	@Override
 	public void run() {
-
-		Long corrently = System.currentTimeMillis();
-		Long minus = corrently - game.start;
-
-		if (game.isOn()) {
-			if (minus == game.END_TIME) {
-				game.setTimeout(true);
-			}
+		
+		try {
+			Thread.sleep(this.timeOut);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-
-		if (!game.isOn()) {
-			if (minus == game.WAIT_TIME) {
-				game.setTimeout(true);
-			}
-		}
-		game.setTimeout(false);
-
+		connectionServer.initilizateGame();
 	}
 }

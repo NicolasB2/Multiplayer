@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import connection.ClientConnection;
+import connection.Server;
 
 public class Login_GUI extends JFrame implements ActionListener {
 
@@ -58,6 +59,7 @@ public class Login_GUI extends JFrame implements ActionListener {
 	private JButton butPanelRegistrar;
 
 	private Main_Agario connection;
+	public String email; 
 
 	public Login_GUI(Main_Agario connection) {
 
@@ -182,12 +184,12 @@ public class Login_GUI extends JFrame implements ActionListener {
 		String comand = e.getActionCommand();
 
 		if (comand.equals(LOGIN)) {
-			ClientConnection cc = new ClientConnection(getEmail(),getPassword(),this);
+			ClientConnection cc = new ClientConnection(getEmail(),getPassword(),this,Server.LOGIN);
 			if(loginCorrect) {
 				this.setVisible(false);
 				JOptionPane.showMessageDialog(null, "Welcome to Agar.io");
+				this.email = getEmail();
 				connection.play();
-				connection.setPlayer("dani",5);
 			}else {
 				JOptionPane.showMessageDialog(null, "Login Incorrect");
 			}
