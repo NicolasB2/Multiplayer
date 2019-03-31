@@ -85,13 +85,11 @@ public class ClientConnection {
 
 		String s = (String) is.readObject();
 		System.out.println(s);
-		
 		if(s.equals(Server.PLAY)) {
 			this.gui.loginCorrect = true;
 			this.nick = (String) is.readObject();
 			this.id = (String) is.readObject();
 		}
-		System.out.println(s);
 
 	}
 	

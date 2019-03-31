@@ -45,8 +45,6 @@ public class Main_Agario extends JFrame {
 
 		this.loginWindow = new Login_GUI(this);
 		this.loginWindow.setVisible(true);
-
-//		play();
 	}
 
 	public void setPlayer(String nick, int id) {
@@ -66,7 +64,7 @@ public class Main_Agario extends JFrame {
 		this.setVisible(true);
 		game = new Game();
 		initGame();
-		game.startGame(1);
+		game.startGame(1);//Cambiar por uno no generico
 		hilo h = new hilo(space);
 		h.start();
 

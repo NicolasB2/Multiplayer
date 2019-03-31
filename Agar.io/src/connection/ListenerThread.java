@@ -60,7 +60,7 @@ public class ListenerThread extends Thread {
 		if (log) {
 			os.writeObject(Server.PLAY);
 			os.writeObject(server.findNickname(email));
-			os.writeObject("1");
+			os.writeObject("1");//Cambiar por uno no generico
 		} else {
 			os.writeObject(Server.EXIT);
 		}
