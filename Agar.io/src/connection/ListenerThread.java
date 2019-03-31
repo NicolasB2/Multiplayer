@@ -58,9 +58,7 @@ public class ListenerThread extends Thread {
 		System.out.println("We got: " + password);
 		log = server.validateLogin(email, password);
 		if (log) {
-			os.writeObject(Server.PLAY);
-			os.writeObject(server.findNickname(email));
-			os.writeObject("1");//Cambiar por uno no generico
+			os.writeObject(Server.LOGIN_OK);
 		} else {
 			os.writeObject(Server.EXIT);
 		}
@@ -75,7 +73,7 @@ public class ListenerThread extends Thread {
 		String password = (String) is.readObject();
 		System.out.println("We got: " + password);
 		server.singin(nickname, email, password);
-		os.writeObject(Server.LOGIN);
+		os.writeObject(Server.SAVE);
 		os.flush();
 	}
 	

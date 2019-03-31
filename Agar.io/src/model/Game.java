@@ -25,9 +25,7 @@ public class Game implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	public final static int WAIT_TIME = 120000;
-	public final static int END_TIME = 300000;
+	private static final long serialVersionUID = 1L;	
 	public final static int FOOD_RADIUS = 10;
 
 	private ArrayList<Avatar> food;
@@ -35,32 +33,28 @@ public class Game implements Serializable {
 
 	private boolean isOn;
 	private boolean timeout;
+
 	private Font font;
 	public Long start;
 	
 
-	public Game() {
 
+
+	public Game() {
 		this.food = new ArrayList<Avatar>();
 		this.avatars = new ArrayList<Avatar>();
-
-		StartTime();
 		isOn = false;
 		timeout = false;
 
-		ThreadTime t = new ThreadTime(this);
-		t.start();
 	}
 
-	public void startGame(int id) {
+	public void startGame() {
 		isOn = true;
 		timeout = false;
-		StartTime();
 		initializeFood();
+
 	
 
-		ThreadTime t = new ThreadTime(this);
-		t.start();
 
 		ThreadFood f = new ThreadFood(this);
 		f.start();
@@ -68,8 +62,7 @@ public class Game implements Serializable {
 		ThreadCollision c = new ThreadCollision(this);
 		c.start();
 
-		ThreadMoving m = new ThreadMoving(id, this);
-		m.start();
+
 	}
 
 	public String send_Game() {
@@ -80,9 +73,9 @@ public class Game implements Serializable {
 
 	}
 
-	public void StartTime() {
-		start = System.currentTimeMillis();
-	}
+
+
+
 
 	private void initializeFood() {
 		for (int i = 0; i < 100; i++) {
@@ -136,6 +129,10 @@ public class Game implements Serializable {
 		avatars.add(a);
 	}
 
+	public int getIdAvailable() {
+		return avatars.size();
+		
+	}
 	public void move(double x, double y, int id) {
 		Avatar avar = getAvatar(id);
 		if (avar != null) {

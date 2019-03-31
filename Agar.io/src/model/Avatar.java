@@ -52,8 +52,6 @@ public class Avatar {
 	}
 
 	public void move(double x, double y) {
-//		this.centerX += 5;
-//		this.centerY += 5;
 		this.centerX += x;
 		this.centerY += y;
 	}
@@ -82,7 +80,7 @@ public class Avatar {
 
 	public void check_Collision(Avatar other) {	
 		boolean c = collision(other);
-		if (c == true){
+		if (c == true && other!=null){
             this.increaseRadious(other.getRadious()/3);
             other.setAlive(false);
         } 

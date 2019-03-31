@@ -17,26 +17,34 @@ public class ClientConnection {
 	public final static int PORT = 8000;
 	public final static String SERVER_ADRESS = "localhost";
 	public Login_GUI gui;
-	private boolean isloogin;
+	private String commands;
 	private String email;
 	private String password;
 	private String nickname;
 	private String nick;
 	private String id;
 
-	public ClientConnection( String email, String password,Login_GUI gui) {
+	//login
+	public ClientConnection( String email, String password,Login_GUI gui, String commands) {
 		this.gui = gui;
-		this.isloogin = true;
+		this.commands = commands;
 		this.email = email;
 		this.password = password;
 		connection();
 	}
 
-	public ClientConnection(String nickname, String email, String password) {
-		this.isloogin = false;
+	//register
+	public ClientConnection(String nickname, String email,  String password,  String commands) {
+		this.commands = commands;
+		this.password = password;
 		this.nickname = nickname;
 		this.email = email;
-		this.password = password;
+		connection();
+	}
+	
+	//play
+	public ClientConnection(  String commands) {
+		this.commands = commands;
 		connection();
 	}
 	private void connection() {
@@ -56,10 +64,14 @@ public class ClientConnection {
 			is = new ObjectInputStream(sslsocket.getInputStream());
 
 			BufferedReader b = new BufferedReader(new InputStreamReader(System.in));
-			if (isloogin) {
+			if (commands.equals(Server.LOGIN)) {
 				login(os, is);
-			}else {
+			}
+			if (commands.equals(Server.SING_IN)){
 				register(os, is);
+			}
+			if (commands.equals(Server.PLAY)){
+				play(os, is);
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -74,18 +86,21 @@ public class ClientConnection {
 		}
 	}
 
+	private void play(ObjectOutputStream os, ObjectInputStream is) {
+		
+		
+	}
+
 	public void login(ObjectOutputStream os, ObjectInputStream is) throws Exception {
 
 		os.writeObject(Server.LOGIN);
-		System.out.println("email: " + email);
 		os.writeObject(email);
-		System.out.println("password:" + password);
 		os.writeObject(password);
 		os.flush();
 
 		String s = (String) is.readObject();
 		System.out.println(s);
-		if(s.equals(Server.PLAY)) {
+		if(s.equals(Server.LOGIN_OK)) {
 			this.gui.loginCorrect = true;
 		}
 
@@ -94,11 +109,8 @@ public class ClientConnection {
 	public void register(ObjectOutputStream os, ObjectInputStream is) throws Exception {
 
 		os.writeObject(Server.SING_IN);
-		System.out.println("nick: " + nickname);
 		os.writeObject(nickname);
-		System.out.println("email: " + email);
 		os.writeObject(email);
-		System.out.println("password:" + password);
 		os.writeObject(password);
 		os.flush();
 
