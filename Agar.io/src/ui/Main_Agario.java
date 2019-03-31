@@ -12,16 +12,14 @@ import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 
-<<<<<<< HEAD
-import controller.Login;
+
+
+import controller.DataBase;
 import controller.ThreadMoving;
 import controller.hilo;
 import model.Avatar;
-=======
-
-import controller.DataBase;
->>>>>>> 774cd29406add2a860006a2046476dfd3d9507c5
 import model.Game;
+
 
 public class Main_Agario extends JFrame {
 
@@ -60,12 +58,12 @@ public class Main_Agario extends JFrame {
 
 		// esperar que se logee el usuario y pasen los 2 min de espera
 
-		// this.createBufferStrategy(2);
-		this.setLocationRelativeTo(null);
-		this.setIgnoreRepaint(false);
+//		 this.createBufferStrategy(2);
+//		this.setLocationRelativeTo(null);
+//		this.setIgnoreRepaint(false);
 
 		this.moving = new ThreadMoving(this.id, game);
-		this.moving.start();
+		moving.start();
 		
 		hilo h = new hilo(space);
 		h.start();
@@ -95,8 +93,8 @@ public class Main_Agario extends JFrame {
 		this.setLocationRelativeTo(null);
 
 		// Add player with socket
-		ArrayList<Avatar> players = game.getAvatars();
-		ArrayList<Avatar> food = game.getFood();
+//		ArrayList<Avatar> players = game.getAvatars();
+//		ArrayList<Avatar> food = game.getFood();
 
 		this.space = new Space(this, game.getAvatar(id), game.getFood(), new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 		this.space.setFocusable(false);

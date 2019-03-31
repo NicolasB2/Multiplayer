@@ -9,7 +9,7 @@ import ui.Space;
 public class Avatar {
 
 	
-	public static final int INIT_SPEED = 4;
+	public static final int INIT_SPEED = 1;
 	public static final int MAX_COLOR = 256;
 
 	private static Random random = new Random();
@@ -52,6 +52,8 @@ public class Avatar {
 	}
 
 	public void move(double x, double y) {
+//		this.centerX += 5;
+//		this.centerY += 5;
 		this.centerX += x;
 		this.centerY += y;
 	}

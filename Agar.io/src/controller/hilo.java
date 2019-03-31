@@ -21,7 +21,7 @@ public class hilo extends Thread {
 		while (true) {
 
 			try {
-	                Thread.sleep(1000);
+	                Thread.sleep(10);
 	                this.space.repaint();
 
 			} catch (Exception ex) {

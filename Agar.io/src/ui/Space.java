@@ -46,7 +46,6 @@ public class Space extends Canvas {
 	@Override
 	public void paint(Graphics g) {
 
-
 		// Paint background
 		g.setColor(new Color(220, 220, 220));
 		g.setColor(Color.WHITE);
@@ -99,12 +98,9 @@ public class Space extends Canvas {
 	public void paintPlayer(ArrayList<Avatar> avatars, Graphics g) throws RemoteException {
 		
 		for (int i = 0; i < avatars.size(); i++) {
-			System.out.println(avatars.get(i).getNickName());
 			try {
 				Avatar a = avatars.get(i);
 				render(g, 1,a);			
-				
-				
 				
 				
 			} catch (Exception e) {

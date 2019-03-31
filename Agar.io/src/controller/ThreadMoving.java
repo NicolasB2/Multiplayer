@@ -7,7 +7,7 @@ import model.Game;
 import ui.Space;
 
 public class ThreadMoving extends Thread {
-	private static final int INTERVALO = 1000;
+	private static final int INTERVALO = 100;
 
 	private int id;
 	private Game game;
@@ -36,7 +36,8 @@ public class ThreadMoving extends Thread {
 	//verificar
 	private void updatePositionMouse() {
 		Point mouse = MouseInfo.getPointerInfo().getLocation();
-		this.xFinal = mouse.x - Space.WIDTH;
-		this.yFinal = mouse.y - Space.HEIGHT;
+		this.xFinal = (mouse.x -game.getAvatar(1).getCenterX())/100;
+		this.yFinal = (mouse.y-game.getAvatar(1).getCenterY())/100; 
+		System.out.println(xFinal+"---"+-yFinal);
 	}
 }
