@@ -12,10 +12,15 @@ import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 
+<<<<<<< HEAD
 import controller.Login;
 import controller.ThreadMoving;
 import controller.hilo;
 import model.Avatar;
+=======
+
+import controller.DataBase;
+>>>>>>> 774cd29406add2a860006a2046476dfd3d9507c5
 import model.Game;
 
 public class Main_Agario extends JFrame {
