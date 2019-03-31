@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Random;
 
+import model.Avatar;
 import model.Game;
 
 public class ThreadFood extends Thread {
@@ -21,15 +22,8 @@ public class ThreadFood extends Thread {
 		try {
 			while (game.isOn()) {
 
-				double randomX = Math.floor(Math.random() * (773 - 1) + 1);
-				double randomY = Math.floor(Math.random() * (1371 - 1) + 1);
-
-				Random rand = new Random();
-				int r = rand.nextInt(255);
-				int g = rand.nextInt(255);
-				int b = rand.nextInt(255);
-
-				sleep(2500);
+				game.getFood().add(new Avatar());
+				sleep(1500);
 
 			}
 
