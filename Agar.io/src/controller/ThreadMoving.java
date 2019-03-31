@@ -36,8 +36,8 @@ public class ThreadMoving extends Thread {
 	//verificar
 	private void updatePositionMouse() {
 		Point mouse = MouseInfo.getPointerInfo().getLocation();
-		this.xFinal = (mouse.x -game.getAvatar(1).getCenterX())/250;
-		this.yFinal = (mouse.y-game.getAvatar(1).getCenterY())/250; 
+		this.xFinal = (mouse.x -game.getAvatar(id).getCenterX())/250;
+		this.yFinal = (mouse.y-game.getAvatar(id).getCenterY())/250; 
 		
 		if(this.xFinal<0) {
 			this.xFinal-=4;

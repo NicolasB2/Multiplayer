@@ -187,7 +187,7 @@ public class Login_GUI extends JFrame implements ActionListener {
 				this.setVisible(false);
 				JOptionPane.showMessageDialog(null, "Welcome to Agar.io");
 				connection.play();
-				connection.setPlayer("dani",3);
+				connection.setPlayer("dani",5);
 			}else {
 				JOptionPane.showMessageDialog(null, "Login Incorrect");
 			}

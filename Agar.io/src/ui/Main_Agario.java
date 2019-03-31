@@ -50,7 +50,8 @@ public class Main_Agario extends JFrame {
 	public void setPlayer(String nick, int id) {
 		this.id = id;
 		this.nickName = nick;
-//		space.setID(id);
+		game.addAvatar(nick, id);
+		game.startGame(this.id);
 	}
 
 	public void play() {
@@ -64,7 +65,6 @@ public class Main_Agario extends JFrame {
 		this.setVisible(true);
 		game = new Game();
 		initGame();
-		game.startGame(1);//Cambiar por uno no generico
 		hilo h = new hilo(space);
 		h.start();
 

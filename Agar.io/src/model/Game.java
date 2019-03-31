@@ -41,7 +41,7 @@ public class Game implements Serializable {
 		this.food = new ArrayList<Avatar>();
 		this.avatars = new ArrayList<Avatar>();
 		
-		avatars.add(new Avatar("deibi", 1));
+//		avatars.add(new Avatar("deibi", 1));
 		StartTime();
 		isOn = false;
 		timeout = false;
@@ -62,7 +62,7 @@ public class Game implements Serializable {
 		ThreadFood f = new ThreadFood(this);
 		f.start();
 		
-		ThreadCollision c = new ThreadCollision(this,id);
+		ThreadCollision c = new ThreadCollision(this);
 		c.start();
 		
 		ThreadMoving m = new ThreadMoving(id,this);
@@ -128,13 +128,12 @@ public class Game implements Serializable {
 		return null;
 	}
 	
-	public void addAvatar(String nickName, int xMax, int yMax) {
-		Avatar a = new Avatar(nickName,avatars.size());
+	public void addAvatar(String nickName,int id) {
+		Avatar a = new Avatar(nickName,id);
 		avatars.add(a);
 	}
 
 	public void move(double x, double y, int id) {
-		System.out.println(id);
 		Avatar avar  = getAvatar(id);
 		if(avar!=null) {
 			avar.move(x, y);
