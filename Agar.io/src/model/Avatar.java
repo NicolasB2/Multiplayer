@@ -8,7 +8,6 @@ import ui.Space;
 
 public class Avatar {
 
-	
 	public static final int INIT_SPEED = 1;
 	public static final int MAX_COLOR = 256;
 
@@ -32,8 +31,8 @@ public class Avatar {
 	}
 
 	public Avatar() {
-		this.centerX = random.nextInt(Main_Agario.WINDOW_WIDTH - 15 ) + 15;
-		this.centerY = random.nextInt(Main_Agario.WINDOW_HEIGHT -15) + 15;
+		this.centerX = random.nextInt(Main_Agario.WINDOW_WIDTH - 15) + 15;
+		this.centerY = random.nextInt(Main_Agario.WINDOW_HEIGHT - 15) + 15;
 		this.avatar = false;
 		this.alive = true;
 		radious = 5;
@@ -41,8 +40,8 @@ public class Avatar {
 	}
 
 	public Avatar(String nickName, int id) {
-		this.centerX = random.nextInt(Main_Agario.WINDOW_WIDTH - 15 ) + 15;
-		this.centerY = random.nextInt(Main_Agario.WINDOW_HEIGHT -15) + 15;
+		this.centerX = random.nextInt(Main_Agario.WINDOW_WIDTH - 15) + 15;
+		this.centerY = random.nextInt(Main_Agario.WINDOW_HEIGHT - 15) + 15;
 		this.avatar = true;
 		this.alive = true;
 		this.id = id;
@@ -63,28 +62,30 @@ public class Avatar {
 	private double distance(double xi, double yi, double xf, double yf) {
 		return Math.sqrt((yf - yi) * (yf - yi) + (xf - xi) * (xf - xi));
 	}
-	
+
 	private boolean collision(Avatar other) {
-		double d = distance(this.centerX, this.centerY, other.centerX, other.centerY);
-		if (d < this.radious + other.getRadious()) {
-			if (this.radious > other.getRadious()) {
-				return true;
-			} else if (this.radious < other.radious) {
-				return false;
-			} else
-				return false;
-		} else {
-			return false;
+		if (other != null) {
+			double d = distance(this.centerX, this.centerY, other.centerX, other.centerY);
+			if (d < this.radious + other.getRadious()) {
+				if (this.radious > other.getRadious()) {
+					return true;
+				} else if (this.radious < other.radious) {
+					return false;
+				} else
+					return false;
+			}
 		}
+		return false;
+
 	}
 
-	public void check_Collision(Avatar other) {	
+	public void check_Collision(Avatar other) {
 		boolean c = collision(other);
-		if (c == true && other!=null){
-            this.increaseRadious(other.getRadious()/3);
-            other.setAlive(false);
-        } 
-        
+		if (c == true && other != null) {
+			this.increaseRadious(other.getRadious() / 3);
+			other.setAlive(false);
+		}
+
 	}
 
 	public double getRadious() {
@@ -98,7 +99,7 @@ public class Avatar {
 	public void increaseRadious(double increase) {
 		this.radious += increase;
 	}
-	
+
 	public double getSpeed() {
 		return speed;
 	}
@@ -138,8 +139,7 @@ public class Avatar {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
+
 	public String getNickName() {
 		return nickName;
 	}
@@ -164,7 +164,4 @@ public class Avatar {
 		this.centerY = centerY;
 	}
 
-
-	
-	
 }

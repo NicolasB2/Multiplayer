@@ -15,7 +15,6 @@ public class ThreadCollision extends Thread {
 		while (game.isOn()) {
 			try {
 				checkCollisions();
-				System.out.println(game.reportScores());
 				Thread.sleep(INTERVAL);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -26,13 +25,15 @@ public class ThreadCollision extends Thread {
 	public void checkCollisions() {
 		for (int i = 0; i < game.getAvatars().size(); i++) {
 			for (int j = 0; j < game.getFood().size(); j++) {
-				game.getAvatars().get(i).check_Collision(game.getFood().get(j));
+				if (game.getFood().get(j)!=null) {
+					game.getAvatars().get(i).check_Collision(game.getFood().get(j));
+				}
 			}
 
 		}
 		for (int i = 0; i < game.getAvatars().size(); i++) {
 			for (int j = 0; j < game.getAvatars().size(); j++) {
-				if (j != id) {
+				if (j != id && game.getFood().get(j)!= null ) {
 					game.getAvatars().get(i).check_Collision(game.getFood().get(j));
 				}
 			}

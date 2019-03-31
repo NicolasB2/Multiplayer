@@ -11,12 +11,14 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.print.DocFlavor.STRING;
 
 import ui.Login_GUI;
+import ui.Main_Agario;
 
 public class ClientConnection {
 
 	public final static int PORT = 8000;
 	public final static String SERVER_ADRESS = "localhost";
 	public Login_GUI gui;
+	private Main_Agario main;
 	private String commands;
 	private String email;
 	private String password;
@@ -41,8 +43,10 @@ public class ClientConnection {
 	}
 
 	// play
-	public ClientConnection(String commands) {
+	public ClientConnection(Main_Agario main,String email , String commands) {
+		this.main = main;
 		this.commands = commands;
+		this.email = email;
 		connection();
 	}
 
@@ -84,12 +88,6 @@ public class ClientConnection {
 		}
 	}
 
-	private void play(ObjectOutputStream os, ObjectInputStream is) throws Exception {
-		os.writeObject(Server.PLAY);
-		String s = (String) is.readObject();
-		
-
-	}
 
 	public void login(ObjectOutputStream os, ObjectInputStream is) throws Exception {
 
@@ -124,6 +122,14 @@ public class ClientConnection {
 
 	}
 
+	private void play(ObjectOutputStream os, ObjectInputStream is) throws Exception {
+		os.writeObject(Server.PLAY);
+		String id = (String) is.readObject();
+		os.writeObject(email);
+		String nick = (String) is.readObject();
+		this.main.setPlayer(nick,Integer.parseInt(id));
+	}
+	
 	public static void main(String[] args) {
 
 //		ClientConnection c = new ClientConnection("","","");

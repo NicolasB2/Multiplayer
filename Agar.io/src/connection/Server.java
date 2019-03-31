@@ -46,6 +46,7 @@ public class Server {
 			SSLServerSocket s = (SSLServerSocket) ssf.createServerSocket(PORT);
 
 			System.out.println("****** Server online ******");
+			System.out.println("clientes: " +clients);
 			while (true) {
 				SSLSocket sslsocket = (SSLSocket) s.accept();
 				System.out.println("New Client accepted");

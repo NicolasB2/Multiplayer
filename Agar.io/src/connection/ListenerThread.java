@@ -80,7 +80,15 @@ public class ListenerThread extends Thread {
 	
 	private void play(ObjectInputStream is, ObjectOutputStream os) throws Exception {
 		
-		os.writeObject(server.nextId());
+		String id = server.nextId();
+		os.writeObject(id);
+		String email = (String) is.readObject();
+		String nick = server.findNickname(email);
+		os.writeObject(nick);
+		
+		System.out.println(id);
+		System.out.println(email);
+		System.out.println(nick);
 		os.flush();
 	}
 
