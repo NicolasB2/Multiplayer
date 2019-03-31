@@ -1,10 +1,12 @@
 package connection;
 
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
@@ -128,12 +130,15 @@ public class ClientConnection {
 		os.writeObject(email);
 		String nick = (String) is.readObject();
 		this.main.setPlayer(nick,Integer.parseInt(id));
-	}
-	
-	public static void main(String[] args) {
+		
+		OutputStream out = new FileOutputStream("src/sources/saveGame.txt");
 
-//		ClientConnection c = new ClientConnection("","","");
-	
+		byte[] bytes = new byte[16 * 1024];
+
+		int count;
+		while ((count = is.read(bytes)) > 0) {
+			out.write(bytes, 0, count);
+		}
 	}
 
 }

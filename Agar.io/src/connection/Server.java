@@ -19,6 +19,8 @@ public class Server {
 	public final static String LOGIN_OK = "LOGIN_OK";
 	public final static String EXIT = "EXIT";
 	public final static String SAVE = "SAVE";
+	
+	//path
 
 	public static int PORT = 8000;
 	public final static int END_TIME = 300000;
@@ -47,11 +49,12 @@ public class Server {
 
 			System.out.println("****** Server online ******");
 			System.out.println("clientes: " +clients);
-			while (true) {
+			while (clients<6) {
 				SSLSocket sslsocket = (SSLSocket) s.accept();
 				System.out.println("New Client accepted");
 				ListenerThread t = new ListenerThread(sslsocket, this);
 				t.start();
+				System.out.println(clients);
 			}
 
 		} catch (Exception ex) {
@@ -92,5 +95,15 @@ public class Server {
 	public static void main(String[] args) {
 		Server s = new Server();
 
+	}
+
+	public File sendSerializable() {
+		this.ConnectionDB.saveGame(this.connectionGame);
+		File f = new File(DataBase.GAME_PATH);
+		return f;
+	}
+	public void addClients() {
+		this.clients ++;
+		
 	}
 }

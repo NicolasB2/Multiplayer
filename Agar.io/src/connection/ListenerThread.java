@@ -1,8 +1,11 @@
 package connection;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 
 import javax.net.ssl.SSLSocket;
 
@@ -33,7 +36,6 @@ public class ListenerThread extends Thread {
 				singin(is, os);
 			}
 			if(key.equals(Server.PLAY)){
-				System.out.println("entro a la condicon del sever");
 				play(is, os);
 			}
 
@@ -60,6 +62,7 @@ public class ListenerThread extends Thread {
 		log = server.validateLogin(email, password);
 		if (log) {
 			os.writeObject(Server.LOGIN_OK);
+			server.addClients();
 		} else {
 			os.writeObject(Server.EXIT);
 		}
@@ -89,6 +92,23 @@ public class ListenerThread extends Thread {
 		System.out.println(id);
 		System.out.println(email);
 		System.out.println(nick);
+		
+		try {
+
+			File file = server.sendSerializable();
+
+			long length = file.length();
+			byte[] bytes = new byte[16 * 1024];
+			FileInputStream in = new FileInputStream(file);
+
+			int count = in.read(bytes);
+			while (count > 0) {
+				os.write(bytes, 0, count);
+				count = in.read(bytes);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		os.flush();
 	}
 
