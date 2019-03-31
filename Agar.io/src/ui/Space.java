@@ -95,7 +95,6 @@ public class Space extends Canvas {
 		}
 
 	}
-
 	public void setID(int value) {
 		this.id = value;
 	}
@@ -114,21 +113,13 @@ public class Space extends Canvas {
 			System.out.println(avatars.get(i).getNickName());
 			try {
 				Avatar a = avatars.get(i);
-				//				a.render(g, 1);			
+				render(g, 1,a);			
 				
-				double r = a.getRadious();
-				System.out.println(r + " ");
-				g.setColor(a.getColor());
-				g.fillOval((int) (a.getCenterX() - r), (int) (a.getCenterY() - r), (int) (2 * r), (int) (2 * r));
-				g.setColor(Color.BLACK);
-				g.drawOval((int) (a.getCenterX() - r), (int) (a.getCenterY() - r), (int) (2 * r), (int) (2 * r));
-
 				
 				
 				
 			} catch (Exception e) {
 				System.out.print("Problem in paintPlayer");
-				;
 				e.printStackTrace();
 			}
 		}
@@ -138,14 +129,22 @@ public class Space extends Canvas {
 		for (int i = 0; i < food.size(); i++) {
 			try {
 				Avatar f = food.get(i);
-				f.render(g, 1);
+				render(g, 1,f);
 				
 			} catch (Exception e) {
 				System.out.print("Problem in paintFood");
-				;
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public static void render(Graphics g, double scale, Avatar a) {		
+		
+		double r = a.getRadious();
+		g.setColor(a.getColor());
+		g.fillOval((int) (a.getCenterX() -r), (int) (a.getCenterY() -r), (int)(2*r),(int) (2*r));
+		g.setColor(Color.BLACK);
+		g.drawOval((int) (a.getCenterX() - r), (int) (a.getCenterY() -r), (int)(2*r), (int)(2*r));
 	}
 
 }

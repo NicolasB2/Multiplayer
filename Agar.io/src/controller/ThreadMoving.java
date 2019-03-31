@@ -4,9 +4,10 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 
 import model.Game;
+import ui.Space;
 
 public class ThreadMoving extends Thread {
-	private static final int INTERVALO = 20;
+	private static final int INTERVALO = 1000;
 
 	private int id;
 	private Game game;
@@ -35,7 +36,7 @@ public class ThreadMoving extends Thread {
 	//verificar
 	private void updatePositionMouse() {
 		Point mouse = MouseInfo.getPointerInfo().getLocation();
-		this.xFinal = mouse.x - 50;
-		this.yFinal = mouse.y - 50;
+		this.xFinal = mouse.x - Space.WIDTH;
+		this.yFinal = mouse.y - Space.HEIGHT;
 	}
 }

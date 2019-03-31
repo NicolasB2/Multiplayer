@@ -13,6 +13,7 @@ import java.util.Random;
 import controller.ThreadFood;
 import controller.ThreadMoving;
 import controller.ThreadTime;
+import ui.Space;
 import controller.Player;
 import controller.ThreadCollision;
 
@@ -35,11 +36,9 @@ public class Game {
 		
 		this.food = new ArrayList<Avatar>();
 		this.avatars = new ArrayList<Avatar>();
-		avatars.add(new Avatar("deibi", 1, 50, 50));
 		
+		avatars.add(new Avatar("deibi", 1));
 		initializeFood();
-		
-		
 		StartTime();
 		isOn = false;
 		timeout = false;
@@ -127,7 +126,7 @@ public class Game {
 	}
 	
 	public void addAvatar(String nickName, int xMax, int yMax) {
-		Avatar a = new Avatar(nickName,avatars.size() , xMax, yMax);
+		Avatar a = new Avatar(nickName,avatars.size());
 		avatars.add(a);
 	}
 
@@ -174,7 +173,8 @@ public class Game {
 
 	public void render(Graphics g, double scale) {
 		for(int i=0; i < avatars.size();i++  ) {
-			avatars.get(i).render(g, scale);		
+			
+			Space.render(g, scale,avatars.get(i));		
 			}
 		Avatar avatar = avatars.get(0);
 		if(avatar != null ) {

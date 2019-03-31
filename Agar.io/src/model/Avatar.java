@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 import ui.Main_Agario;
+import ui.Space;
 
 public class Avatar {
 
@@ -39,13 +40,15 @@ public class Avatar {
 		set_color();
 	}
 
-	public Avatar(String nickName, int id, int xMax, int yMax) {
-		this.centerX = random.nextInt(xMax);
-		this.centerY = random.nextInt(yMax);
+	public Avatar(String nickName, int id) {
+		this.centerX = Math.floor(Math.random()*(Space.WIDTH-30+1)+30);
+		this.centerY = Math.floor(Math.random()*(Space.HEIGHT-30+1)+30);
 		this.avatar = true;
 		this.alive = true;
 		this.id = id;
 		this.nickName = nickName;
+		set_color();
+		this.radious = 15;
 	}
 
 	public void move(double x, double y) {
@@ -163,14 +166,7 @@ public class Avatar {
 		this.centerY = centerY;
 	}
 
-	public void render(Graphics g, double scale) {		
-		
-		double r = this.getRadious();
-		g.setColor(this.color);
-		g.fillOval((int) (this.centerX -r), (int) (this.centerY -r), (int)(2*r),(int) (2*r));
-		g.setColor(Color.BLACK);
-		g.drawOval((int) (this.centerX - r), (int) (this.centerY -r), (int)(2*r), (int)(2*r));
-	}
+
 	
 	
 }

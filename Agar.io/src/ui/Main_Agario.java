@@ -6,13 +6,16 @@ import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 
-
 import controller.Login;
+import controller.ThreadMoving;
+import controller.hilo;
+import model.Avatar;
 import model.Game;
 
 public class Main_Agario extends JFrame {
@@ -27,6 +30,7 @@ public class Main_Agario extends JFrame {
 	private Space space;
 	private String nickName;
 	private int id;
+	private ThreadMoving moving;
 
 	private Game game;
 
@@ -34,30 +38,45 @@ public class Main_Agario extends JFrame {
 
 	public Main_Agario() {
 		game = new Game();
-		//initComponents();
-		this.loginWindow = new Login_GUI(this);
-		this.loginWindow.setVisible(true);
+		initComponents();
+		// this.loginWindow = new Login_GUI(this);
+		// this.loginWindow.setVisible(true);
+		setPlayer("dani flow latino", 1);
+		play();
+	}
 
+	public void setPlayer(String nick, int id) {
+		this.id = id;
+		this.nickName = nick;
+		space.setID(id);
 	}
 
 	public void play() {
 
 		// esperar que se logee el usuario y pasen los 2 min de espera
 
-		this.createBufferStrategy(2);
+		// this.createBufferStrategy(2);
 		this.setLocationRelativeTo(null);
 		this.setIgnoreRepaint(false);
+
+		this.moving = new ThreadMoving(this.id, game);
+		this.moving.start();
 		
-	
+		hilo h = new hilo(space);
+		h.start();
 		
-		 while(true){
-	            this.space.repaint();
-	            try {
-	                Thread.sleep(10);
-	            } catch (InterruptedException ex) {
-	                Logger.getLogger(Main_Agario.class.getName()).log(Level.SEVERE, null, ex);
-	            }
-	        }
+//		while (true) {
+//
+//			try {
+//	                Thread.sleep(1000);
+//	                this.space.repaint();
+//
+//			} catch (Exception ex) {
+//				System.out.println("Error");
+//				Logger.getLogger(Main_Agario.class.getName()).log(Level.SEVERE, null, ex);
+//
+//			}
+	//	}
 
 	}
 
@@ -71,20 +90,16 @@ public class Main_Agario extends JFrame {
 		this.setLocationRelativeTo(null);
 
 		// Add player with socket
+		ArrayList<Avatar> players = game.getAvatars();
+		ArrayList<Avatar> food = game.getFood();
 
-		this.space = new Space(this,game.getAvatar(id), game.getFood(), new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+		this.space = new Space(this, game.getAvatar(id), game.getFood(), new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 		this.space.setFocusable(false);
 		this.setIgnoreRepaint(false);
 		this.add((Component) this.space);
 
-		/*
-		 * this.addKeyListener(new KeyAdapter(){
-		 * 
-		 * @Override public void keyPressed(KeyEvent e) { formKeyPressed(e); } });
-		 */ // For the split
-
 	}
-	
+
 	public Game getGame() {
 		return game;
 	}
@@ -99,19 +114,16 @@ public class Main_Agario extends JFrame {
 	public void openWindowRegistrer() {
 		registrerWindow = new Registrer(this);
 		registrerWindow.setVisible(true);
-		
+
 	}
-	
+
 	public void closeRegistre() {
 		registrerWindow.setVisible(false);
 	}
-	
-	
+
 	public static void main(String[] args) {
 		Main_Agario m = new Main_Agario();
 		m.setVisible(true);
 	}
-	
-	
-	
+
 }
