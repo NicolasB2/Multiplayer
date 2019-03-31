@@ -15,6 +15,7 @@ public class ThreadCollision extends Thread {
 		while (game.isOn()) {
 			try {
 				checkCollisions();
+				System.out.println(game.reportScores());
 				Thread.sleep(INTERVAL);
 			} catch (Exception e) {
 				e.printStackTrace();

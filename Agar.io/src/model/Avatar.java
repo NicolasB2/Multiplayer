@@ -56,7 +56,6 @@ public class Avatar {
 //		this.centerY += 5;
 		this.centerX += x;
 		this.centerY += y;
-		System.out.println(this.id);
 	}
 
 	public void calculate_speed() {

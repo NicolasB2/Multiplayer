@@ -3,6 +3,7 @@ package ui;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -81,6 +82,9 @@ public class Space extends Canvas {
 				Logger.getLogger(Space.class.getName()).log(Level.SEVERE, null, e);
 			}
 		}
+		
+		//Paint Leader board
+		paintLeaderBoard(main.getGame().getTop(), g);
 
 	}
 //	public void setID(int value) {
@@ -122,6 +126,20 @@ public class Space extends Canvas {
 		g.fillOval((int) (a.getCenterX() -r), (int) (a.getCenterY() -r), (int)(2*r),(int) (2*r));
 		g.setColor(Color.BLACK);
 		g.drawOval((int) (a.getCenterX() - r), (int) (a.getCenterY() -r), (int)(2*r), (int)(2*r));
+	}
+	
+	private void paintLeaderBoard(ArrayList<Avatar> top, Graphics g){
+		
+		g.setColor(Color.DARK_GRAY);
+        g.setFont(new Font("Ubuntu",Font.BOLD,15));
+        g.drawString("LEADERBOARD", (int) dimPanel.getWidth()-150, 50);
+        g.drawString("----------------", (int) dimPanel.getWidth()-175, 60);
+        int i = 30;
+        int pos = 1;
+        
+        
+        g.drawString(main.getGame().reportScores(), (int)dimPanel.getWidth()-150, 75);
+        
 	}
 
 }

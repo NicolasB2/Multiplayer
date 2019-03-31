@@ -5,9 +5,12 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.io.*;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 
 import controller.ThreadFood;
@@ -18,7 +21,7 @@ import controller.Player;
 import controller.ThreadCollision;
 
 public class Game implements Serializable {
-	
+
 	/**
 	 * 
 	 */
@@ -26,26 +29,25 @@ public class Game implements Serializable {
 	public final static int WAIT_TIME = 120000;
 	public final static int END_TIME = 300000;
 	public final static int FOOD_RADIUS = 10;
-	
+
 	private ArrayList<Avatar> food;
 	private ArrayList<Avatar> avatars;
-	
-	
+
 	private boolean isOn;
 	private boolean timeout;
-	private Font font; 
+	private Font font;
 	public Long start;
+	
 
 	public Game() {
-		
+
 		this.food = new ArrayList<Avatar>();
 		this.avatars = new ArrayList<Avatar>();
-		
-//		avatars.add(new Avatar("deibi", 1));
+
 		StartTime();
 		isOn = false;
 		timeout = false;
-		
+
 		ThreadTime t = new ThreadTime(this);
 		t.start();
 	}
@@ -55,35 +57,36 @@ public class Game implements Serializable {
 		timeout = false;
 		StartTime();
 		initializeFood();
-		
+	
+
 		ThreadTime t = new ThreadTime(this);
 		t.start();
-		
+
 		ThreadFood f = new ThreadFood(this);
 		f.start();
-		
+
 		ThreadCollision c = new ThreadCollision(this);
 		c.start();
-		
-		ThreadMoving m = new ThreadMoving(id,this);
+
+		ThreadMoving m = new ThreadMoving(id, this);
 		m.start();
 	}
-	
+
 	public String send_Game() {
 		return "";
 	}
-	
+
 	public void read_Game(String g) {
-		
+
 	}
-	
+
 	public void StartTime() {
 		start = System.currentTimeMillis();
 	}
-	
+
 	private void initializeFood() {
 		for (int i = 0; i < 100; i++) {
-			
+
 			Avatar a = new Avatar();
 			food.add(a);
 		}
@@ -100,7 +103,7 @@ public class Game implements Serializable {
 		}
 
 		for (int i = 0; i < aux.size(); i++) {
-			this.food.remove((int)aux.get(i));
+			this.food.remove((int) aux.get(i));
 		}
 
 	}
@@ -114,30 +117,30 @@ public class Game implements Serializable {
 		}
 
 		for (int i = 0; i < aux.size(); i++) {
-			avatars.remove((int)aux.get(i));
+			avatars.remove((int) aux.get(i));
 		}
 
 	}
 
 	public Avatar getAvatar(int id) {
 		for (int i = 0; i < avatars.size(); i++) {
-			if(avatars.get(i).getId()==id) {
+			if (avatars.get(i).getId() == id) {
 				return avatars.get(i);
 			}
 		}
 		return null;
 	}
-	
-	public void addAvatar(String nickName,int id) {
-		Avatar a = new Avatar(nickName,id);
+
+	public void addAvatar(String nickName, int id) {
+		Avatar a = new Avatar(nickName, id);
 		avatars.add(a);
 	}
 
 	public void move(double x, double y, int id) {
-		Avatar avar  = getAvatar(id);
-		if(avar!=null) {
+		Avatar avar = getAvatar(id);
+		if (avar != null) {
 			avar.move(x, y);
-		}	
+		}
 	}
 
 	public boolean isOn() {
@@ -156,8 +159,6 @@ public class Game implements Serializable {
 		this.timeout = timeout;
 	}
 
-	
-
 	public ArrayList<Avatar> getFood() {
 		return food;
 	}
@@ -175,25 +176,61 @@ public class Game implements Serializable {
 	}
 
 	public void render(Graphics g, double scale) {
-		for(int i=0; i < avatars.size();i++  ) {
-			
-			Space.render(g, scale,avatars.get(i));		
-			}
+		for (int i = 0; i < avatars.size(); i++) {
+
+			Space.render(g, scale, avatars.get(i));
+		}
 		Avatar avatar = avatars.get(0);
-		if(avatar != null ) {
+		if (avatar != null) {
 			double x = avatar.getCenterX();
 			double y = avatar.getCenterY();
 			int r = (int) avatar.getRadious();
-			this.font = new Font("Calibri",Font.BOLD,r/2);
+			this.font = new Font("Calibri", Font.BOLD, r / 2);
 			FontMetrics metrics = g.getFontMetrics(font);
-			int xt= (int) x-metrics.stringWidth(avatar.getNickName())/2;
-			int yt = (int) (y+ r/4);
+			int xt = (int) x - metrics.stringWidth(avatar.getNickName()) / 2;
+			int yt = (int) (y + r / 4);
 			g.setFont(font);
 			g.drawString(avatar.getNickName(), xt, yt);
 		}
+
+	}
+	
+	public ArrayList<Avatar> getTop() {
 		
+		ArrayList<Avatar> top = new ArrayList<>();
+		top = avatars;
+		Collections.sort(top, new Comparator<Avatar>() {
+			 @Override
+	            public int compare(Avatar a1, Avatar a2) {
+	                return (int)(a2.getRadious() - a1.getRadious());
+	            }
+			 
+		}); 
 		
+		        if (top.size() > 3) {
+		            top.subList(3, top.size()).clear();
+		            return top;
+		        } else {
+		            return top;
+		        }
+		        
+		        
+			 
+		}
+	
+	public String reportScores() {
+	
+		String report = "";
+		
+		for(int i = 0; i < getTop().size(); i++){
+			DecimalFormat df = new DecimalFormat("#.##");
+			report += (i+1) +".  " + getTop().get(i).getNickName() + " " + df.format(getTop().get(i).getRadious()) + "\n"; 
+		}
+		return report;
 	}
 	
 	
-}
+	
+	}
+
+
