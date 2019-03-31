@@ -42,6 +42,12 @@ public class DataBase {
 		}
 	}
 
+	public void registerUser(String nickname, String password, String email) {
+		Player usr = new Player(nickname, password, email);
+		players.add(usr);
+		saveUsers();
+	}
+	
 	private void saveUsers() {
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USERS_PATH));
@@ -52,37 +58,7 @@ public class DataBase {
 		}
 	}
 
-	private void loadScores() {
-		File archivo = new File(SCORE_PATH);
-		if (archivo.exists()) {
-			try {
-				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo));
-				players = (ArrayList<Player>) ois.readObject();
-				ois.close();
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	private void saveScores() {
-		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SCORE_PATH));
-			oos.writeObject(players);
-			oos.close();
-
-		} catch (IOException e) {
-		}
-	}
-
-	public void registerUser(String nickname, String password, String email) {
-		Player usr = new Player(nickname, password, email);
-		players.add(usr);
-		saveUsers();
-	}
-
-	public void readSerializable() {
+	public void readUsers() {
 		try {
 			InputStream file = new FileInputStream(USERS_PATH);
 			InputStream buffer = new BufferedInputStream(file);
@@ -98,7 +74,7 @@ public class DataBase {
 
 	public boolean validateLogin(String email, String password) {
 
-		readSerializable();
+		readUsers();
 		boolean correct = false;
 		for (int i = 0; i < players.size(); i++) {
 			Player compare = players.get(i);
@@ -112,6 +88,16 @@ public class DataBase {
 
 	}
 
+	public String findNickName(String email) {
+		
+		for (int i = 0; i < players.size(); i++) {
+			if(players.get(i).getEmail().equals(email)) {
+				return players.get(i).getNickname();
+			}
+			
+		}
+		return "";
+	}
 	public static void main(String[] args) {
 
 		DataBase test = new DataBase();

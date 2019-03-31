@@ -66,7 +66,6 @@ public class Main_Agario extends JFrame {
 		this.setVisible(true);
 		game = new Game();
 		initGame();
-		setPlayer("dani flow latino", 1);
 		game.startGame(1);
 		hilo h = new hilo(space);
 		h.start();

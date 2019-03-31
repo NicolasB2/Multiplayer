@@ -32,6 +32,9 @@ public class ListenerThread extends Thread {
 			if (key.equals(Server.SING_IN)) {
 				singin(is, os);
 			}
+//			if(key.equals(Server.PLAY)){
+//				play(is, os);
+//			}
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -56,6 +59,8 @@ public class ListenerThread extends Thread {
 		log = server.validateLogin(email, password);
 		if (log) {
 			os.writeObject(Server.PLAY);
+			os.writeObject(server.findNickname(email));
+			os.writeObject("1");
 		} else {
 			os.writeObject(Server.EXIT);
 		}
@@ -74,14 +79,4 @@ public class ListenerThread extends Thread {
 		os.flush();
 	}
 
-	private void play(ObjectInputStream is, ObjectOutputStream os) throws Exception {
-		while (true) {
-			String p = (String) is.readObject();
-			System.out.println("We got: " + p);
-			server.message += p + "\n";
-
-			os.writeObject(server.message);
-			os.flush();
-		}
-	}
 }

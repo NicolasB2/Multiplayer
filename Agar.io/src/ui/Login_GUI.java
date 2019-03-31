@@ -171,6 +171,11 @@ public class Login_GUI extends JFrame implements ActionListener {
 		return txtPass.getText();
 	}
 
+	public void setPlayer(String nick, String id) {
+		int x = Integer.parseInt(id);
+		System.out.println(id);
+		connection.setPlayer(nick, x);
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -182,6 +187,7 @@ public class Login_GUI extends JFrame implements ActionListener {
 				this.setVisible(false);
 				JOptionPane.showMessageDialog(null, "Welcome to Agar.io");
 				connection.play();
+				connection.setPlayer(cc.getNick(),Integer.parseInt( cc.getId()));
 			}else {
 				JOptionPane.showMessageDialog(null, "Login Incorrect");
 			}

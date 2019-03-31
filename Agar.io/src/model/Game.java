@@ -101,7 +101,6 @@ public class Game implements Serializable {
 
 		for (int i = 0; i < aux.size(); i++) {
 			this.food.remove((int)aux.get(i));
-			System.out.println(aux.get(0));
 		}
 
 	}
