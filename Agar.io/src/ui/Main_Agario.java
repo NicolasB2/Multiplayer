@@ -111,6 +111,17 @@ public class Main_Agario extends JFrame {
 		registrerWindow.setVisible(false);
 	}
 
+	
+	public String [] coordenates(){
+		String [] coordenates = new String [3];
+		coordenates[0] = this.id+"";
+		coordenates[1] = this.game.getAvatar(this.id).getCenterX()+"";
+		coordenates[2] = this.game.getAvatar(this.id).getCenterY()+"";
+		
+		
+		return coordenates;
+	}
+	
 	public static void main(String[] args) {
 		Main_Agario m = new Main_Agario();
 		m.setVisible(false);

@@ -35,7 +35,7 @@ public class ListenerThread extends Thread {
 			if (key.equals(Server.SING_IN)) {
 				singin(is, os);
 			}
-			if(key.equals(Server.PLAY)){
+			if (key.equals(Server.PLAY)) {
 				play(is, os);
 			}
 
@@ -80,15 +80,15 @@ public class ListenerThread extends Thread {
 		os.writeObject(Server.SAVE);
 		os.flush();
 	}
-	
+
 	private void play(ObjectInputStream is, ObjectOutputStream os) throws Exception {
-		
+
 		String id = server.nextId();
 		os.writeObject(id);
 		String email = (String) is.readObject();
 		String nick = server.findNickname(email);
 		os.writeObject(nick);
-		
+
 		try {
 
 			File file = server.sendSerializable();
@@ -97,11 +97,12 @@ public class ListenerThread extends Thread {
 			byte[] bytes = new byte[16 * 1024];
 			FileInputStream in = new FileInputStream(file);
 
-			int count = in.read(bytes);
-			while (count > 0) {
-				os.write(bytes, 0, count);
-				count = in.read(bytes);
-			}
+				int count = in.read(bytes);
+				while (count > 0) {
+					os.write(bytes, 0, count);
+					count = in.read(bytes);
+				}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

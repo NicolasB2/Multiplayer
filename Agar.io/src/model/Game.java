@@ -45,6 +45,15 @@ public class Game implements Serializable {
 		this.avatars = new ArrayList<Avatar>();
 		isOn = false;
 		timeout = false;
+		initializeFood();
+		
+		Avatar a = new Avatar("heehee", 3);
+		Avatar b = new Avatar("eooooo", 4);
+		
+		avatars.add(a);
+		avatars.add(b);
+		
+		
 	}
 
 	public void startGame() {
@@ -56,8 +65,6 @@ public class Game implements Serializable {
 
 		ThreadCollision c = new ThreadCollision(this);
 		c.start();
-
-
 	}
 
 	public String send_Game() {
