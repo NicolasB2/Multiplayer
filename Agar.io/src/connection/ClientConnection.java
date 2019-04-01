@@ -130,14 +130,9 @@ public class ClientConnection {
 		String nick = (String) is.readObject();
 		this.main.setPlayer(nick,Integer.parseInt(id));
 		
-		OutputStream out = new FileOutputStream("./resources/data/saveGame.txt");
-
-		byte[] bytes = new byte[16 * 1024];
-
-		int count;
-		while ((count = is.read(bytes)) > 0) {
-			out.write(bytes, 0, count);
-		}
+		ReadingThread readT = new ReadingThread(os, is);
+		
+		
 	}
 
 }

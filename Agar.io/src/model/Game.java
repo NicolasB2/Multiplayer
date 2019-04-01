@@ -45,6 +45,7 @@ public class Game implements Serializable {
 		this.avatars = new ArrayList<Avatar>();
 		isOn = false;
 		timeout = false;
+		initializeFood();
 	}
 
 	public void startGame() {
