@@ -54,7 +54,7 @@ public class Server {
 				System.out.println("New Client accepted");
 				ListenerThread t = new ListenerThread(sslsocket, this);
 				t.start();
-				System.out.println(clients);
+				System.out.println("clientes: " +clients);
 			}
 
 		} catch (Exception ex) {
@@ -89,7 +89,6 @@ public class Server {
 
 	public String nextId() {
 		String id_ = connectionGame.getIdAvailable()+"";
-		System.out.println(id_);
 		return id_ ;
 	}
 	
@@ -106,9 +105,5 @@ public class Server {
 		this.ConnectionDB.saveGame(this.connectionGame);
 		File f = new File(DataBase.GAME_PATH);
 		return f;
-	}
-	public void addClients() {
-		this.clients ++;
-		
 	}
 }

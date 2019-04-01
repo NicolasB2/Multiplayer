@@ -71,7 +71,7 @@ public class Main_Agario extends JFrame {
 		
 		System.out.println(this.game.getFood().size());
 		game.addAvatar(this.nickName, this.id);
-//		game.startGame();
+		game.startGame();
 		ThreadMoving m = new ThreadMoving(id,this.getGame());
 		m.start();
 		initGame();

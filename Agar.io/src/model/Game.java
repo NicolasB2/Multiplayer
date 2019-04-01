@@ -64,6 +64,8 @@ public class Game implements Serializable {
 
 		ThreadCollision c = new ThreadCollision(this);
 		c.start();
+		
+		System.out.println(avatars.size());
 	}
 
 	public String send_Game() {

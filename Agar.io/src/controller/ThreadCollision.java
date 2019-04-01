@@ -33,8 +33,8 @@ public class ThreadCollision extends Thread {
 		}
 		for (int i = 0; i < game.getAvatars().size(); i++) {
 			for (int j = 0; j < game.getAvatars().size(); j++) {
-				if (j != id && game.getFood().get(j)!= null ) {
-					game.getAvatars().get(i).check_Collision(game.getFood().get(j));
+				if (j != id ) {
+					game.getAvatars().get(i).check_Collision(game.getAvatars().get(j));
 				}
 			}
 		}

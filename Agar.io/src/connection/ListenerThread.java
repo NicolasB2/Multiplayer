@@ -62,7 +62,6 @@ public class ListenerThread extends Thread {
 		log = server.validateLogin(email, password);
 		if (log) {
 			os.writeObject(Server.LOGIN_OK);
-			server.addClients();
 		} else {
 			os.writeObject(Server.EXIT);
 		}
