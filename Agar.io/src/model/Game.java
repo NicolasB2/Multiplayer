@@ -46,17 +46,12 @@ public class Game implements Serializable {
 		isOn = false;
 		timeout = false;
 		initializeFood();
-<<<<<<< HEAD
-=======
 		
 		Avatar a = new Avatar("heehee", 3);
 		Avatar b = new Avatar("eooooo", 4);
 		
 		avatars.add(a);
 		avatars.add(b);
-		
-		
->>>>>>> 6dbb758af0f1651bfba0f439f5f8a17bfc0d944d
 	}
 
 	public void startGame() {

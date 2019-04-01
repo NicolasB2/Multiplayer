@@ -111,4 +111,11 @@ public class Server {
 		this.clients ++;
 		
 	}
+
+	public void update(String ip_, String x_, String y_) {
+		System.out.println(ip_);
+		System.out.println(x_);
+		System.out.println(y_);
+		
+	}
 }

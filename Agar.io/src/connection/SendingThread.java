@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.sql.Savepoint;
+
+import ui.Main_Agario;
 
 public class SendingThread extends Thread{
 
@@ -38,7 +41,11 @@ public class SendingThread extends Thread{
 					
 				}
 				
-				sleep(1000);
+				String ip_ = server.nextId();
+				String x_ = server.nextId();
+				String y_ = server.nextId();
+				
+				this.server.update(ip_,x_,y_);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
