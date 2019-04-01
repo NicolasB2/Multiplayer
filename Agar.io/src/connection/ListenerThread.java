@@ -89,10 +89,6 @@ public class ListenerThread extends Thread {
 		String nick = server.findNickname(email);
 		os.writeObject(nick);
 		
-		System.out.println(id);
-		System.out.println(email);
-		System.out.println(nick);
-		
 		try {
 
 			File file = server.sendSerializable();

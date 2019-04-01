@@ -67,14 +67,13 @@ public class Main_Agario extends JFrame {
 		this.setVisible(true);
 		this.game = new Game();
 		DataBase db = new DataBase();
-		db.loadGame(this.game);
+		this.game = db.loadGame();
 		
-		//initialize avatar since server
+		System.out.println(this.game.getFood().size());
 		game.addAvatar(this.nickName, this.id);
 //		game.startGame();
 		ThreadMoving m = new ThreadMoving(id,this.getGame());
 		m.start();
-		//end 
 		initGame();
 		hilo h = new hilo(space);
 		h.start();

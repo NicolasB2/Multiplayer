@@ -14,24 +14,27 @@ public class DataBase {
 	public final static String GAME_PATH = "./resources/data/game.txt";
 	private ArrayList<Player> players = new ArrayList<Player>();
 
-
 	public DataBase() {
 
 	}
 
-	public void loadGame(Game game){
+	public Game loadGame() {
 		File archivo = new File("./resources/data/saveGame.txt");
+		Game game = null;
 		if (archivo.exists()) {
 			try {
 				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo));
 				game = (Game) ois.readObject();
 				ois.close();
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		
+		System.out.println("after read File foods " + game.getFood().size());
+		return game;
 	}
+
 	public void saveGame(Game game) {
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(GAME_PATH));
@@ -47,7 +50,7 @@ public class DataBase {
 		players.add(usr);
 		saveUsers();
 	}
-	
+
 	private void saveUsers() {
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USERS_PATH));
@@ -89,15 +92,16 @@ public class DataBase {
 	}
 
 	public String findNickName(String email) {
-		
+
 		for (int i = 0; i < players.size(); i++) {
-			if(players.get(i).getEmail().equals(email)) {
+			if (players.get(i).getEmail().equals(email)) {
 				return players.get(i).getNickname();
 			}
-			
+
 		}
 		return "";
 	}
+
 	public static void main(String[] args) {
 
 		DataBase test = new DataBase();

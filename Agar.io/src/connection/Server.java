@@ -88,7 +88,9 @@ public class Server {
 	}
 
 	public String nextId() {
-		return connectionGame.getIdAvailable()+"";
+		String id_ = connectionGame.getIdAvailable()+"";
+		System.out.println(id_);
+		return id_ ;
 	}
 	
 	

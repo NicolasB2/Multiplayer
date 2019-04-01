@@ -45,16 +45,11 @@ public class Game implements Serializable {
 		this.avatars = new ArrayList<Avatar>();
 		isOn = false;
 		timeout = false;
-
 	}
 
 	public void startGame() {
 		isOn = true;
 		timeout = false;
-		initializeFood();
-
-	
-
 
 		ThreadFood f = new ThreadFood(this);
 		f.start();
