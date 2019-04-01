@@ -16,8 +16,8 @@ import ui.Main_Agario;
 
 public class ClientConnection {
 	public final static int PORT = 8000;
-	public final static String SERVER_ADRESS = "192.168.0.7";
-//	public final static String SERVER_ADRESS = "localhost";
+//	public final static String SERVER_ADRESS = "192.168.0.7";
+	public final static String SERVER_ADRESS = "localhost";
 	public Login_GUI gui;
 	private Main_Agario main;
 	private String commands;
@@ -128,9 +128,17 @@ public class ClientConnection {
 		os.writeObject(email);
 		String nick = (String) is.readObject();
 		this.main.setPlayer(nick, Integer.parseInt(id));
-		
-		ReadingThread readT = new ReadingThread(os, is, main);
-		os.flush();
+
+		OutputStream out = new FileOutputStream("./resources/data/saveGame.txt");
+
+		byte[] bytes = new byte[16 * 1024];
+
+			int count = 0;
+			while ((count = is.read(bytes)) > 0) {
+				out.write(bytes, 0, count);
+			}
+
+	
 	}
 
 }

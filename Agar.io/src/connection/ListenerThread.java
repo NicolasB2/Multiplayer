@@ -87,8 +87,25 @@ public class ListenerThread extends Thread {
 		os.writeObject(id);
 		String email = (String) is.readObject();
 		String nick = server.findNickname(email);
-		os.writeObject(nick);		
-		SendingThread sendingT = new SendingThread(is, os, server);
+		os.writeObject(nick);
+
+		try {
+
+			File file = server.sendSerializable();
+
+			long length = file.length();
+			byte[] bytes = new byte[16 * 1024];
+			FileInputStream in = new FileInputStream(file);
+
+				int count = in.read(bytes);
+				while (count > 0) {
+					os.write(bytes, 0, count);
+					count = in.read(bytes);
+				}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		os.flush();
 	}
 

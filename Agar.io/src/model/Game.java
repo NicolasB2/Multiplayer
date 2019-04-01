@@ -47,11 +47,12 @@ public class Game implements Serializable {
 		timeout = false;
 		initializeFood();
 		
-		Avatar a = new Avatar("heehee", 3);
-		Avatar b = new Avatar("eooooo", 4);
+		Avatar a = new Avatar("Juan", 3);
 		
 		avatars.add(a);
-		avatars.add(b);
+		
+		
+		
 	}
 
 	public void startGame() {
