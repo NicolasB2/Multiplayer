@@ -16,8 +16,8 @@ import ui.Main_Agario;
 
 public class ClientConnection {
 	public final static int PORT = 8000;
-	public final static String SERVER_ADRESS = "192.168.0.7";
-//	public final static String SERVER_ADRESS = "localhost";
+//	public final static String SERVER_ADRESS = "192.168.0.7";
+	public final static String SERVER_ADRESS = "localhost";
 	public Login_GUI gui;
 	private Main_Agario main;
 	private String commands;
@@ -44,7 +44,7 @@ public class ClientConnection {
 	}
 
 	// play
-	public ClientConnection(Main_Agario main,String email , String commands) {
+	public ClientConnection(Main_Agario main, String email, String commands) {
 		this.main = main;
 		this.commands = commands;
 		this.email = email;
@@ -89,15 +89,14 @@ public class ClientConnection {
 		}
 	}
 
-
 	public void login(ObjectOutputStream os, ObjectInputStream is) throws Exception {
 
 		os.writeObject(Server.LOGIN);
 		os.writeObject(email);
 		os.writeObject(password);
 		os.flush();
-		System.out.println("Login email: "+email);
-		System.out.println("Login pasword: "+password);
+		System.out.println("Login email: " + email);
+		System.out.println("Login pasword: " + password);
 		String s = (String) is.readObject();
 		System.out.println(s);
 		if (s.equals(Server.LOGIN_OK)) {
@@ -112,10 +111,10 @@ public class ClientConnection {
 		os.writeObject(nickname);
 		os.writeObject(email);
 		os.writeObject(password);
-		
-		System.out.println("Register: "+nickname);
-		System.out.println("Register: "+email);
-		System.out.println("Register: "+ password);
+
+		System.out.println("Register: " + nickname);
+		System.out.println("Register: " + email);
+		System.out.println("Register: " + password);
 		os.flush();
 
 		String s = (String) is.readObject();
@@ -128,11 +127,26 @@ public class ClientConnection {
 		String id = (String) is.readObject();
 		os.writeObject(email);
 		String nick = (String) is.readObject();
+<<<<<<< HEAD
 		this.main.setPlayer(nick,Integer.parseInt(id));
 		
 		ReadingThread readT = new ReadingThread(os, is);
 		
 		
+=======
+		this.main.setPlayer(nick, Integer.parseInt(id));
+
+		OutputStream out = new FileOutputStream("./resources/data/saveGame.txt");
+
+		byte[] bytes = new byte[16 * 1024];
+
+			int count = 0;
+			while ((count = is.read(bytes)) > 0) {
+				out.write(bytes, 0, count);
+			}
+
+	
+>>>>>>> 6dbb758af0f1651bfba0f439f5f8a17bfc0d944d
 	}
 
 }

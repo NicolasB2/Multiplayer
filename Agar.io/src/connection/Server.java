@@ -99,6 +99,9 @@ public class Server {
 
 	}
 
+	
+	
+	
 	public File sendSerializable() {
 		this.ConnectionDB.saveGame(this.connectionGame);
 		File f = new File(DataBase.GAME_PATH);
