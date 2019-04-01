@@ -2,12 +2,17 @@ package model;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 import java.util.Random;
 import ui.Main_Agario;
 import ui.Space;
 
-public class Avatar {
+public class Avatar implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final int INIT_SPEED = 1;
 	public static final int MAX_COLOR = 256;
 

@@ -65,11 +65,13 @@ public class Main_Agario extends JFrame {
 		this.setFocusable(true);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
-		game = new Game();
+		this.game = new Game();
+		DataBase db = new DataBase();
+		db.loadGame(this.game);
 		
 		//initialize avatar since server
 		game.addAvatar(this.nickName, this.id);
-		game.startGame();
+//		game.startGame();
 		ThreadMoving m = new ThreadMoving(id,this.getGame());
 		m.start();
 		//end 

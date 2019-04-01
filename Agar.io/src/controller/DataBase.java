@@ -20,7 +20,7 @@ public class DataBase {
 	}
 
 	public void loadGame(Game game){
-		File archivo = new File(GAME_PATH);
+		File archivo = new File("./resources/data/saveGame.txt");
 		if (archivo.exists()) {
 			try {
 				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo));

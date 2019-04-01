@@ -16,8 +16,8 @@ import ui.Main_Agario;
 
 public class ClientConnection {
 	public final static int PORT = 8000;
-//	public final static String SERVER_ADRESS = "192.168.0.7";
-	public final static String SERVER_ADRESS = "localhost";
+	public final static String SERVER_ADRESS = "192.168.0.7";
+//	public final static String SERVER_ADRESS = "localhost";
 	public Login_GUI gui;
 	private Main_Agario main;
 	private String commands;
