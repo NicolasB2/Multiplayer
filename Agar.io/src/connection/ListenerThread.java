@@ -1,17 +1,28 @@
 package connection;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.Reader;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
 
 import javax.net.ssl.SSLSocket;
+
+import controller.DataBase;
 
 public class ListenerThread extends Thread {
 
 	private SSLSocket sslsocket;
+	private ServerSocket serverSocket;
 	private Server server;
 
 	public ListenerThread(SSLSocket sslsocket, Server server) {
@@ -24,18 +35,26 @@ public class ListenerThread extends Thread {
 
 		ObjectInputStream is = null;
 		ObjectOutputStream os = null;
+		
+		DataInputStream in;
+		DataOutputStream out;
+		
 		try {
 			is = new ObjectInputStream(sslsocket.getInputStream());
 			os = new ObjectOutputStream(sslsocket.getOutputStream());
+			
 
 			String key = (String) is.readObject();
 			if (key.equals(Server.LOGIN)) {
+//				out.writeUTF(mensaje);
 				login(is, os);
 			}
 			if (key.equals(Server.SING_IN)) {
+//				out.writeUTF(mensaje);
 				singin(is, os);
 			}
 			if (key.equals(Server.PLAY)) {
+//				out.writeUTF(mensaje);
 				play(is, os);
 			}
 
@@ -81,31 +100,11 @@ public class ListenerThread extends Thread {
 	}
 
 	private void play(ObjectInputStream is, ObjectOutputStream os) throws Exception {
-
 		String id = server.nextId();
 		os.writeObject(id);
 		String email = (String) is.readObject();
 		String nick = server.findNickname(email);
 		os.writeObject(nick);
-
-		try {
-
-			File file = server.sendSerializable();
-
-			long length = file.length();
-			byte[] bytes = new byte[16 * 1024];
-			FileInputStream in = new FileInputStream(file);
-
-				int count = in.read(bytes);
-				while (count > 0) {
-					os.write(bytes, 0, count);
-					count = in.read(bytes);
-				}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		os.flush();
 	}
 
 }

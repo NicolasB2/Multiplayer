@@ -1,12 +1,17 @@
 package connection;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
@@ -16,7 +21,6 @@ import ui.Main_Agario;
 
 public class ClientConnection {
 	public final static int PORT = 8000;
-//	public final static String SERVER_ADRESS = "192.168.0.7";
 	public final static String SERVER_ADRESS = "localhost";
 	public Login_GUI gui;
 	private Main_Agario main;
@@ -25,6 +29,27 @@ public class ClientConnection {
 	private String password;
 	private String nickname;
 
+	
+	public ClientConnection(String command) {
+		DataOutputStream out;
+		DataInputStream in;
+		Socket socket;
+		String message;
+		
+		try {
+			socket = new Socket(SERVER_ADRESS, PORT);
+			out = new DataOutputStream(socket.getOutputStream());
+			in = new DataInputStream(socket.getInputStream());
+			
+			out.writeUTF(command);
+			message = in.readUTF();
+			System.out.println(message);
+			
+		} catch (Exception e) {
+			System.out.println("something was wrong");
+		}
+	}
+	
 	// login
 	public ClientConnection(String email, String password, Login_GUI gui, String commands) {
 		this.gui = gui;
@@ -128,17 +153,6 @@ public class ClientConnection {
 		os.writeObject(email);
 		String nick = (String) is.readObject();
 		this.main.setPlayer(nick, Integer.parseInt(id));
-
-		OutputStream out = new FileOutputStream("./resources/data/saveGame.txt");
-
-		byte[] bytes = new byte[16 * 1024];
-
-			int count = 0;
-			while ((count = is.read(bytes)) > 0) {
-				out.write(bytes, 0, count);
-			}
-
-	
 	}
 
 }

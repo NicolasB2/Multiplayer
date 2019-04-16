@@ -4,13 +4,12 @@ import java.io.*;
 import java.security.*;
 import javax.net.ssl.*;
 
-import controller.DataBase;
-import controller.ThreadTime;
+import controller.*;
 import model.Game;
 
 public class Server {
 
-	// since client
+	// Since client
 	public final static String LOGIN = "LOGIN";
 	public final static String SING_IN = "SING_IN";
 	public final static String PLAY = "PLAY";
@@ -20,18 +19,19 @@ public class Server {
 	public final static String EXIT = "EXIT";
 	public final static String SAVE = "SAVE";
 	
-	//path
-
-	public static int PORT = 8000;
+	// Ports
+	public static int PORT_CONNECTION = 8000;
+	public static int PORT_LOGIN = 9000;
+	public static int PORT_SAVE_ACCOUNT = 10000;
+	public static int PORT_PLAY = 11000;
+	
 	public final static int END_TIME = 300000;
 	public final static int WAIT_TIME = 10000;
 
 	private int clients;
-	private DataBase ConnectionDB;
 	private Game connectionGame;
 
 	public Server() {
-		ConnectionDB = new DataBase();
 		String Password = "123456";
 		String ksName = "./resources/data/MyServer.jks";
 		char Pass[] = Password.toCharArray();
@@ -45,7 +45,7 @@ public class Server {
 			SSLContext sc = SSLContext.getInstance("TLS");
 			sc.init(kmf.getKeyManagers(), null, null);
 			SSLServerSocketFactory ssf = sc.getServerSocketFactory();
-			SSLServerSocket s = (SSLServerSocket) ssf.createServerSocket(PORT);
+			SSLServerSocket s = (SSLServerSocket) ssf.createServerSocket(PORT_CONNECTION);
 
 			System.out.println("****** Server online ******");
 			System.out.println("clientes: " +clients);
@@ -67,12 +67,11 @@ public class Server {
 	}
 
 	public boolean validateLogin(String email, String password) {
-		boolean log = ConnectionDB.validateLogin(email, password);
+		boolean log = DataBase.validateLogin(email, password);
 		if (log) {
 			if (clients == 0) {
 				connectionGame = new Game();
-				ThreadTime tt = new ThreadTime(this, WAIT_TIME);
-				tt.start();
+				initilizateGame();
 			}
 			clients++;
 		}
@@ -80,11 +79,11 @@ public class Server {
 	}
 
 	public void singin(String nickname, String email, String password) {
-		ConnectionDB.registerUser(nickname, password, email);
+		DataBase.registerUser(nickname, password, email);
 	}
 
 	public String findNickname(String email) {
-		return ConnectionDB.findNickName(email);
+		return DataBase.findNickName(email);
 	}
 
 	public String nextId() {
@@ -98,11 +97,8 @@ public class Server {
 
 	}
 
-	
-	
-	
 	public File sendSerializable() {
-		this.ConnectionDB.saveGame(this.connectionGame);
+		DataBase.saveGame(this.connectionGame);
 		File f = new File(DataBase.GAME_PATH);
 		return f;
 	}

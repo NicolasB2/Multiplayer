@@ -12,13 +12,9 @@ public class DataBase {
 	public final static String USERS_PATH = "./resources/data/users.txt";
 	public final static String SCORE_PATH = "./resources/data/scores.txt";
 	public final static String GAME_PATH = "./resources/data/game.txt";
-	private ArrayList<Player> players = new ArrayList<Player>();
+	private static ArrayList<Player> players = new ArrayList<Player>();
 
-	public DataBase() {
-
-	}
-
-	public Game loadGame() {
+	public static Game loadGame() {
 		File archivo = new File("./resources/data/saveGame.txt");
 		Game game = null;
 		if (archivo.exists()) {
@@ -31,37 +27,29 @@ public class DataBase {
 			}
 		}
 		
-		System.out.println("after read File foods " + game.getFood().size());
 		return game;
 	}
 
-	public void saveGame(Game game) {
+	public static void saveGame(Game game) {
 		try {
+			System.out.println("34567890");
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(GAME_PATH));
 			oos.writeObject(game);
 			oos.close();
+			oos.flush();
 
 		} catch (IOException e) {
 		}
 	}
 
-	public void registerUser(String nickname, String password, String email) {
+	public static void registerUser(String nickname, String password, String email) {
+		readUsers();
 		Player usr = new Player(nickname, password, email);
 		players.add(usr);
 		saveUsers();
 	}
 
-	private void saveUsers() {
-		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USERS_PATH));
-			oos.writeObject(players);
-			oos.close();
-
-		} catch (IOException e) {
-		}
-	}
-
-	public void readUsers() {
+	public static void readUsers() {
 		try {
 			InputStream file = new FileInputStream(USERS_PATH);
 			InputStream buffer = new BufferedInputStream(file);
@@ -75,7 +63,17 @@ public class DataBase {
 
 	}
 
-	public boolean validateLogin(String email, String password) {
+	private static void saveUsers() {
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USERS_PATH));
+			oos.writeObject(players);
+			oos.close();
+
+		} catch (IOException e) {
+		}
+	}
+	
+	public static boolean validateLogin(String email, String password) {
 
 		readUsers();
 		boolean correct = false;
@@ -91,8 +89,9 @@ public class DataBase {
 
 	}
 
-	public String findNickName(String email) {
+	public static String findNickName(String email) {
 
+		readUsers();
 		for (int i = 0; i < players.size(); i++) {
 			if (players.get(i).getEmail().equals(email)) {
 				return players.get(i).getNickname();
@@ -104,11 +103,10 @@ public class DataBase {
 
 	public static void main(String[] args) {
 
-		DataBase test = new DataBase();
-		test.registerUser("deibi", "12345", "elDeibi@hotmail.com");
-		test.registerUser("DaniG", "0987654321", "daniG@gmail.com");
-		test.registerUser("Sarris", "0987612345", "laSarris@hotmail.com");
-		test.registerUser("Naicolas", "5432167890", "elBiober@hotmail.com");
+		DataBase.registerUser("deibi", "12345", "deibi@");
+		DataBase.registerUser("DaniG", "12345", "daniG@");
+		DataBase.registerUser("Sarris", "12345", "laSarris@");
+		DataBase.registerUser("Naicolas", "12345", "elBiober@");
 	}
 
 }

@@ -1,31 +1,17 @@
 package model;
-
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
+import java.awt.*;
 import java.io.*;
-import java.sql.Date;
 import java.text.DecimalFormat;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Random;
-
-import controller.ThreadFood;
-import controller.ThreadMoving;
-import controller.ThreadTime;
+import java.util.*;
 import ui.Space;
-import controller.Player;
-import controller.ThreadCollision;
+import controller.*;
 
 public class Game implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;	
+	private static final long serialVersionUID = 1L;
 	public final static int FOOD_RADIUS = 10;
 
 	private ArrayList<Avatar> food;
@@ -36,9 +22,6 @@ public class Game implements Serializable {
 
 	private Font font;
 	public Long start;
-	
-
-
 
 	public Game() {
 		this.food = new ArrayList<Avatar>();
@@ -48,11 +31,8 @@ public class Game implements Serializable {
 		initializeFood();
 		
 		Avatar a = new Avatar("Juan", 3);
-		
 		avatars.add(a);
-		
-		
-		
+
 	}
 
 	public void startGame() {
@@ -64,8 +44,6 @@ public class Game implements Serializable {
 
 		ThreadCollision c = new ThreadCollision(this);
 		c.start();
-		
-		System.out.println(avatars.size());
 	}
 
 	public String send_Game() {
@@ -75,10 +53,6 @@ public class Game implements Serializable {
 	public void read_Game(String g) {
 
 	}
-
-
-
-
 
 	private void initializeFood() {
 		for (int i = 0; i < 100; i++) {
@@ -93,11 +67,12 @@ public class Game implements Serializable {
 	public void deleteFood() {
 		ArrayList<Integer> aux = new ArrayList<Integer>();
 		for (int i = 0; i < food.size(); i++) {
-			if (!food.get(i).isAlive()) {
-				aux.add(i);
+			if (food.get(i) != null) {
+				if (!food.get(i).isAlive()) {
+					aux.add(i);
+				}
 			}
 		}
-
 		for (int i = 0; i < aux.size(); i++) {
 			this.food.remove((int) aux.get(i));
 		}
@@ -134,8 +109,9 @@ public class Game implements Serializable {
 
 	public int getIdAvailable() {
 		return avatars.size();
-		
+
 	}
+
 	public void move(double x, double y, int id) {
 		Avatar avar = getAvatar(id);
 		if (avar != null) {
@@ -177,7 +153,6 @@ public class Game implements Serializable {
 
 	public void render(Graphics g, double scale) {
 		for (int i = 0; i < avatars.size(); i++) {
-
 			Space.render(g, scale, avatars.get(i));
 		}
 		Avatar avatar = avatars.get(0);
@@ -194,40 +169,37 @@ public class Game implements Serializable {
 		}
 
 	}
-	
+
 	public ArrayList<Avatar> getTop() {
-		
+
 		ArrayList<Avatar> top = new ArrayList<>();
 		top = avatars;
 		Collections.sort(top, new Comparator<Avatar>() {
-			 @Override
-	            public int compare(Avatar a1, Avatar a2) {
-	                return (int)(a2.getRadious() - a1.getRadious());
-	            }
-			 
-		}); 
-		
-		        if (top.size() > 3) {
-		            top.subList(3, top.size()).clear();
-		            return top;
-		        } else {
-		            return top;
-		        }
+			@Override
+			public int compare(Avatar a1, Avatar a2) {
+				return (int) (a2.getRadious() - a1.getRadious());
+			}
+
+		});
+
+		if (top.size() > 3) {
+			top.subList(3, top.size()).clear();
+			return top;
+		} else {
+			return top;
 		}
-	
+	}
+
 	public String reportScores() {
-	
+
 		String report = "";
-		
-		for(int i = 0; i < getTop().size(); i++){
+
+		for (int i = 0; i < getTop().size(); i++) {
 			DecimalFormat df = new DecimalFormat("#.##");
-			report += (i+1) +".  " + getTop().get(i).getNickName() + " " + df.format(getTop().get(i).getRadious()) + "\n"; 
+			report += (i + 1) + ".  " + getTop().get(i).getNickName() + " " + df.format(getTop().get(i).getRadious())
+					+ "\n";
 		}
 		return report;
 	}
-	
-	
-	
-	}
 
-
+}

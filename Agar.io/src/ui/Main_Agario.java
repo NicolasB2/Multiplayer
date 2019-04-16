@@ -1,27 +1,13 @@
 package ui;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.*;
+import java.util.*;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
-import connection.ClientConnection;
-import connection.Server;
-import controller.DataBase;
-import controller.ThreadCollision;
-import controller.ThreadFood;
-import controller.ThreadMoving;
-import controller.hilo;
-import model.Avatar;
-import model.Game;
+import connection.*;
+import controller.*;
+import model.*;
 
 public class Main_Agario extends JFrame {
 
@@ -58,6 +44,7 @@ public class Main_Agario extends JFrame {
 	
 	public void play() {
 		ClientConnection cc = new ClientConnection(this,loginWindow.getEmail(),Server.PLAY);
+		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(false);
 		this.setBounds(WINDOW_POS_X, WINDOW_POS_Y, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -66,8 +53,6 @@ public class Main_Agario extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		this.game = new Game();
-		DataBase db = new DataBase();
-		this.game = db.loadGame();
 		
 		System.out.println(this.game.getFood().size());
 		game.addAvatar(this.nickName, this.id);
