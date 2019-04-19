@@ -81,10 +81,12 @@ public class Client_Login_Signin {
 		System.out.println("*****************");
 		if (s.equals(Server.LOGIN_OK)) {
 			this.controller.setCorrectLogin(true);
-			this.controller.setPlayer("david", 0);
+			String nickname = (String) is.readObject();
+			int id =  Integer.parseInt( (String)is.readObject());
+			this.controller.setPlayer(nickname, id);
 		}else {
 			this.controller.setCorrectLogin(false);
-		}
+		} 
 	}
 
 	public void register(ObjectOutputStream os, ObjectInputStream is) throws Exception {

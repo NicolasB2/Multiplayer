@@ -68,6 +68,9 @@ public class Server_Login_Signin {
 
 		if (log) {
 			os.writeObject(Server.LOGIN_OK);
+			os.writeObject(server.findNickname(email));
+			os.writeObject(server.nextId());
+			
 		} else {
 			os.writeObject(Server.LOGIN_INCORRECT);
 		}

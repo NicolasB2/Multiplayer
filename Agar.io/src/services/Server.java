@@ -22,9 +22,9 @@ public class Server {
 	// Ports
 	public static int PORT_CONNECTION = 8000;// tcp
 	public static int PORT_LOGIN = 9000;// ssl
-	public static int PORT_PLAY = 10000;// tcp
-	public static int PORT_MUSIC = 11000;// udp
-	public static int PORT_STREAMING = 12000;// udp
+	public static int PORT_PLAY = 8195;// tcp
+	public static int PORT_MUSIC = 8222;// udp
+	public static int PORT_STREAMING = 8580;// udp
 
 	public final static int END_TIME = 300000;
 	public final static int WAIT_TIME = 10000;
@@ -75,6 +75,7 @@ public class Server {
 		return id_;
 	}
 
+	
 	public static void main(String[] args) {
 		try {
 			Server s = new Server();
