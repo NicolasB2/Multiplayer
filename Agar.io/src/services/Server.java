@@ -37,8 +37,7 @@ public class Server {
 		System.out.println("****** Server online ******");
 		serverSocket = new ServerSocket(PORT_CONNECTION);
 
-		while (gamers < 6) {
-			System.out.println("clientes: " + gamers);
+		while (gamers < 2) {
 			Socket socket;
 			socket = serverSocket.accept();
 			AssignPort assign = new AssignPort(socket, this);
@@ -58,6 +57,7 @@ public class Server {
 				initilizateGame();
 			}
 			gamers++;
+			System.out.println("gamers: "+gamers);
 		}
 		return log;
 	}
@@ -73,19 +73,6 @@ public class Server {
 	public String nextId() {
 		String id_ = connectionGame.getIdAvailable() + "";
 		return id_;
-	}
-
-	public int getGamers() {
-		return gamers;
-	}
-
-	public void setGamers(int gamers) {
-		this.gamers = gamers;
-	}
-
-	public void addGamer() {
-		gamers++;
-
 	}
 
 	public static void main(String[] args) {

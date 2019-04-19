@@ -37,14 +37,8 @@ public class Main_Agario extends JFrame {
 		this.setVisible(true);
 		
 		controller.startGame();
-		/**
-		 * Esta quemado OJO
-		 */
-		controller.setPlayer("David", 0);
 		controller.startMoving();
 		paintGame(controller.getAvatar(),controller.getGame().getFood());
-		
-	
 	}
 
 	private void paintGame(Avatar avatar, ArrayList<Avatar> food) {

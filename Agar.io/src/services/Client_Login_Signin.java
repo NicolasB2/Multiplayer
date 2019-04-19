@@ -9,7 +9,7 @@ import javax.net.ssl.SSLSocketFactory;
 
 import control.Controller;
 
-public class Client_Login_Signin extends Thread {
+public class Client_Login_Signin {
 
 	private Controller controller;
 	private String mail;
@@ -25,6 +25,8 @@ public class Client_Login_Signin extends Thread {
 		this.nickname = nickname;
 		this.port = port;
 		this.login= false;
+		
+		connectionSSL();
 	}
 	
 	public Client_Login_Signin(Controller controller,String mail,String password,int port) {
@@ -33,6 +35,8 @@ public class Client_Login_Signin extends Thread {
 		this.password = password;
 		this.port = port;
 		this.login= true;
+		
+		connectionSSL();
 	}
 
 	
@@ -70,13 +74,14 @@ public class Client_Login_Signin extends Thread {
 		os.writeObject(this.mail);
 		os.writeObject(this.password);
 		os.flush();
-		System.out.println("Login email: " + mail);
-		System.out.println("Login pasword: " + password);
+		System.out.println("email: " + mail);
+		System.out.println("pasword: " + password);
 		String s = (String) is.readObject();
 		System.out.println(s);
 		System.out.println("*****************");
 		if (s.equals(Server.LOGIN_OK)) {
 			this.controller.setCorrectLogin(true);
+			this.controller.setPlayer("david", 0);
 		}else {
 			this.controller.setCorrectLogin(false);
 		}
@@ -89,19 +94,14 @@ public class Client_Login_Signin extends Thread {
 		os.writeObject(mail);
 		os.writeObject(password);
 
-		System.out.println("Register: " + nickname);
-		System.out.println("Register: " + mail);
-		System.out.println("Register: " + password);
+		System.out.println("nickname: " + nickname);
+		System.out.println("mail: " + mail);
+		System.out.println("password: " + password);
 		os.flush();
 
 		String s = (String) is.readObject();
 		System.out.println(s);
 		System.out.println("*****************");
-	}
-
-	@Override
-	public void run() {
-		connectionSSL();
 	}
 
 }

@@ -19,6 +19,7 @@ public class Controller {
 	public Controller() {
 		
 		this.correctLogin = false;
+		this.game = new Game();
 		
 		try {
 			this.socket = new Socket(SERVER_ADRESS, PORT);
@@ -50,13 +51,11 @@ public class Controller {
 	public void login(String mail,String password) {
 		int x = answerPort(Server.LOGIN);
 		Client_Login_Signin cls = new Client_Login_Signin(this, mail, password, x);
-		cls.start();
 	}
 
 	public void register(String mail,String password,String nickname) {
 		int x = answerPort(Server.LOGIN);
 		Client_Login_Signin cls = new Client_Login_Signin(this, mail, password,nickname,x);
-		cls.start();
 	}
 	
 	public void setPlayer(String nick, int id) {
@@ -70,7 +69,6 @@ public class Controller {
 	}
 
 	public void startGame() {
-		this.game = new Game();
 		game.startGame();
 	}
 
