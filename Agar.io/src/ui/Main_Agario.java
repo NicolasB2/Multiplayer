@@ -1,12 +1,12 @@
 package ui;
 
 import java.awt.*;
+import java.io.*;
+import java.net.*;
 import java.util.*;
-
 import javax.swing.*;
-
 import connection.*;
-import controller.*;
+import control.*;
 import model.*;
 
 public class Main_Agario extends JFrame {
@@ -19,32 +19,15 @@ public class Main_Agario extends JFrame {
 	private Login_GUI loginWindow;
 	private Registrer registrerWindow;
 	private Space space;
-	private String nickName;
-	private int id;
-
-	private ThreadMoving moving;
-	private ThreadCollision collision;
-	private ThreadFood tfood;
-
-	private Game game;
-
-	// falta: connection with moving
+	private Controller controller;
 
 	public Main_Agario() {
-
+		controller = new Controller();
 		this.loginWindow = new Login_GUI(this);
 		this.loginWindow.setVisible(true);
 	}
-
-	public void setPlayer(String nick, int id) {
-		this.id = id;
-		this.nickName = nick;
-	}
-
 	
 	public void play() {
-		ClientConnection cc = new ClientConnection(this,loginWindow.getEmail(),Server.PLAY);
-		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(false);
 		this.setBounds(WINDOW_POS_X, WINDOW_POS_Y, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -52,32 +35,30 @@ public class Main_Agario extends JFrame {
 		this.setFocusable(true);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
-		this.game = new Game();
 		
-		System.out.println(this.game.getFood().size());
-		game.addAvatar(this.nickName, this.id);
-		game.startGame();
-		ThreadMoving m = new ThreadMoving(id,this.getGame());
-		m.start();
-		initGame();
-		hilo h = new hilo(space);
-		h.start();
+		controller.startGame();
+		/**
+		 * Esta quemado OJO
+		 */
+		controller.setPlayer("David", 0);
+		controller.startMoving();
+		paintGame(controller.getAvatar(),controller.getGame().getFood());
+		
+	
 	}
 
-	private void initGame() {
+	private void paintGame(Avatar avatar, ArrayList<Avatar> food) {
 		// Add player with socket
-		ArrayList<Avatar> players = game.getAvatars();
-		ArrayList<Avatar> food = game.getFood();
 
-		this.space = new Space(this, game.getAvatar(id), game.getFood(), new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+		this.space = new Space(controller.getGame(), new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 		this.space.setFocusable(false);
 		this.setIgnoreRepaint(false);
 		this.add((Component) this.space);
+		
+		ThreadRepaint h = new ThreadRepaint(space);
+		h.start();
 	}
 
-	public Game getGame() {
-		return game;
-	}
 
 	@Override
 	public void paint(Graphics g) {
@@ -97,19 +78,35 @@ public class Main_Agario extends JFrame {
 	}
 
 	
-	public String [] coordenates(){
-		String [] coordenates = new String [3];
-		coordenates[0] = this.id+"";
-		coordenates[1] = this.game.getAvatar(this.id).getCenterX()+"";
-		coordenates[2] = this.game.getAvatar(this.id).getCenterY()+"";
-		
-		
-		return coordenates;
+//	public String [] coordenates(){
+//		String [] coordenates = new String [3];
+//		coordenates[0] = this.id+"";
+//		coordenates[1] = this.game.getAvatar(this.id).getCenterX()+"";
+//		coordenates[2] = this.game.getAvatar(this.id).getCenterY()+"";	
+//		return coordenates;
+//	}
+	
+
+	public int askPort(String request) {
+		return controller.answerPort(request);
 	}
 	
+	
+	public Controller getController() {
+		return controller;
+	}
+
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
+
 	public static void main(String[] args) {
 		Main_Agario m = new Main_Agario();
 		m.setVisible(false);
 	}
+
+
+
+
 
 }

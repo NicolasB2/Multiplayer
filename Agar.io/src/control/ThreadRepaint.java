@@ -1,4 +1,4 @@
-package controller;
+package control;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -6,11 +6,11 @@ import java.util.logging.Logger;
 import ui.Main_Agario;
 import ui.Space;
 
-public class hilo extends Thread {
+public class ThreadRepaint extends Thread {
 
 	private Space space;
 	
-	public hilo(Space space) {
+	public ThreadRepaint(Space space) {
 	
 		this.space = space;
 		

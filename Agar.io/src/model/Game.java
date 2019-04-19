@@ -3,8 +3,9 @@ import java.awt.*;
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.*;
+
+import control.*;
 import ui.Space;
-import controller.*;
 
 public class Game implements Serializable {
 

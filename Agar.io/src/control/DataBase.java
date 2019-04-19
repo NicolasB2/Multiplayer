@@ -1,11 +1,8 @@
-package controller;
+package control;
 
 import java.io.*;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Random;
-
-import model.Game;
+import java.util.*;
+import model.*;
 
 public class DataBase {
 	public final static int FOOD_RADIUS = 10;

@@ -4,26 +4,24 @@ import java.io.*;
 import java.security.*;
 import javax.net.ssl.*;
 
-import controller.*;
+import control.*;
 import model.Game;
 
-public class Server {
+public class OldServer {
 
 	// Since client
 	public final static String LOGIN = "LOGIN";
-	public final static String SING_IN = "SING_IN";
+	public final static String SIGN_IN = "SIGN_IN";
 	public final static String PLAY = "PLAY";
-
-	// Answer
-	public final static String LOGIN_OK = "LOGIN_OK";
-	public final static String EXIT = "EXIT";
-	public final static String SAVE = "SAVE";
+	public final static String  MUSIC = "MUSIC";
+	public final static String OBSERVE = "OBSERVE";
 	
 	// Ports
-	public static int PORT_CONNECTION = 8000;
-	public static int PORT_LOGIN = 9000;
-	public static int PORT_SAVE_ACCOUNT = 10000;
-	public static int PORT_PLAY = 11000;
+	public static int PORT_CONNECTION = 8000;//tcp
+	public static int PORT_LOGIN = 9000;//ssl
+	public static int PORT_PLAY = 10000;//tcp
+	public static int PORT_MUSIC = 11000;//udp
+	public static int PORT_STREAMING = 12000;//udp
 	
 	public final static int END_TIME = 300000;
 	public final static int WAIT_TIME = 10000;
@@ -31,7 +29,8 @@ public class Server {
 	private int clients;
 	private Game connectionGame;
 
-	public Server() {
+	
+	public OldServer() {
 		String Password = "123456";
 		String ksName = "./resources/data/MyServer.jks";
 		char Pass[] = Password.toCharArray();
@@ -52,8 +51,8 @@ public class Server {
 			while (clients<6) {
 				SSLSocket sslsocket = (SSLSocket) s.accept();
 				System.out.println("New Client accepted");
-				ListenerThread t = new ListenerThread(sslsocket, this);
-				t.start();
+				//ListenerThread t = new ListenerThread(sslsocket, this);
+			//	t.start();
 				System.out.println("clientes: " +clients);
 			}
 
@@ -93,7 +92,7 @@ public class Server {
 	
 	
 	public static void main(String[] args) {
-		Server s = new Server();
+		OldServer s = new OldServer();
 
 	}
 

@@ -20,24 +20,15 @@ import model.Game;
 
 public class Space extends Canvas {
 
-	private Image dibujoAux;
-//	private Graphics gAux;
-	private Dimension dimAux;
+
 	private Dimension dimPanel; // add private final
-	private int id;
+	private Game game;
+	
+	public Space(Game game, Dimension d) {
 
-	private Main_Agario main;
-	private ArrayList<Avatar> food;
-	private Avatar avatar;
-
-	public Space(Main_Agario main, Avatar avatar, ArrayList<Avatar> food, Dimension d) {
-
-		this.main = main;
-		this.avatar = avatar;
-		this.food = food;
+		this.game = game;
 		this.setSize(d);
 		this.dimPanel = d;
-		this.id = -1;
 	}
 
 	@Override
@@ -62,30 +53,30 @@ public class Space extends Canvas {
 
 		// Paint Avatars
 
-		if (main.getGame().getAvatars() != null) {
+		if (game.getAvatars() != null) {
 			try {
-				this.paintPlayer(main.getGame().getAvatars(), g);
+				this.paintPlayer(game.getAvatars(), g);
 			} catch (Exception e) {
 				Logger.getLogger(Space.class.getName()).log(Level.SEVERE, null, e);
 
 			}
 		}
 
-		if (food == null) {
+		if (game.getFood() == null) {
 			System.out.println("food null");
 		}
 
 		// Paint Food
-		if (this.food != null) {
+		if (game.getFood() != null) {
 			try {
-				this.paintFood(this.food, g);
+				this.paintFood(game.getFood(), g);
 			} catch (Exception e) {
 				Logger.getLogger(Space.class.getName()).log(Level.SEVERE, null, e);
 			}
 		}
 		
 		//Paint Leader board
-		paintLeaderBoard(main.getGame().getTop(), g);
+		paintLeaderBoard(game.getTop(), g);
 
 	}
 
@@ -143,9 +134,7 @@ public class Space extends Canvas {
         g.drawString("----------------", (int) dimPanel.getWidth()-175, 60);
         int i = 30;
         int pos = 1;
-        
-        
-        g.drawString(main.getGame().reportScores(), (int)dimPanel.getWidth()-150, 75);
+        g.drawString(game.reportScores(), (int)dimPanel.getWidth()-150, 75);
         
 	}
 

@@ -1,4 +1,4 @@
-package controller;
+package control;
 
 import java.awt.MouseInfo;
 import java.awt.Point;
