@@ -38,10 +38,10 @@ public class Server {
 	public Server() throws IOException {
 		System.out.println("****** Server online ******");
 		serverSocket = new ServerSocket(PORT_CONNECTION);
-		
+
 		game = new Game();
 		game.initializeFood();
-		
+
 		while (gamers < 2) {
 			Socket socket;
 			socket = serverSocket.accept();
@@ -59,20 +59,20 @@ public class Server {
 	public void singin(String nickname, String email, String password) {
 		DataBase.registerUser(nickname, password, email);
 	}
-	
+
 	public int validateLogin(String email, String password) {
 		boolean log = DataBase.validateLogin(email, password);
 		if (log) {
 			gamers++;
-			int id  = nextId();
-			game.addAvatar(findNickname(email),id);
-			System.out.println("gamers: "+gamers);
+			int id = nextId();
+			game.addAvatar(findNickname(email), id);
+			System.out.println("gamers: " + gamers);
 			return id;
-		}else {
+		} else {
 			return -1;
 		}
 	}
-	
+
 	private String findNickname(String email) {
 		return DataBase.findNickName(email);
 	}
@@ -81,28 +81,33 @@ public class Server {
 		int id_ = game.getIdAvailable();
 		return id_;
 	}
-	
+
 	public String sendBaseGame() {
 
 		ArrayList<Avatar> gamers = game.getAvatars();
-		String message = "" ;
-		
+		String message = "";
+
 		for (int i = 0; i < gamers.size(); i++) {
-			String id = gamers.get(i).getId() + "";
-			String nickname = gamers.get(i).getNickName();
-			String radious = gamers.get(i).getRadious()+"";
-			String posX =gamers.get(i).getPosX() + "";
-			String posY =gamers.get(i).getPosY() + "";
-			String rgb = gamers.get(i).getColor().getRGB() + "";
-			String player = "";
 
-			if (i == gamers.size()-1 ) {
-				player = id + "/" + nickname + "/" + radious + "/" + posX + "/" + posY + "/" + rgb;
-			} else {
-				player = id + "/" + nickname + "/" + radious + "/" + posX + "/" + posY + "/" + rgb + "," ;
+			if (gamers.get(i) != null) {
+				String id = gamers.get(i).getId() + "";
+				String nickname = gamers.get(i).getNickName();
+				String radious = gamers.get(i).getRadious() + "";
+				String posX = gamers.get(i).getPosX() + "";
+				String posY = gamers.get(i).getPosY() + "";
+				String rgb = gamers.get(i).getColor().getRGB() + "";
+				String live = gamers.get(i).isAlive() ? "true" : "false";
+				String player = "";
+
+				if (i == gamers.size() - 1) {
+					player = id + "/" + nickname + "/" + radious + "/" + posX + "/" + posY + "/" + rgb + "/" + live;
+				} else {
+					player = id + "/" + nickname + "/" + radious + "/" + posX + "/" + posY + "/" + rgb + "/" + live
+							+ ",";
+				}
+
+				message += player;
 			}
-
-			message += player;
 		}
 
 		message += "_";
@@ -110,20 +115,22 @@ public class Server {
 		ArrayList<Avatar> food = game.getFood();
 
 		for (int i = 0; i < food.size(); i++) {
-			String rgb = food.get(i).getColor().getRGB() + "";
-			String posX = food.get(i).getPosX() + "";
-			String posY = food.get(i).getPosY() + "";
-			String ball = rgb + "/" + posX + "/" + posY;
 
-			if (i < food.size() - 1) {
-				ball += ",";
+			if (food.get(i) != null) {
+				String rgb = food.get(i).getColor().getRGB() + "";
+				String posX = food.get(i).getPosX() + "";
+				String posY = food.get(i).getPosY() + "";
+				String ball = rgb + "/" + posX + "/" + posY;
+
+				if (i < food.size() - 1) {
+					ball += ",";
+				}
+				message += ball;
 			}
-			message += ball;
 		}
 		return message;
 	}
-	
-	
+
 	public static ServerSocket getServerSocket() {
 		return serverSocket;
 	}
@@ -167,10 +174,12 @@ public class Server {
 		if (player[3].equalsIgnoreCase("true")) {
 			isAlive = true;
 		}
-		
+
 		double radious = Double.parseDouble(player[4]);
-		this.game.updatePlayer(id, x, y, isAlive, radious);
-		
+
+		if (this.game.getAvatar(id) != null) {
+			this.game.updatePlayer(id, x, y, isAlive, radious);
+		}
 	}
 
 }

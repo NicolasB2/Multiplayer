@@ -22,19 +22,21 @@ public class ThreadMoving extends Thread {
 
 	@Override
 	public void run() {
-		while (true) {
+		while (game.getAvatar(id)!=null) {
 			try {
 				this.updatePositionMouse();
 				game.move(xFinal, yFinal, id);
 				Thread.sleep(INTERVALO);
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("Error in moving");
 			}
 		}
 	}
 
 	//verificar
 	private void updatePositionMouse() {
+		
+		if(game.getAvatar(id)!=null) {
 		Point mouse = MouseInfo.getPointerInfo().getLocation();
 		this.xFinal = (mouse.x -game.getAvatar(id).getPosX())/250;
 		this.yFinal = (mouse.y-game.getAvatar(id).getPosY())/250; 
@@ -48,5 +50,5 @@ public class ThreadMoving extends Thread {
 		if(this.yFinal>1) {
 			this.yFinal+=4;
 		}
-	}
+	}}
 }

@@ -67,7 +67,7 @@ public class Controller {
 		cpg.start();
 	}
 
-	public void updateWorld(String[] infoPlayers, String[] infoBalls) {
+	private ArrayList<Avatar> readPlayers(String[] infoPlayers) {
 		ArrayList<Avatar> players = new ArrayList<Avatar>();
 
 		for (int i = 0; i < infoPlayers.length; i++) {
@@ -80,16 +80,25 @@ public class Controller {
 			double posY = Double.parseDouble(player[4]);
 			int rgb = Integer.parseInt(player[5]);
 
-			
+			boolean alive = player[6].equals("true") ? true : false;
+
+			if (this.id == id && alive == false) {
+				return null;
+			}
 			Avatar player_avatar = new Avatar(nickname, id);
 			player_avatar.setColor(new Color(rgb));
 			player_avatar.setPosX(posX);
 			player_avatar.setPosY(posY);
 			player_avatar.setRadious(radious);
+			player_avatar.setAlive(alive);
 			players.add(player_avatar);
-
 		}
 
+		return players;
+
+	}
+
+	private ArrayList<Avatar> readFood(String[] infoBalls) {
 		ArrayList<Avatar> food = new ArrayList<Avatar>();
 
 		for (int i = 0; i < infoBalls.length; i++) {
@@ -103,46 +112,25 @@ public class Controller {
 			bl.setPosY(posY);
 			food.add(bl);
 		}
+		return food;
+	}
 
-		game.updateWorld(players, food, this.id);
+	public void updateWorld(String[] infoPlayers, String[] infoBalls) {
+		ArrayList<Avatar> players = readPlayers(infoPlayers);
+		if (players != null) {
+			game.updateWorld(players, readFood(infoBalls), this.id);
+		} else {
+			System.out.println("perdiste");
+		}
 	}
 
 	public void initializeWorld(String[] infoPlayers, String[] infoBalls) {
-
-		ArrayList<Avatar> players = new ArrayList<Avatar>();
-
-		for (int i = 0; i < infoPlayers.length; i++) {
-			String[] player = infoPlayers[i].split("/");
-			int id = Integer.parseInt(player[0]);
-			String nickname = player[1];
-			double radious = Double.parseDouble(player[2]);
-			double posX = Double.parseDouble(player[3]);
-			double posY = Double.parseDouble(player[4]);
-			int rgb = Integer.parseInt(player[5]);
-
-			Avatar player_avatar = new Avatar(nickname, id);
-			player_avatar.setColor(new Color(rgb));
-			player_avatar.setPosX(posX);
-			player_avatar.setPosY(posY);
-			player_avatar.setRadious(radious);
-			players.add(player_avatar);
+		ArrayList<Avatar> players = readPlayers(infoPlayers);
+		if (players != null) {
+			game.initializeWorld(players, readFood(infoBalls));
+		} else {
+			System.out.println("perdiste");
 		}
-
-		ArrayList<Avatar> food = new ArrayList<Avatar>();
-
-		for (int i = 0; i < infoBalls.length; i++) {
-			String[] ballInfo = infoBalls[i].split("/");
-			int rgb = Integer.parseInt(ballInfo[0]);
-			double posX = Double.parseDouble(ballInfo[1]);
-			double posY = Double.parseDouble(ballInfo[2]);
-			Avatar bl = new Avatar();
-			bl.setColor(new Color(rgb));
-			bl.setPosX(posX);
-			bl.setPosY(posY);
-			food.add(bl);
-		}
-
-		game.initializeWorld(players, food);
 	}
 
 	public Avatar getAvatar() {

@@ -35,12 +35,16 @@ public class Server_Play_Game extends Thread {
 			in = new DataInputStream(socket.getInputStream());
 			out = new DataOutputStream(socket.getOutputStream());
 			server.getGame().startGame();
-			
+
 			while (true) {
 				out.writeUTF(server.sendBaseGame());
 				String received = in.readUTF();
-				String[] player = received.split("/");
-				server.updateGame(player);
+				if (!received.equals("lose")) {
+					String[] player = received.split("/");
+					server.updateGame(player);
+				}else {
+					break;
+				}
 			}
 
 		} catch (Exception e) {
