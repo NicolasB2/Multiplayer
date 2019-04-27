@@ -69,8 +69,7 @@ public class Controller {
 
 	public void updateWorld(String[] infoPlayers, String[] infoBalls) {
 		ArrayList<Avatar> players = new ArrayList<Avatar>();
-Avatar local = null;
-		
+
 		for (int i = 0; i < infoPlayers.length; i++) {
 
 			String[] player = infoPlayers[i].split("/");
@@ -81,6 +80,7 @@ Avatar local = null;
 			double posY = Double.parseDouble(player[4]);
 			int rgb = Integer.parseInt(player[5]);
 
+			
 			Avatar player_avatar = new Avatar(nickname, id);
 			player_avatar.setColor(new Color(rgb));
 			player_avatar.setPosX(posX);

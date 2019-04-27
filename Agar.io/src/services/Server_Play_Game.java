@@ -38,7 +38,6 @@ public class Server_Play_Game extends Thread {
 			
 			while (true) {
 				out.writeUTF(server.sendBaseGame());
-				System.out.println("send game");
 				String received = in.readUTF();
 				String[] player = received.split("/");
 				server.updateGame(player);

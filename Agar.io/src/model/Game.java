@@ -1,4 +1,5 @@
 package model;
+
 import java.awt.*;
 import java.io.*;
 import java.text.DecimalFormat;
@@ -51,12 +52,12 @@ public class Game implements Serializable {
 	}
 
 	public void initializeFood() {
-		
+
 		for (int i = 0; i < 100; i++) {
 			Avatar a = new Avatar();
 			food.add(a);
 		}
-		
+
 		isOn = true;
 	}
 
@@ -200,34 +201,37 @@ public class Game implements Serializable {
 
 	public void initializeWorld(ArrayList<Avatar> players, ArrayList<Avatar> food) {
 		this.avatars = players;
-		this.food = food;	
+		this.food = food;
 	}
 
-	public void updateWorld(ArrayList<Avatar> players, ArrayList<Avatar> food,int id) {
+	public void updateWorld(ArrayList<Avatar> players, ArrayList<Avatar> food, int id) {
 		Avatar local = null;
-		
+
 		for (int i = 0; i < this.avatars.size(); i++) {
-			if(this.avatars.get(i).getId()==id) {
-			local = this.avatars.get(i);
+			if (this.avatars.get(i).getId() == id) {
+				local = this.avatars.get(i);
 			}
 		}
-		
+
 		this.food = food;
 		this.avatars = players;
-		
-		for (int i = 0; i <players.size(); i++) {
-			if(this.avatars.get(i).getId()==id) {
-				this.avatars.set(i,local);
+
+		for (int i = 0; i < avatars.size(); i++) {
+			if (this.avatars.get(i).getId() == id) {
+				this.avatars.get(i).setPosX(local.getPosX());
+				this.avatars.get(i).setPosY(local.getPosY());
 			}
 		}
 	}
-	
+
 	public void updatePlayer(int id, double x, double y, boolean isAlive, double radious) {
 		Avatar a = getAvatar(id);
 		a.setPosX(x);
 		a.setPosY(y);
 		a.setAlive(isAlive);
-		a.setRadious(radious);
+		if(a.getRadious()<radious) {
+			a.setRadious(radious);
+		}
 	}
 
 }

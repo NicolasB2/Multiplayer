@@ -87,7 +87,7 @@ public class Avatar implements Serializable {
 	public void check_Collision(Avatar other) {
 		boolean c = collision(other);
 		if (c == true && other != null) {
-			this.increaseRadious(other.getRadious() / 3);
+			this.radious += (other.getRadious()/3);
 			other.setAlive(false);
 		}
 
@@ -99,10 +99,6 @@ public class Avatar implements Serializable {
 
 	public void setRadious(double radious) {
 		this.radious = radious;
-	}
-
-	public void increaseRadious(double increase) {
-		this.radious += increase;
 	}
 
 	public double getSpeed() {
