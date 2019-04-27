@@ -38,11 +38,11 @@ public class AssignPort extends Thread {
 					if (key.equals(Server.LOGIN) || key.equals(Server.SIGN_IN)) {
 						out.writeUTF(Server.PORT_LOGIN + "");
 						Server_Login_Signin sls = new Server_Login_Signin(this.server);
-						sls.start();
 					}
-
 					if (key.equals(Server.PLAY)) {
 						out.writeUTF(Server.PORT_PLAY + "");
+						Server_Play_Game spg = new Server_Play_Game(this.server);
+						spg.start();
 					}
 					if (key.equals(Server.MUSIC)) {
 						out.writeUTF(Server.PORT_MUSIC + "");

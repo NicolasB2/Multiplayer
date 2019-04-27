@@ -1,11 +1,11 @@
+/.classpath
+/.project
 /connection/
-/controller/
-/model/
-/ui/
-/server/
-/services/
 /control/
 /data/
-/icons/
 /diagrams/
+/icons/
+/model/
 /music/
+/services/
+/ui/

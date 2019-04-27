@@ -37,7 +37,7 @@ public class Main_Agario extends JFrame {
 		this.setVisible(true);
 		
 		controller.startGame();
-		controller.startMoving();
+//		controller.startMoving();
 		paintGame(controller.getAvatar(),controller.getGame().getFood());
 	}
 

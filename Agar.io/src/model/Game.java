@@ -29,11 +29,11 @@ public class Game implements Serializable {
 		this.avatars = new ArrayList<Avatar>();
 		isOn = false;
 		timeout = false;
-		initializeFood();
 		
-		Avatar a = new Avatar("Juan", 3);
+		Avatar a = new Avatar("Dani", 3);
+		Avatar b = new Avatar("Sara", 4);
 		avatars.add(a);
-
+		avatars.add(b);
 	}
 
 	public void startGame() {
@@ -55,13 +55,13 @@ public class Game implements Serializable {
 
 	}
 
-	private void initializeFood() {
+	public void initializeFood() {
+		
 		for (int i = 0; i < 100; i++) {
-
 			Avatar a = new Avatar();
 			food.add(a);
 		}
-
+		
 		isOn = true;
 	}
 
@@ -158,8 +158,8 @@ public class Game implements Serializable {
 		}
 		Avatar avatar = avatars.get(0);
 		if (avatar != null) {
-			double x = avatar.getCenterX();
-			double y = avatar.getCenterY();
+			double x = avatar.getPosX();
+			double y = avatar.getPosY();
 			int r = (int) avatar.getRadious();
 			this.font = new Font("Calibri", Font.BOLD, r / 2);
 			FontMetrics metrics = g.getFontMetrics(font);
@@ -201,6 +201,11 @@ public class Game implements Serializable {
 					+ "\n";
 		}
 		return report;
+	}
+
+	public void initializeWorld(ArrayList<Avatar> players, ArrayList<Avatar> food) {
+		this.avatars = players;
+		this.food = food;	
 	}
 
 }

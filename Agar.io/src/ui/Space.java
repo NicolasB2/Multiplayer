@@ -88,8 +88,8 @@ public class Space extends Canvas {
 				Avatar a = avatars.get(i);
 				render(g, 1,a);	
 				
-				double x = a.getCenterX();
-	            double y = a.getCenterY();
+				double x = a.getPosX();
+	            double y = a.getPosY();
 	            double r = a.getRadious();
 	            g.setFont(new Font("Ubuntu",Font.BOLD,(int)r/2));
 	            FontMetrics metrics = g.getFontMetrics(g.getFont());
@@ -121,9 +121,9 @@ public class Space extends Canvas {
 		
 		double r = a.getRadious();
 		g.setColor(a.getColor());
-		g.fillOval((int) (a.getCenterX() -r), (int) (a.getCenterY() -r), (int)(2*r),(int) (2*r));
+		g.fillOval((int) (a.getPosX() -r), (int) (a.getPosY() -r), (int)(2*r),(int) (2*r));
 		g.setColor(Color.BLACK);
-		g.drawOval((int) (a.getCenterX() - r), (int) (a.getCenterY() -r), (int)(2*r), (int)(2*r));
+		g.drawOval((int) (a.getPosX() - r), (int) (a.getPosY() -r), (int)(2*r), (int)(2*r));
 	}
 	
 	private void paintLeaderBoard(ArrayList<Avatar> top, Graphics g){

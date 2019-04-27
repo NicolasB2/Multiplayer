@@ -126,17 +126,12 @@ public class Login_GUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		String comand = e.getActionCommand();
-		
+
 		if (comand.equals(LOGIN)) {
-			connection.getController().login(getEmail(),getPassword());
-			try {
-				Thread.sleep(1500);
-				System.out.println("Cargo");
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
+			connection.getController().login(getEmail(), getPassword());
 			if (connection.getController().isCorrectLogin()) {
 				JOptionPane.showMessageDialog(null, "Welcome to Agar.io");
+				this.setVisible(false);
 				connection.play();
 			}
 

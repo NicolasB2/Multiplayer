@@ -18,7 +18,7 @@ public class Server_Login_Signin {
 		start();
 	}
 
-	public void start() {
+	private void start() {
 		ObjectInputStream is = null;
 		ObjectOutputStream os = null;
 
@@ -58,19 +58,17 @@ public class Server_Login_Signin {
 		}
 	}
 	private void login(ObjectInputStream is, ObjectOutputStream os) throws Exception {
-		boolean log = false;
+		int log;
 
 		String email = (String) is.readObject();
-		System.out.println("We got: " + email);
+		System.out.println("email: " + email);
 		String password = (String) is.readObject();
-		System.out.println("We got: " + password);
+		System.out.println("password: " + password);
 		log = server.validateLogin(email, password);
 
-		if (log) {
+		if (log>=0) {
 			os.writeObject(Server.LOGIN_OK);
-			os.writeObject(server.findNickname(email));
-			os.writeObject(server.nextId());
-			
+			os.writeObject(log+"");
 		} else {
 			os.writeObject(Server.LOGIN_INCORRECT);
 		}

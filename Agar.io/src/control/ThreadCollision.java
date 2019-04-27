@@ -17,7 +17,7 @@ public class ThreadCollision extends Thread {
 				checkCollisions();
 				Thread.sleep(INTERVAL);
 			} catch (Exception e) {
-				e.printStackTrace();
+				
 			}
 		}
 	}

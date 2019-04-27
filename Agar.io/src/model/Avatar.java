@@ -19,8 +19,8 @@ public class Avatar implements Serializable {
 	private static Random random = new Random();
 
 	private String nickName;
-	private double centerX;
-	private double centerY;
+	private double posX;
+	private double posY;
 	private double radious;
 	private double speed;
 	private boolean avatar;
@@ -36,8 +36,8 @@ public class Avatar implements Serializable {
 	}
 
 	public Avatar() {
-		this.centerX = random.nextInt(Main_Agario.WINDOW_WIDTH - 15) + 15;
-		this.centerY = random.nextInt(Main_Agario.WINDOW_HEIGHT - 15) + 15;
+		this.posX = random.nextInt(Main_Agario.WINDOW_WIDTH - 15) + 15;
+		this.posY = random.nextInt(Main_Agario.WINDOW_HEIGHT - 15) + 15;
 		this.avatar = false;
 		this.alive = true;
 		radious = 5;
@@ -45,8 +45,8 @@ public class Avatar implements Serializable {
 	}
 
 	public Avatar(String nickName, int id) {
-		this.centerX = random.nextInt(Main_Agario.WINDOW_WIDTH - 15) + 15;
-		this.centerY = random.nextInt(Main_Agario.WINDOW_HEIGHT - 15) + 15;
+		this.posX = random.nextInt(Main_Agario.WINDOW_WIDTH - 15) + 15;
+		this.posY = random.nextInt(Main_Agario.WINDOW_HEIGHT - 15) + 15;
 		this.avatar = true;
 		this.alive = true;
 		this.id = id;
@@ -56,8 +56,8 @@ public class Avatar implements Serializable {
 	}
 
 	public void move(double x, double y) {
-		this.centerX += x;
-		this.centerY += y;
+		this.posX += x;
+		this.posY += y;
 	}
 
 	public void calculate_speed() {
@@ -70,7 +70,7 @@ public class Avatar implements Serializable {
 
 	private boolean collision(Avatar other) {
 		if (other != null) {
-			double d = distance(this.centerX, this.centerY, other.centerX, other.centerY);
+			double d = distance(this.posX, this.posY, other.posX, other.posY);
 			if (d < this.radious + other.getRadious()) {
 				if (this.radious > other.getRadious()) {
 					return true;
@@ -153,20 +153,20 @@ public class Avatar implements Serializable {
 		this.nickName = nickName;
 	}
 
-	public double getCenterX() {
-		return centerX;
+	public double getPosX() {
+		return posX;
 	}
 
-	public void setCenterX(double centerX) {
-		this.centerX = centerX;
+	public void setPosX(double posX) {
+		this.posX = posX;
 	}
 
-	public double getCenterY() {
-		return centerY;
+	public double getPosY() {
+		return posY;
 	}
 
-	public void setCenterY(double centerY) {
-		this.centerY = centerY;
+	public void setPosY(double posY) {
+		this.posY = posY;
 	}
 
 }
