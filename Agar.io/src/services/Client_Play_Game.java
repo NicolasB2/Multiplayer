@@ -7,7 +7,7 @@ import control.Controller;
 public class Client_Play_Game extends Thread {
 
 	public final static String PATH = "./resources/data/userGame.txt";
-	
+
 	private Controller controller;
 	private Socket socket;
 	private int port;
@@ -30,8 +30,9 @@ public class Client_Play_Game extends Thread {
 
 			in = new DataInputStream(socket.getInputStream());
 			out = new DataOutputStream(socket.getOutputStream());
-			
+
 //			out.writeUTF(Server.PORT_PLAY + "");
+			
 			String read = in.readUTF();
 			String[] infoBig = read.split("_");
 			String[] infoPlayers = infoBig[0].split(",");
@@ -40,6 +41,25 @@ public class Client_Play_Game extends Thread {
 			controller.initializeWorld(infoPlayers, infoBalls);
 			controller.startMoving();
 			
+			while (true) {
+				
+				int id = controller.getId();
+				double x = controller.getGame().getAvatar(id).getPosX();
+				double y = controller.getGame().getAvatar(id).getPosY();
+				boolean isPlaying = controller.getGame().getAvatar(id).isAlive();
+				double radious = controller.getGame().getAvatar(id).getRadious();
+				
+				out.writeUTF(id + "/" + x + "/" + y + "/" + isPlaying + "/" + radious);
+				
+				
+				read = in.readUTF();
+				infoBig = read.split("_");
+				infoPlayers = infoBig[0].split(",");
+				infoBalls = infoBig[1].split(",");
+				
+				controller.updateWorld(infoPlayers, infoBalls);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

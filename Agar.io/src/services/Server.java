@@ -157,4 +157,20 @@ public class Server {
 
 	}
 
+	public void updateGame(String[] player) {
+		int id = Integer.parseInt(player[0]);
+		double x = Double.parseDouble(player[1]);
+		double y = Double.parseDouble(player[2]);
+
+		boolean isAlive = false;
+
+		if (player[3].equalsIgnoreCase("true")) {
+			isAlive = true;
+		}
+		
+		double radious = Double.parseDouble(player[4]);
+		this.game.updatePlayer(id, x, y, isAlive, radious);
+		
+	}
+
 }

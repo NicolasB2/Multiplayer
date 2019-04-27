@@ -67,6 +67,46 @@ public class Controller {
 		cpg.start();
 	}
 
+	public void updateWorld(String[] infoPlayers, String[] infoBalls) {
+		ArrayList<Avatar> players = new ArrayList<Avatar>();
+Avatar local = null;
+		
+		for (int i = 0; i < infoPlayers.length; i++) {
+
+			String[] player = infoPlayers[i].split("/");
+			int id = Integer.parseInt(player[0]);
+			String nickname = player[1];
+			double radious = Double.parseDouble(player[2]);
+			double posX = Double.parseDouble(player[3]);
+			double posY = Double.parseDouble(player[4]);
+			int rgb = Integer.parseInt(player[5]);
+
+			Avatar player_avatar = new Avatar(nickname, id);
+			player_avatar.setColor(new Color(rgb));
+			player_avatar.setPosX(posX);
+			player_avatar.setPosY(posY);
+			player_avatar.setRadious(radious);
+			players.add(player_avatar);
+
+		}
+
+		ArrayList<Avatar> food = new ArrayList<Avatar>();
+
+		for (int i = 0; i < infoBalls.length; i++) {
+			String[] ballInfo = infoBalls[i].split("/");
+			int rgb = Integer.parseInt(ballInfo[0]);
+			double posX = Double.parseDouble(ballInfo[1]);
+			double posY = Double.parseDouble(ballInfo[2]);
+			Avatar bl = new Avatar();
+			bl.setColor(new Color(rgb));
+			bl.setPosX(posX);
+			bl.setPosY(posY);
+			food.add(bl);
+		}
+
+		game.updateWorld(players, food, this.id);
+	}
+
 	public void initializeWorld(String[] infoPlayers, String[] infoBalls) {
 
 		ArrayList<Avatar> players = new ArrayList<Avatar>();
@@ -104,7 +144,6 @@ public class Controller {
 
 		game.initializeWorld(players, food);
 	}
-
 
 	public Avatar getAvatar() {
 		return game.getAvatar(this.id);

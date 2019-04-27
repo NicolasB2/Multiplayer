@@ -13,13 +13,13 @@ public class Server_Play_Game extends Thread {
 	public Server_Play_Game(Server server) {
 		this.server = server;
 		this.socket = null;
-		
+
 		try {
-			
+
 			this.serverSocket = new ServerSocket(Server.PORT_PLAY);
 			this.socket = serverSocket.accept();
 			this.serverSocket.close();
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -28,17 +28,22 @@ public class Server_Play_Game extends Thread {
 	@Override
 	public void run() {
 		try {
-			
+
 			DataInputStream in;
 			DataOutputStream out;
 
 			in = new DataInputStream(socket.getInputStream());
 			out = new DataOutputStream(socket.getOutputStream());
+			server.getGame().startGame();
 			
-			out.writeUTF(server.sendBaseGame());
-			System.out.println("send first instance");
-//			String key = in.readUTF();
-			
+			while (true) {
+				out.writeUTF(server.sendBaseGame());
+				System.out.println("send game");
+				String received = in.readUTF();
+				String[] player = received.split("/");
+				server.updateGame(player);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

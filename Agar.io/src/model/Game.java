@@ -29,11 +29,6 @@ public class Game implements Serializable {
 		this.avatars = new ArrayList<Avatar>();
 		isOn = false;
 		timeout = false;
-		
-		Avatar a = new Avatar("Dani", 3);
-		Avatar b = new Avatar("Sara", 4);
-		avatars.add(a);
-		avatars.add(b);
 	}
 
 	public void startGame() {
@@ -206,6 +201,33 @@ public class Game implements Serializable {
 	public void initializeWorld(ArrayList<Avatar> players, ArrayList<Avatar> food) {
 		this.avatars = players;
 		this.food = food;	
+	}
+
+	public void updateWorld(ArrayList<Avatar> players, ArrayList<Avatar> food,int id) {
+		Avatar local = null;
+		
+		for (int i = 0; i < this.avatars.size(); i++) {
+			if(this.avatars.get(i).getId()==id) {
+			local = this.avatars.get(i);
+			}
+		}
+		
+		this.food = food;
+		this.avatars = players;
+		
+		for (int i = 0; i <players.size(); i++) {
+			if(this.avatars.get(i).getId()==id) {
+				this.avatars.set(i,local);
+			}
+		}
+	}
+	
+	public void updatePlayer(int id, double x, double y, boolean isAlive, double radious) {
+		Avatar a = getAvatar(id);
+		a.setPosX(x);
+		a.setPosY(y);
+		a.setAlive(isAlive);
+		a.setRadious(radious);
 	}
 
 }

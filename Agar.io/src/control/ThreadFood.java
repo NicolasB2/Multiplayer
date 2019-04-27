@@ -24,7 +24,6 @@ public class ThreadFood extends Thread {
 
 				game.getFood().add(new Avatar());
 				sleep(1500);
-
 			}
 
 		} catch (Exception e) {
