@@ -44,6 +44,7 @@ public class Client_Play_Game extends Thread {
 				int id = controller.getId();
 
 				if (controller.getGame().getAvatar(id) != null) {
+					
 					double x = controller.getGame().getAvatar(id).getPosX();
 					double y = controller.getGame().getAvatar(id).getPosY();
 					boolean isPlaying = controller.getGame().getAvatar(id).isAlive();

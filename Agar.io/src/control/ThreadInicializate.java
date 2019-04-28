@@ -15,6 +15,7 @@ public class ThreadInicializate extends Thread {
 	@Override
 	public void run() {
 		while (!game.isOn()) {
+			
 			if(game.getAvatars().size()==Game.MAX_PLAYERS) {
 				game.startGame();
 			}

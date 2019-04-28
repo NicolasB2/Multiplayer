@@ -87,6 +87,7 @@ public class Avatar implements Serializable {
 
 	public void check_Collision(Avatar other) {
 		boolean c = collision(other);
+		
 		if (c == true && other != null) {
 			this.radious += (other.getRadious()/3);
 			other.setAlive(false);
