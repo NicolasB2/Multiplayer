@@ -34,7 +34,6 @@ public class Server_Play_Game extends Thread {
 
 			in = new DataInputStream(socket.getInputStream());
 			out = new DataOutputStream(socket.getOutputStream());
-			server.getGame().startGame();
 
 			while (true) {
 				out.writeUTF(server.sendBaseGame());

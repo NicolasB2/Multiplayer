@@ -15,6 +15,7 @@ public class Game implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	public final static int FOOD_RADIUS = 10;
+	public final static int MAX_PLAYERS = 2;
 
 	private ArrayList<Avatar> food;
 	private ArrayList<Avatar> avatars;
@@ -30,6 +31,7 @@ public class Game implements Serializable {
 		this.avatars = new ArrayList<Avatar>();
 		isOn = false;
 		timeout = false;
+		initializeFood();
 	}
 
 	public void startGame() {
@@ -43,22 +45,13 @@ public class Game implements Serializable {
 		c.start();
 	}
 
-	public String send_Game() {
-		return "";
-	}
-
-	public void read_Game(String g) {
-
-	}
-
 	public void initializeFood() {
 
 		for (int i = 0; i < 100; i++) {
 			Avatar a = new Avatar();
 			food.add(a);
 		}
-
-		isOn = true;
+		
 	}
 
 	public void deleteFood() {
@@ -102,6 +95,10 @@ public class Game implements Serializable {
 	public void addAvatar(String nickName, int id) {
 		Avatar a = new Avatar(nickName, id);
 		avatars.add(a);
+		
+		if(avatars.size()==MAX_PLAYERS) {
+			startGame();
+		}
 	}
 
 	public int getIdAvailable() {

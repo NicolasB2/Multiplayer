@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import javax.print.DocFlavor.URL;
 import javax.swing.ImageIcon;
 import javax.swing.*;
-import connection.*;
 import control.Controller;
 import services.*;
 

@@ -40,20 +40,16 @@ public class Server {
 		serverSocket = new ServerSocket(PORT_CONNECTION);
 
 		game = new Game();
-		game.initializeFood();
+		int maxGamers = 0;
 
-		while (gamers < 2) {
+		while (maxGamers < Game.MAX_PLAYERS) {
 			Socket socket;
 			socket = serverSocket.accept();
 			AssignPort assign = new AssignPort(socket, this);
 			assign.start();
+			maxGamers++;
 		}
-		System.out.println("inicializate game");
-		initilizateGame();
-	}
-
-	public void initilizateGame() {
-		game.startGame();
+		System.out.println("all gamers");
 	}
 
 	public void singin(String nickname, String email, String password) {

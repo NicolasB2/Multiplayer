@@ -1,4 +1,4 @@
-package services;
+package Client;
 
 import java.io.*;
 import java.net.Socket;
@@ -30,8 +30,6 @@ public class Client_Play_Game extends Thread {
 
 			in = new DataInputStream(socket.getInputStream());
 			out = new DataOutputStream(socket.getOutputStream());
-
-//			out.writeUTF(Server.PORT_PLAY + "");
 
 			String read = in.readUTF();
 			String[] infoBig = read.split("_");

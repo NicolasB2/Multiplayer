@@ -22,33 +22,34 @@ public class ThreadMoving extends Thread {
 
 	@Override
 	public void run() {
-		while (game.getAvatar(id)!=null) {
+		while (game.getAvatar(id) != null) {
 			try {
 				this.updatePositionMouse();
 				game.move(xFinal, yFinal, id);
 				Thread.sleep(INTERVALO);
 			} catch (Exception e) {
-				System.out.println("Error in moving");
+				e.printStackTrace();
 			}
 		}
 	}
 
-	//verificar
+	// verificar
 	private void updatePositionMouse() {
-		
-		if(game.getAvatar(id)!=null) {
-		Point mouse = MouseInfo.getPointerInfo().getLocation();
-		this.xFinal = (mouse.x -game.getAvatar(id).getPosX())/250;
-		this.yFinal = (mouse.y-game.getAvatar(id).getPosY())/250; 
-		
-		if(this.xFinal<0) {
-			this.xFinal-=4;
+
+		if (game.getAvatar(id) != null) {
+			Point mouse = MouseInfo.getPointerInfo().getLocation();
+			this.xFinal = (mouse.x - game.getAvatar(id).getPosX()) / 250;
+			this.yFinal = (mouse.y - game.getAvatar(id).getPosY()) / 250;
+
+			if (this.xFinal < 0) {
+				this.xFinal -= 4;
+			}
+			if (this.yFinal < 0) {
+				this.yFinal -= 4;
+			}
+			if (this.yFinal > 1) {
+				this.yFinal += 4;
+			}
 		}
-		if(this.yFinal<0) {
-			this.yFinal-=4;
-		}
-		if(this.yFinal>1) {
-			this.yFinal+=4;
-		}
-	}}
+	}
 }

@@ -1,16 +1,14 @@
 package ui;
 
 import java.awt.*;
-import java.io.*;
-import java.net.*;
 import java.util.*;
 import javax.swing.*;
-import connection.*;
 import control.*;
 import model.*;
 
 public class Main_Agario extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	public static final int WINDOW_WIDTH = 1400;
 	public static final int WINDOW_HEIGHT = 800;
 	public static final int WINDOW_POS_X = 50;
@@ -70,16 +68,6 @@ public class Main_Agario extends JFrame {
 		registrerWindow.setVisible(false);
 	}
 
-	
-//	public String [] coordenates(){
-//		String [] coordenates = new String [3];
-//		coordenates[0] = this.id+"";
-//		coordenates[1] = this.game.getAvatar(this.id).getCenterX()+"";
-//		coordenates[2] = this.game.getAvatar(this.id).getCenterY()+"";	
-//		return coordenates;
-//	}
-	
-
 	public int askPort(String request) {
 		return controller.answerPort(request);
 	}
@@ -97,9 +85,4 @@ public class Main_Agario extends JFrame {
 		Main_Agario m = new Main_Agario();
 		m.setVisible(false);
 	}
-
-
-
-
-
 }
