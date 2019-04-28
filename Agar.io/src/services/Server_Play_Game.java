@@ -34,8 +34,19 @@ public class Server_Play_Game extends Thread {
 
 			in = new DataInputStream(socket.getInputStream());
 			out = new DataOutputStream(socket.getOutputStream());
-
-			while (true) {
+			
+			
+			boolean control = true;
+			while (!this.server.getGame().isOn()) {
+				out.writeUTF("wait");
+			}
+			
+			while (control) {
+				try {
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 				out.writeUTF(server.sendBaseGame());
 				String received = in.readUTF();
 				if (!received.equals("lose")) {
@@ -45,6 +56,8 @@ public class Server_Play_Game extends Thread {
 					break;
 				}
 			}
+			
+			System.out.println("someone lose");
 
 		} catch (Exception e) {
 			e.printStackTrace();

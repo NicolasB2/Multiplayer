@@ -108,6 +108,12 @@ public class Controller {
 			int rgb = Integer.parseInt(ballInfo[0]);
 			double posX = Double.parseDouble(ballInfo[1]);
 			double posY = Double.parseDouble(ballInfo[2]);
+			
+			try {
+				posX = Double.parseDouble(ballInfo[1]);
+				posY = Double.parseDouble(ballInfo[2]);
+			} catch (Exception e) {
+			}
 			Avatar bl = new Avatar();
 			bl.setColor(new Color(rgb));
 			bl.setPosX(posX);
@@ -121,8 +127,6 @@ public class Controller {
 		ArrayList<Avatar> players = readPlayers(infoPlayers);
 		if (players != null) {
 			game.updateWorld(players, readFood(infoBalls), this.id);
-		} else {
-			System.out.println("perdiste");
 		}
 	}
 

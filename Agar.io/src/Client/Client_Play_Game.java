@@ -32,36 +32,45 @@ public class Client_Play_Game extends Thread {
 			out = new DataOutputStream(socket.getOutputStream());
 
 			String read = in.readUTF();
+			while (read.equals("wait")) {
+				read = in.readUTF();
+			}
+			System.out.println("paso");
+
 			String[] infoBig = read.split("_");
 			String[] infoPlayers = infoBig[0].split(",");
 			String[] infoBalls = infoBig[1].split(",");
 
 			controller.initializeWorld(infoPlayers, infoBalls);
 			controller.startMoving();
+			boolean control = true;
 
-			while (true) {
+			while (control) {
 
 				int id = controller.getId();
+				try {
+					if (controller.getGame().getAvatar(id) != null) {
 
-				if (controller.getGame().getAvatar(id) != null) {
-					
-					double x = controller.getGame().getAvatar(id).getPosX();
-					double y = controller.getGame().getAvatar(id).getPosY();
-					boolean isPlaying = controller.getGame().getAvatar(id).isAlive();
-					double radious = controller.getGame().getAvatar(id).getRadious();
-					out.writeUTF(id + "/" + x + "/" + y + "/" + isPlaying + "/" + radious);
+						double x = controller.getGame().getAvatar(id).getPosX();
+						double y = controller.getGame().getAvatar(id).getPosY();
+						boolean isPlaying = controller.getGame().getAvatar(id).isAlive();
+						double radious = controller.getGame().getAvatar(id).getRadious();
+						out.writeUTF(id + "/" + x + "/" + y + "/" + isPlaying + "/" + radious);
 
-					read = in.readUTF();
-					infoBig = read.split("_");
-					infoPlayers = infoBig[0].split(",");
-					infoBalls = infoBig[1].split(",");
+						read = in.readUTF();
+						infoBig = read.split("_");
+						infoPlayers = infoBig[0].split(",");
+						infoBalls = infoBig[1].split(",");
 
-					controller.updateWorld(infoPlayers, infoBalls);
+						controller.updateWorld(infoPlayers, infoBalls);
 
-				} else {
-					out.writeUTF("lose");
-					System.out.println("you lose");
-					break;
+					} else {
+						out.writeUTF("lose");
+						System.out.println("you lose");
+						break;
+					}
+				} catch (Exception e) {
+
 				}
 			}
 

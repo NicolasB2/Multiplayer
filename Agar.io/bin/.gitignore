@@ -1,13 +1,11 @@
 /.classpath
 /.project
-/connection/
+/Client/
 /control/
 /data/
 /diagrams/
+/gui/
 /icons/
 /model/
 /music/
 /services/
-/ui/
-/Client/
-/gui/

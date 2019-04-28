@@ -4,7 +4,6 @@ import model.Game;
 
 public class ThreadCollision extends Thread {
 	private Game game;
-	private int id;
 
 	public ThreadCollision(Game game) {
 		this.game = game;
@@ -14,6 +13,7 @@ public class ThreadCollision extends Thread {
 		while (game.isOn()) {
 			try {
 				checkCollisions();
+				sleep(100);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -31,10 +31,8 @@ public class ThreadCollision extends Thread {
 		}
 		for (int i = 0; i < game.getAvatars().size(); i++) {
 			for (int j = 0; j < game.getAvatars().size(); j++) {
-				if (game.getAvatars().get(j) != null) {
-					if (j != id) {
-						game.getAvatars().get(i).check_Collision(game.getAvatars().get(j));
-					}
+				if (game.getAvatars().get(j) != null && game.getAvatars().get(i) != null) {
+					game.getAvatars().get(i).check_Collision(game.getAvatars().get(j));
 				}
 			}
 		}
