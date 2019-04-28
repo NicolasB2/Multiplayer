@@ -1,7 +1,5 @@
 package control;
 
-import java.util.Random;
-
 import model.Avatar;
 import model.Game;
 

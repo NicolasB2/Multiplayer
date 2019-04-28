@@ -49,18 +49,17 @@ public class Client_Play_Game extends Thread {
 					boolean isPlaying = controller.getGame().getAvatar(id).isAlive();
 					double radious = controller.getGame().getAvatar(id).getRadious();
 					out.writeUTF(id + "/" + x + "/" + y + "/" + isPlaying + "/" + radious);
-					
+
 					read = in.readUTF();
 					infoBig = read.split("_");
 					infoPlayers = infoBig[0].split(",");
 					infoBalls = infoBig[1].split(",");
-					
-					try {
-						controller.updateWorld(infoPlayers, infoBalls);
-					} catch (Exception e) {
-					}
+
+					controller.updateWorld(infoPlayers, infoBalls);
+
 				} else {
 					out.writeUTF("lose");
+					System.out.println("you lose");
 					break;
 				}
 			}

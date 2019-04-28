@@ -42,6 +42,9 @@ public class Server {
 		game = new Game();
 		int maxGamers = 0;
 
+		ThreadInicializate th = new ThreadInicializate(this.game);
+		th.start();
+		
 		while (maxGamers < Game.MAX_PLAYERS) {
 			Socket socket;
 			socket = serverSocket.accept();
@@ -49,7 +52,6 @@ public class Server {
 			assign.start();
 			maxGamers++;
 		}
-		System.out.println("all gamers");
 	}
 
 	public void singin(String nickname, String email, String password) {

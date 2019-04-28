@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 import java.util.*;
 
 import control.*;
-import ui.Space;
+import gui.Space;
 
 public class Game implements Serializable {
 
@@ -15,7 +15,9 @@ public class Game implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	public final static int FOOD_RADIUS = 10;
-	public final static int MAX_PLAYERS = 2;
+	public final static Long TIME_START = (long) 60000;
+	public final static int MIN_PLAYERS = 2;
+	public final static int MAX_PLAYERS = 3;
 
 	private ArrayList<Avatar> food;
 	private ArrayList<Avatar> avatars;
@@ -95,10 +97,6 @@ public class Game implements Serializable {
 	public void addAvatar(String nickName, int id) {
 		Avatar a = new Avatar(nickName, id);
 		avatars.add(a);
-		
-		if(avatars.size()==MAX_PLAYERS) {
-			startGame();
-		}
 	}
 
 	public int getIdAvailable() {

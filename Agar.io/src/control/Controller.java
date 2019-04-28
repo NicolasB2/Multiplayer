@@ -130,9 +130,7 @@ public class Controller {
 		ArrayList<Avatar> players = readPlayers(infoPlayers);
 		if (players != null) {
 			game.initializeWorld(players, readFood(infoBalls));
-		} else {
-			System.out.println("perdiste");
-		}
+		} 
 	}
 
 	public Avatar getAvatar() {

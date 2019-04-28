@@ -4,8 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.io.Serializable;
 import java.util.Random;
-import ui.Main_Agario;
-import ui.Space;
+
+import gui.Main_Agario;
+import gui.Space;
 
 public class Avatar implements Serializable {
 

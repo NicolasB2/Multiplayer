@@ -3,8 +3,8 @@ package control;
 import java.awt.MouseInfo;
 import java.awt.Point;
 
+import gui.Space;
 import model.Game;
-import ui.Space;
 
 public class ThreadMoving extends Thread {
 	private static final int INTERVALO = 100;

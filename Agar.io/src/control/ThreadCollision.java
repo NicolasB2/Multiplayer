@@ -3,7 +3,6 @@ package control;
 import model.Game;
 
 public class ThreadCollision extends Thread {
-	private static final int INTERVAL = 10;
 	private Game game;
 	private int id;
 
@@ -15,9 +14,8 @@ public class ThreadCollision extends Thread {
 		while (game.isOn()) {
 			try {
 				checkCollisions();
-				Thread.sleep(INTERVAL);
 			} catch (Exception e) {
-				
+				e.printStackTrace();
 			}
 		}
 	}

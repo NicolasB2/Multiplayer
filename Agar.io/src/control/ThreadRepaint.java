@@ -3,8 +3,8 @@ package control;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import ui.Main_Agario;
-import ui.Space;
+import gui.Main_Agario;
+import gui.Space;
 
 public class ThreadRepaint extends Thread {
 
