@@ -41,14 +41,14 @@ public class Server_Play_Game extends Thread {
 				out.writeUTF("wait");
 			}
 			
-			while (control) {
+			while (control && this.server.getGame().isOn()) {
 				try {
 					out.writeUTF(server.sendBaseGame());
 					String received = in.readUTF();
 					if (!received.equals("exit")) {
 						String[] player = received.split("/");
 						server.updateGame(player);
-					}else {
+					}else{
 						control = false;
 					}
 				} catch (Exception e) {
@@ -56,7 +56,8 @@ public class Server_Play_Game extends Thread {
 				}
 			}
 			
-			System.out.println("someone lose");
+			out.writeUTF("time");
+			System.out.println("someone out");
 
 		} catch (Exception e) {
 			e.printStackTrace();

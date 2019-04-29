@@ -14,17 +14,16 @@ import services.*;
 public class Controller {
 
 	public final static int PORT = 8000;
-	public final static String SERVER_ADRESS = "localhost";
-	
-	
-	
+	// public final static String SERVER_ADRESS = "172.30.174.251";
+	public final static String SERVER_ADRESS = "localHost";
+
 	private Socket socket;
 	private Game game;
 	private boolean correctLogin;
 	private String nickName;
 	private int id;
 	private Main_Agario main_Agario;
-	
+
 	public Controller(Main_Agario main_Agario) {
 
 		this.main_Agario = main_Agario;
@@ -113,7 +112,7 @@ public class Controller {
 			int rgb = Integer.parseInt(ballInfo[0]);
 			double posX = Double.parseDouble(ballInfo[1]);
 			double posY = Double.parseDouble(ballInfo[2]);
-			
+
 			try {
 				posX = Double.parseDouble(ballInfo[1]);
 				posY = Double.parseDouble(ballInfo[2]);
@@ -138,8 +137,9 @@ public class Controller {
 	public void initializeWorld(String[] infoPlayers, String[] infoBalls) {
 		ArrayList<Avatar> players = readPlayers(infoPlayers);
 		if (players != null) {
+			game.setOn(true);
 			game.initializeWorld(players, readFood(infoBalls));
-		} 
+		}
 	}
 
 	public Avatar getAvatar() {
@@ -190,35 +190,34 @@ public class Controller {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public void showLose(boolean isLose) {
+
+	public void showLose() {
 		String message = "";
-		if(isLose) {
-			message = "　 You Lose !!" ;
-			main_Agario.showMessage(message);
-		}
+		message = "　 You Lose !!";
+		main_Agario.showMessage(message);
+		System.out.println("lose");
 	}
-	
+
 	public void showWait() {
-		String message = "Please Wait" ;
+		String message = "Please Wait";
 		main_Agario.showMessage(message);
 	}
-	
+
 	public void showWin() {
-		String message = "　 You Win !!" ;
+		String message = "　 You Win !!";
+		System.out.println("win");
 		main_Agario.showMessage(message);
 	}
 
 	public boolean youWin() {
-		if( getGame().getAvatars().size() == 1 && getGame().getAvatars().get(0).getId()==id) {
+		if (getGame().getAvatars().size() == 1 && getGame().getAvatars().get(0).getId() == id) {
 			return true;
 		}
-			return false;
+		return false;
 	}
 
 	public void cleanMessage() {
 		main_Agario.showMessage("");
 	}
-	
 
 }

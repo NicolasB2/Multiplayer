@@ -16,6 +16,7 @@ public class Game implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public final static int FOOD_RADIUS = 10;
 	public final static Long TIME_START = (long) 60000;
+	public final static Long TIME_OUT = (long) 60000;
 	public final static int MIN_PLAYERS = 2;
 	public final static int MAX_PLAYERS = 3;
 
@@ -53,7 +54,7 @@ public class Game implements Serializable {
 			Avatar a = new Avatar();
 			food.add(a);
 		}
-		
+
 	}
 
 	public void deleteFood() {
@@ -224,9 +225,13 @@ public class Game implements Serializable {
 		a.setPosX(x);
 		a.setPosY(y);
 		a.setAlive(isAlive);
-		if(a.getRadious()<radious) {
+		if (a.getRadious() < radious) {
 			a.setRadious(radious);
 		}
+	}
+
+	public boolean calculeWin(int id) {
+		return (getTop().get(0).getId() == id);
 	}
 
 }

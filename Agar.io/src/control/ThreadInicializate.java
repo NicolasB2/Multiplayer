@@ -31,5 +31,20 @@ public class ThreadInicializate extends Thread {
 		}
 		
 		System.out.println("*********** Game was Started ************");
+		startTime = System.currentTimeMillis();
+		while(game.isOn()) {
+			
+			Long Currently = System.currentTimeMillis();
+			Long diferent = Currently - startTime;
+			if(diferent>=Game.TIME_OUT) {
+				game.setOn(false);
+				
+			}
+		}
+	
+	
 	}
+	
+	
+	
 }
