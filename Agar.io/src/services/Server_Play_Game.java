@@ -43,16 +43,13 @@ public class Server_Play_Game extends Thread {
 			
 			while (control) {
 				try {
-					
+					out.writeUTF(server.sendBaseGame());
+					String received = in.readUTF();
+					if (!received.equals("lose")) {
+						String[] player = received.split("/");
+						server.updateGame(player);
+					}
 				} catch (Exception e) {
-					// TODO: handle exception
-				}
-				out.writeUTF(server.sendBaseGame());
-				String received = in.readUTF();
-				if (!received.equals("lose")) {
-					String[] player = received.split("/");
-					server.updateGame(player);
-				}else {
 					break;
 				}
 			}

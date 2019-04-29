@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import Client.Client_Login_Signin;
 import Client.Client_Play_Game;
+import gui.Main_Agario;
 import model.*;
 import services.*;
 
@@ -14,15 +15,19 @@ public class Controller {
 
 	public final static int PORT = 8000;
 	public final static String SERVER_ADRESS = "localhost";
-
+	
+	
+	
 	private Socket socket;
 	private Game game;
 	private boolean correctLogin;
 	private String nickName;
 	private int id;
+	private Main_Agario main_Agario;
+	
+	public Controller(Main_Agario main_Agario) {
 
-	public Controller() {
-
+		this.main_Agario = main_Agario;
 		this.correctLogin = false;
 		this.game = new Game();
 
@@ -185,5 +190,31 @@ public class Controller {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public void showLose(boolean isLose) {
+		String message = "";
+		if(isLose) {
+			message = "You Lose!!" ;
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+			}
+			main_Agario.showMessage(message);
+		}
+	}
+	
+	public void showWait() {
+		String message = "Please Wait" ;
+		main_Agario.showMessage(message);
+	}
+
+	public void showWin() {
+		
+	}
+	
+	public void cleanMessage() {
+		main_Agario.showMessage("");
+	}
+	
 
 }

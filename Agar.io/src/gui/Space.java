@@ -20,12 +20,14 @@ import model.Game;
 
 public class Space extends Canvas {
 
-
 	private Dimension dimPanel; // add private final
 	private Game game;
-	
+	private Graphics gra;
+	private String message;
+
 	public Space(Game game, Dimension d) {
 
+		this.message= "";
 		this.game = game;
 		this.setSize(d);
 		this.dimPanel = d;
@@ -38,7 +40,7 @@ public class Space extends Canvas {
 
 	@Override
 	public void paint(Graphics g) {
-
+		gra = g;
 		// Paint background
 		g.setColor(new Color(220, 220, 220));
 		g.setColor(Color.WHITE);
@@ -74,29 +76,31 @@ public class Space extends Canvas {
 				Logger.getLogger(Space.class.getName()).log(Level.SEVERE, null, e);
 			}
 		}
-		
-		//Paint Leader board
+
+		// Paint Leader board
 		paintLeaderBoard(game.getTop(), g);
+		
+		// Paint message
+		paintMessege();
 
 	}
 
-
 	public void paintPlayer(ArrayList<Avatar> avatars, Graphics g) throws RemoteException {
-		
+
 		for (int i = 0; i < avatars.size(); i++) {
 			try {
 				Avatar a = avatars.get(i);
-				render(g, 1,a);	
-				
+				render(g, 1, a);
+
 				double x = a.getPosX();
-	            double y = a.getPosY();
-	            double r = a.getRadious();
-	            g.setFont(new Font("Ubuntu",Font.BOLD,(int)r/2));
-	            FontMetrics metrics = g.getFontMetrics(g.getFont());
-	            int xt =(int) x - metrics.stringWidth(a.getNickName())/2;
-	            int yt = (int) (y + r/4) ;
-	            g.drawString(a.getNickName(), xt , yt);
-				
+				double y = a.getPosY();
+				double r = a.getRadious();
+				g.setFont(new Font("Ubuntu", Font.BOLD, (int) r / 2));
+				FontMetrics metrics = g.getFontMetrics(g.getFont());
+				int xt = (int) x - metrics.stringWidth(a.getNickName()) / 2;
+				int yt = (int) (y + r / 4);
+				g.drawString(a.getNickName(), xt, yt);
+
 			} catch (Exception e) {
 				System.out.print("Problem in paintPlayer");
 				e.printStackTrace();
@@ -108,34 +112,48 @@ public class Space extends Canvas {
 		for (int i = 0; i < food.size(); i++) {
 			try {
 				Avatar f = food.get(i);
-				render(g, 1,f);
-				
+				render(g, 1, f);
+
 			} catch (Exception e) {
 				System.out.print("Problem in paintFood");
 				e.printStackTrace();
 			}
 		}
 	}
-	
-	public static void render(Graphics g, double scale, Avatar a) {		
-		
+
+	public static void render(Graphics g, double scale, Avatar a) {
+
 		double r = a.getRadious();
 		g.setColor(a.getColor());
-		g.fillOval((int) (a.getPosX() -r), (int) (a.getPosY() -r), (int)(2*r),(int) (2*r));
+		g.fillOval((int) (a.getPosX() - r), (int) (a.getPosY() - r), (int) (2 * r), (int) (2 * r));
 		g.setColor(Color.BLACK);
-		g.drawOval((int) (a.getPosX() - r), (int) (a.getPosY() -r), (int)(2*r), (int)(2*r));
+		g.drawOval((int) (a.getPosX() - r), (int) (a.getPosY() - r), (int) (2 * r), (int) (2 * r));
+	}
+
+	private void paintLeaderBoard(ArrayList<Avatar> top, Graphics g) {
+
+		g.setColor(Color.DARK_GRAY);
+		g.setFont(new Font("Ubuntu", Font.BOLD, 15));
+		g.drawString("LEADERBOARD", (int) dimPanel.getWidth() - 150, 50);
+		g.drawString("----------------", (int) dimPanel.getWidth() - 175, 60);
+		int i = 30;
+		int pos = 1;
+		g.drawString(game.reportScores(), (int) dimPanel.getWidth() - 150, 75);
+
+	}
+
+	public void paintMessege() {
+		gra.setColor(Color.red);
+		gra.setFont(new Font("Ubuntu", Font.BOLD, 80));
+		gra.drawString(this.message, (int) dimPanel.getWidth() - 900, 300);
 	}
 	
-	private void paintLeaderBoard(ArrayList<Avatar> top, Graphics g){
-		
-		g.setColor(Color.DARK_GRAY);
-        g.setFont(new Font("Ubuntu",Font.BOLD,15));
-        g.drawString("LEADERBOARD", (int) dimPanel.getWidth()-150, 50);
-        g.drawString("----------------", (int) dimPanel.getWidth()-175, 60);
-        int i = 30;
-        int pos = 1;
-        g.drawString(game.reportScores(), (int)dimPanel.getWidth()-150, 75);
-        
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 }

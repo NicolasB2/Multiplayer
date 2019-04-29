@@ -18,11 +18,13 @@ public class Main_Agario extends JFrame {
 	private Registrer registrerWindow;
 	private Space space;
 	private Controller controller;
+	private ThreadRepaint repaint;
 
 	public Main_Agario() {
-		controller = new Controller();
+		controller = new Controller(this);
 		this.loginWindow = new Login_GUI(this);
 		this.loginWindow.setVisible(true);
+		this.space = new Space(controller.getGame(), new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 	}
 	
 	public void play() {
@@ -40,14 +42,12 @@ public class Main_Agario extends JFrame {
 
 	private void paintGame(Avatar avatar, ArrayList<Avatar> food) {
 		// Add player with socket
-
-		this.space = new Space(controller.getGame(), new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 		this.space.setFocusable(false);
 		this.setIgnoreRepaint(false);
 		this.add((Component) this.space);
 		
-		ThreadRepaint h = new ThreadRepaint(space);
-		h.start();
+		repaint= new ThreadRepaint(space);
+		repaint.start();
 	}
 
 
@@ -85,4 +85,25 @@ public class Main_Agario extends JFrame {
 		Main_Agario m = new Main_Agario();
 		m.setVisible(false);
 	}
+	
+	public void showMessage(String message) {
+		this.space.setMessage(message);
+	}
+	
+	public Space getSpace() {
+		return space;
+	}
+
+	public void setSpace(Space space) {
+		this.space = space;
+	}
+
+	public ThreadRepaint getRepaint() {
+		return repaint;
+	}
+
+	public void setRepaint(ThreadRepaint repaint) {
+		this.repaint = repaint;
+	}
+	
 }

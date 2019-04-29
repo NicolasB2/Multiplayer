@@ -1,25 +1,20 @@
 package control;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import gui.Main_Agario;
 import gui.Space;
 
 public class ThreadRepaint extends Thread {
 
 	private Space space;
+	private boolean control;
 
 	public ThreadRepaint(Space space) {
-
 		this.space = space;
-
+		control = true;
 	}
 
 	@Override
 	public void run() {
-		while (true) {
-
+		while (control) {
 			try {
 				this.space.repaint();
 				sleep(150);
@@ -27,7 +22,10 @@ public class ThreadRepaint extends Thread {
 				System.out.println("Error in repaint");
 			}
 		}
-
+	}
+	
+	public void stopPaint() {
+		control = false;
 	}
 
 }

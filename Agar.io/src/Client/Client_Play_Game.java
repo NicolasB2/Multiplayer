@@ -11,6 +11,7 @@ public class Client_Play_Game extends Thread {
 	private Controller controller;
 	private Socket socket;
 	private int port;
+	private boolean lose = false;
 
 	public Client_Play_Game(Controller controller, int port) {
 		this.controller = controller;
@@ -33,10 +34,10 @@ public class Client_Play_Game extends Thread {
 
 			String read = in.readUTF();
 			while (read.equals("wait")) {
+				controller.showWait();
 				read = in.readUTF();
 			}
-			System.out.println("paso");
-
+			controller.cleanMessage();
 			String[] infoBig = read.split("_");
 			String[] infoPlayers = infoBig[0].split(",");
 			String[] infoBalls = infoBig[1].split(",");
@@ -67,6 +68,8 @@ public class Client_Play_Game extends Thread {
 					} else {
 						out.writeUTF("lose");
 						System.out.println("you lose");
+						lose = true;
+						controller.showLose(lose);
 						break;
 					}
 				} catch (Exception e) {
