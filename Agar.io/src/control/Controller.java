@@ -194,11 +194,7 @@ public class Controller {
 	public void showLose(boolean isLose) {
 		String message = "";
 		if(isLose) {
-			message = "You Lose!!" ;
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-			}
+			message = "¡¡ You Lose !!" ;
 			main_Agario.showMessage(message);
 		}
 	}
@@ -207,11 +203,19 @@ public class Controller {
 		String message = "Please Wait" ;
 		main_Agario.showMessage(message);
 	}
-
-	public void showWin() {
-		
-	}
 	
+	public void showWin() {
+		String message = "¡¡ You Win !!" ;
+		main_Agario.showMessage(message);
+	}
+
+	public boolean youWin() {
+		if( getGame().getAvatars().size() == 1 && getGame().getAvatars().get(0).getId()==id) {
+			return true;
+		}
+			return false;
+	}
+
 	public void cleanMessage() {
 		main_Agario.showMessage("");
 	}

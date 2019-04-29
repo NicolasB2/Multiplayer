@@ -45,9 +45,11 @@ public class Server_Play_Game extends Thread {
 				try {
 					out.writeUTF(server.sendBaseGame());
 					String received = in.readUTF();
-					if (!received.equals("lose")) {
+					if (!received.equals("exit")) {
 						String[] player = received.split("/");
 						server.updateGame(player);
+					}else {
+						control = false;
 					}
 				} catch (Exception e) {
 					break;

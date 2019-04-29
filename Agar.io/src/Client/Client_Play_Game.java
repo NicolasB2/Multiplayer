@@ -37,6 +37,7 @@ public class Client_Play_Game extends Thread {
 				controller.showWait();
 				read = in.readUTF();
 			}
+			
 			controller.cleanMessage();
 			String[] infoBig = read.split("_");
 			String[] infoPlayers = infoBig[0].split(",");
@@ -44,36 +45,37 @@ public class Client_Play_Game extends Thread {
 
 			controller.initializeWorld(infoPlayers, infoBalls);
 			controller.startMoving();
+			
 			boolean control = true;
-
 			while (control) {
 
 				int id = controller.getId();
-				try {
-					if (controller.getGame().getAvatar(id) != null) {
+				if (controller.getGame().getAvatar(id) != null) {
 
-						double x = controller.getGame().getAvatar(id).getPosX();
-						double y = controller.getGame().getAvatar(id).getPosY();
-						boolean isPlaying = controller.getGame().getAvatar(id).isAlive();
-						double radious = controller.getGame().getAvatar(id).getRadious();
-						out.writeUTF(id + "/" + x + "/" + y + "/" + isPlaying + "/" + radious);
+					double x = controller.getGame().getAvatar(id).getPosX();
+					double y = controller.getGame().getAvatar(id).getPosY();
+					boolean isPlaying = controller.getGame().getAvatar(id).isAlive();
+					double radious = controller.getGame().getAvatar(id).getRadious();
+					out.writeUTF(id + "/" + x + "/" + y + "/" + isPlaying + "/" + radious);
 
-						read = in.readUTF();
-						infoBig = read.split("_");
-						infoPlayers = infoBig[0].split(",");
-						infoBalls = infoBig[1].split(",");
+					read = in.readUTF();
+					infoBig = read.split("_");
+					infoPlayers = infoBig[0].split(",");
+					infoBalls = infoBig[1].split(",");
 
-						controller.updateWorld(infoPlayers, infoBalls);
+					controller.updateWorld(infoPlayers, infoBalls);
 
-					} else {
-						out.writeUTF("lose");
-						System.out.println("you lose");
-						lose = true;
-						controller.showLose(lose);
+					if(controller.youWin()) {
+						out.writeUTF("exit");
+						controller.showWin();
 						break;
 					}
-				} catch (Exception e) {
-
+				} else {
+					out.writeUTF("exit");
+					System.out.println("you lose");
+					lose = true;
+					controller.showLose(lose);
+					break;
 				}
 			}
 

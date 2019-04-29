@@ -44,7 +44,7 @@ public class Server {
 
 		ThreadInicializate th = new ThreadInicializate(this.game);
 		th.start();
-		
+
 		while (maxGamers < Game.MAX_PLAYERS) {
 			Socket socket;
 			socket = serverSocket.accept();

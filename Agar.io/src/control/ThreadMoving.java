@@ -22,7 +22,7 @@ public class ThreadMoving extends Thread {
 
 	@Override
 	public void run() {
-		while (game.getAvatar(id) != null) {
+		while (game.getAvatar(id) != null && game.getAvatars().size()>1) {
 			try {
 				this.updatePositionMouse();
 				game.move(xFinal, yFinal, id);
