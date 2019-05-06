@@ -5,9 +5,9 @@ import java.net.*;
 import java.util.ArrayList;
 
 import control.*;
+import gui.Main_Agario;
 import model.*;
 import music.SongUDPServer;
-
 
 public class Server {
 
@@ -46,7 +46,7 @@ public class Server {
 
 		ThreadInicializate th = new ThreadInicializate(this.game);
 		th.start();
-		
+
 		SongUDPServer song = new SongUDPServer();
 		song.start();
 
@@ -57,23 +57,32 @@ public class Server {
 			assign.start();
 			maxGamers++;
 		}
+
 	}
 
 	public void singin(String nickname, String email, String password) {
 		DataBase.registerUser(nickname, password, email);
 	}
 
-	public int validateLogin(String email, String password) {
+	public int validateLogin(String email, String password, String observer) {
 		boolean log = DataBase.validateLogin(email, password);
+
+		int r = -1;
 		if (log) {
-			gamers++;
 			int id = nextId();
-			game.addAvatar(findNickname(email), id);
-			System.out.println("gamers: " + gamers);
-			return id;
-		} else {
-			return -1;
+
+			if (observer.equals("true")) {
+				r = 0;
+			} else {
+				gamers++;
+				game.addAvatar(findNickname(email), id);
+				System.out.println("gamers: " + gamers);
+				r = id;
+			}
+
 		}
+		System.out.println("gamers: " + gamers);
+		return r;
 	}
 
 	private String findNickname(String email) {

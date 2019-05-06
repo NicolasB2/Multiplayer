@@ -27,6 +27,7 @@ public class Main_Agario extends JFrame {
 		this.space = new Space(controller.getGame(), new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 	}
 	
+
 	public void play() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(false);
@@ -35,9 +36,8 @@ public class Main_Agario extends JFrame {
 		this.setFocusable(true);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
-		
 		controller.startGame();
-		paintGame(controller.getAvatar(),controller.getGame().getFood());
+		paintGame();
 	}
 
 	private void paintGame(Avatar avatar, ArrayList<Avatar> food) {
@@ -50,6 +50,15 @@ public class Main_Agario extends JFrame {
 		repaint.start();
 	}
 
+	private void paintGame() {
+		// Add player with socket
+		this.space.setFocusable(false);
+		this.setIgnoreRepaint(false);
+		this.add((Component) this.space);
+		
+		repaint= new ThreadRepaint(space);
+		repaint.start();
+	}
 
 	@Override
 	public void paint(Graphics g) {

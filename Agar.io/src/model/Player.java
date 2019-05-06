@@ -14,6 +14,7 @@ public class Player implements Serializable {
 	private String nickname;
 	private String password;
 	private String email;
+
 	
 
 	public Player(String nickname, String password, String email) {

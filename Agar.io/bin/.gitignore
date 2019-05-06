@@ -1,13 +1,7 @@
-/.classpath
-/.project
 /Client/
-/connection/
 /control/
-/data/
 /diagrams/
 /gui/
-/icons/
 /model/
 /music/
 /services/
-/music.wav
