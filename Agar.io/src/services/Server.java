@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import control.*;
 import model.*;
 
+
 public class Server {
 
 	// Since client
@@ -44,6 +45,8 @@ public class Server {
 
 		ThreadInicializate th = new ThreadInicializate(this.game);
 		th.start();
+		
+		
 
 		while (maxGamers < Game.MAX_PLAYERS) {
 			Socket socket;

@@ -193,7 +193,7 @@ public class Controller {
 
 	public void showLose() {
 		String message = "";
-		message = "¡¡ You Lose !!";
+		message = "ï¿½ï¿½ You Lose !!";
 		main_Agario.showMessage(message);
 		System.out.println("lose");
 	}
@@ -204,7 +204,7 @@ public class Controller {
 	}
 
 	public void showWin() {
-		String message = "¡¡ You Win !!";
+		String message = "ï¿½ï¿½ You Win !!";
 		System.out.println("win");
 		main_Agario.showMessage(message);
 	}
