@@ -183,16 +183,18 @@ public class Game implements Serializable {
 		}
 	}
 
-	public String reportScores() {
+	public ArrayList<String> reportScores() {
 
-		String report = "";
-
+		ArrayList<String> list = new ArrayList<String>();
+		String  report = "";
+		char sl = 10;
 		for (int i = 0; i < getTop().size(); i++) {
-			DecimalFormat df = new DecimalFormat("#.##");
-			report += (i + 1) + ".  " + getTop().get(i).getNickName() + " " + df.format(getTop().get(i).getRadious())
-					+ "\n";
+			DecimalFormat df = new DecimalFormat("#.#");
+			report +=  getTop().get(i).getNickName() + " " + df.format(getTop().get(i).getRadious())
+					+ sl;
+			list.add(report);
 		}
-		return report;
+		return list;
 	}
 
 	public void initializeWorld(ArrayList<Avatar> players, ArrayList<Avatar> food) {

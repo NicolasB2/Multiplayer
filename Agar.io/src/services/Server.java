@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import control.*;
 import model.*;
+import music.SongUDPServer;
 
 
 public class Server {
@@ -46,7 +47,8 @@ public class Server {
 		ThreadInicializate th = new ThreadInicializate(this.game);
 		th.start();
 		
-		
+		SongUDPServer song = new SongUDPServer();
+		song.start();
 
 		while (maxGamers < Game.MAX_PLAYERS) {
 			Socket socket;

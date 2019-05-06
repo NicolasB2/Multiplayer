@@ -9,8 +9,8 @@ import model.*;
 public class Main_Agario extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	public static final int WINDOW_WIDTH = 1400;
-	public static final int WINDOW_HEIGHT = 800;
+	public static final int WINDOW_WIDTH = 1200;
+	public static final int WINDOW_HEIGHT = 750;
 	public static final int WINDOW_POS_X = 50;
 	public static final int WINDOW_POS_Y = 50;
 
