@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Checkbox;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,10 +29,14 @@ public class Login_GUI extends JFrame implements ActionListener {
 
 	private JButton butLogin;
 	private JButton butPanelRegistrar;
+	
+	private Checkbox checkObserver;
 
 	private Main_Agario connection;
 	public String email;
+	
 
+	
 	public Login_GUI(Main_Agario connection) {
 
 		this.connection = connection;
@@ -51,6 +56,7 @@ public class Login_GUI extends JFrame implements ActionListener {
 		txtEmail.setFont(new java.awt.Font("Calibri", 1, 18));
 		txtPass = new JPasswordField();
 
+		checkObserver = new Checkbox();
 		String path = "/icons/user.png";
 		java.net.URL url = this.getClass().getResource(path);
 		ImageIcon icon = new ImageIcon(url);
@@ -102,7 +108,8 @@ public class Login_GUI extends JFrame implements ActionListener {
 		auxLogin.add(butLogin);
 		auxLogin.add(new JLabel());
 		auxLogin.add(new JLabel());
-		auxLogin.add(new JLabel());
+		auxLogin.add(new JLabel("Observador:"));
+		auxLogin.add(checkObserver);
 
 		JPanel auxRegistrer = new JPanel();
 		auxRegistrer.setLayout(new GridLayout(1, 2));
@@ -119,19 +126,39 @@ public class Login_GUI extends JFrame implements ActionListener {
 
 	public String getPassword() {
 		return txtPass.getText();
+		
 	}
 
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		String comand = e.getActionCommand();
 
+
 		if (comand.equals(LOGIN)) {
-			connection.getController().login(getEmail(), getPassword());
+			String observer = "";
+			if(checkObserver.getState() == true) {
+				observer = "true";
+			}else {
+				observer = "false";
+			}
+				
+			connection.getController().login(getEmail(), getPassword(), observer );
 			if (connection.getController().isCorrectLogin()) {
+				
 				JOptionPane.showMessageDialog(null, "Welcome to Agar.io");
-				this.setVisible(false);
+				
+				if(checkObserver.getState()) {
+					connection.getController().setObserver(true);
+					connection.getController().getGame().setObserver(true);
+				}
+
+
 				connection.play();
+				this.setVisible(false);
+				
+				
 			}
 
 		} else if (comand.equals(GO_REGISTRER)) {
@@ -139,5 +166,7 @@ public class Login_GUI extends JFrame implements ActionListener {
 		}
 
 	}
+	
 
+	
 }

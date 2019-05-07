@@ -4,17 +4,17 @@ package music;
 	import javax.sound.sampled.*;
 
 
-	public class SongUDPCliente  extends Thread{
+	public class SongUDPClient  extends Thread{
 		
-		public SongUDPCliente() {
+		public SongUDPClient() {
 			
 		}
 		
-	    public static void main(String[] args) throws Exception {
-	    	new SongUDPCliente();
+//	    public static void main(String[] args) throws Exception {
+//	    	new SongUDPClient();
 //	    }
-//		
-//		public void run() {
+		
+		public void run() {
 	        
 	           
 	            // play soundfile from server

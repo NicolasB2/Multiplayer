@@ -28,6 +28,7 @@ public class AssignPort extends Thread {
 				if (socket.isConnected()) {
 
 					DataInputStream in;
+					
 					DataOutputStream out;
 
 					in = new DataInputStream(socket.getInputStream());

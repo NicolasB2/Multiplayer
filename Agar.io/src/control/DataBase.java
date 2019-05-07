@@ -88,6 +88,7 @@ public class DataBase {
 	}
 
 	public static String findNickName(String email) {
+		
 
 		readUsers();
 		for (int i = 0; i < players.size(); i++) {
@@ -98,6 +99,21 @@ public class DataBase {
 		}
 		return "";
 	}
+	
+	public static Player findPlayer(String email) {
+		
+
+		readUsers();
+
+		Player p = null;
+		for (int i = 0; i < players.size(); i++) {
+			if (players.get(i).getEmail().equals(email)) {
+				p =  players.get(i);
+			}
+
+		}
+		return p;
+	}
 
 	public static void main(String[] args) {
 
@@ -107,4 +123,5 @@ public class DataBase {
 		DataBase.registerUser("Naicolas", "12345", "elBiober@");
 	}
 
+	
 }

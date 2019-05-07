@@ -134,11 +134,17 @@ public class Space extends Canvas {
 
 		g.setColor(Color.DARK_GRAY);
 		g.setFont(new Font("Ubuntu", Font.BOLD, 15));
-		g.drawString("LEADERBOARD", (int) dimPanel.getWidth() - 150, 50);
-		g.drawString("----------------", (int) dimPanel.getWidth() - 175, 60);
+		g.drawString("LEADERBOARD", (int) dimPanel.getWidth() - 160, 50);
+		g.drawString("---------------------------", (int) dimPanel.getWidth() - 170, 60);
 		int i = 30;
-		int pos = 1;
-		g.drawString(game.reportScores(), (int) dimPanel.getWidth() - 150, 75);
+		int pos = 75;
+		
+		for (int j = 0; j < game.reportScores().size(); j++) {
+			
+			g.drawString((j + 1) + ".  "  + game.reportScores().get(j), 1050, pos);
+			pos+=i;
+		}
+		
 
 	}
 

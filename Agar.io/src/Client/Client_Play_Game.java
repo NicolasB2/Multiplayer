@@ -5,7 +5,10 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import control.Controller;
+
 import gui.Main_Agario;
+
+
 
 public class Client_Play_Game extends Thread {
 
@@ -31,6 +34,7 @@ public class Client_Play_Game extends Thread {
 		
 		try {
 			this.socket = new Socket(Controller.SERVER_ADRESS, port);
+		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -58,6 +62,8 @@ public class Client_Play_Game extends Thread {
 
 			controller.initializeWorld(infoPlayers, infoBalls);
 			controller.startMoving();
+			
+			
 			
 			boolean control = true;
 			while (control) {
