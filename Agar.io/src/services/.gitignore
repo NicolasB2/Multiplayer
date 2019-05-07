@@ -2,8 +2,3 @@
 /Server.class
 /Server_Login_Signin.class
 /Server_Play_Game.class
-/ThreadChatMulticast.class
-/ThreadSendMusic.class
-/ThreadSendSongToClient.class
-/ThreadUsersMessages.class
-/ThreadUsersMessagesHandler.class

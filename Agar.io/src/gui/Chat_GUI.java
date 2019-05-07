@@ -1,76 +1,53 @@
-                                                            package gui;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+package gui;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
+
+import Client.ClientChat;
 
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Chat_GUI extends JPanel implements ActionListener{
-
-	public final static String SEND = "Send";
-	private JButton btnSend;
-	private JTextArea areaChat;
-	private JTextField txtMessage;
-	private Main_Agario principal;
+public class Chat_GUI extends JFrame {
 	
-	public Chat_GUI(Main_Agario principal) {
-		
-		this.principal = principal;
-		
-		TitledBorder border = BorderFactory.createTitledBorder(":: Agario Chat ::");
-		setPreferredSize(new Dimension(300,Main_Agario.WINDOW_HEIGHT));
-		border.setTitleColor(Color.BLACK);
-		setBorder(border);
-		
-		btnSend = new JButton(SEND);
-		btnSend.setActionCommand(SEND);
-		btnSend.addActionListener(this);
-		
-		areaChat = new JTextArea();
-		areaChat.setEditable(false);
-		areaChat.setLineWrap(true);
-		areaChat.setWrapStyleWord(true);
-		
-		txtMessage = new JTextField(4);
-		setLayout(new BorderLayout());
-		
-		JPanel p1 = new JPanel();
-		p1.setLayout(new BorderLayout());
-		
-		p1.add(txtMessage, BorderLayout.CENTER);
-		p1.add(btnSend, BorderLayout.EAST);
-		
-		JScrollPane scroll = new JScrollPane(areaChat);
-		add(scroll, BorderLayout.CENTER);
-		add(p1, BorderLayout.SOUTH);
-		
-	}
+	private SendMessagePanel enviar;
+	private ChatPanel chat;
+	private JLabel banner;
+	private ClientChat cliente;
 	
-
-	public void actionPerformed(ActionEvent e) {
-		
-		String command = e.getActionCommand();
-		if(command.equals(SEND)) {
-			String message = txtMessage.getText();
-			
-			if(message != null && !message.trim().isEmpty()) {
-				principal.sendMessage(message);
-				//receiveMessage(message);
-				txtMessage.setText("");
-			}			
+	
+	public Chat_GUI() {
+		// TODO Auto-generated constructor stub	
+		String nickname = "";
+		while(nickname.equals("")|| nickname.equals(" ") || nickname.equals(":") || nickname.equals(": ")){
+		nickname = JOptionPane.showInputDialog(this, "Ingrese su nickname para el chat", "Nickname", JOptionPane.OK_CANCEL_OPTION);
 		}
+		setLayout(new BorderLayout());
+		setTitle("Chat");
+		setSize(new Dimension(510,480));
+		setResizable(false);
+		enviar = new SendMessagePanel(this);
+		chat = new ChatPanel(this);
+		banner = new JLabel();
+
+		
+		add(banner, BorderLayout.NORTH);
+		add(chat, BorderLayout.CENTER);
+		add(enviar,BorderLayout.SOUTH);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		cliente = new ClientChat(nickname);
+		control.HiloRecibirMensajesInterfaz t = new control.HiloRecibirMensajesInterfaz(this, cliente);
+		t.start();
 	}
 
-	public void receiveMessage(String message) {
-		//el server manda los mensajes con \n, en este caso se agrega solo para ver fallos en la visualizaci�n del jTextArea
-		String[] mess = message.split(":");
-		areaChat.append(mess[0]+": "+mess[1]+"\n");
+	
+	public void enviarMensaje(String mensaje) {
+		cliente.enviarMensaje(mensaje);
 	}
+	public void recibirMensajes(String mensaje) {
+		chat.nuevoMensaje(mensaje);
+	}
+
 }

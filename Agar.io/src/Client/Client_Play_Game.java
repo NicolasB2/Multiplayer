@@ -2,13 +2,8 @@ package Client;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
-
 import control.Controller;
-
-import gui.Main_Agario;
-
-
+import music.SongUDPClient;
 
 public class Client_Play_Game extends Thread {
 
@@ -17,24 +12,14 @@ public class Client_Play_Game extends Thread {
 	private Controller controller;
 	private Socket socket;
 	private int port;
-	private String musicRoot;
-	
-	private ArrayList<String> userMessages;
-	private ThreadSendMessages ThreadSM;
-	private Main_Agario gui;
-	private boolean chatService;
-	private Socket chatSocket;
-	private String nickname;
 
 	public Client_Play_Game(Controller controller, int port) {
 		this.controller = controller;
 		this.port = port;
-		gui = controller.getMain_Agario();
-		nickname = controller.getNickName();
-		
 		try {
 			this.socket = new Socket(Controller.SERVER_ADRESS, port);
-		
+			SongUDPClient song = new SongUDPClient();
+			song.start();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -116,53 +101,4 @@ public class Client_Play_Game extends Thread {
 			e.printStackTrace();
 		}
 	}
-	public void sendMessage(String message) {
-		userMessages.add(message);
-		ThreadSM.addMessage(message);
-	}
-	
-	public void receiveMessage(String message) {
-		
-		gui.receiveMessage(message);
-	}
-	
-	public void eraseMessages() {
-		userMessages = new ArrayList<String>();
-	}
-	public boolean isChatService() {
-		return chatService;
-	}
-
-	public void setChatService(boolean chatService) {
-		this.chatService = chatService;
-	}
-	public ArrayList<String> getUserMessages() {
-		return userMessages;
-	}
-
-	public void setUserMessages(ArrayList<String> userMessages) {
-		this.userMessages = userMessages;
-	}
-	public Socket getChatSocket() {
-		return chatSocket;
-	}
-
-	public void setChatSocket(Socket chatSocket) {
-		this.chatSocket = chatSocket;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	public String getMusicRoot() {
-		return musicRoot;
-	}
-
-	public void setMusicRoot(String musicRoot) {
-		this.musicRoot = musicRoot;
-	}
-
 }

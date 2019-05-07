@@ -34,6 +34,7 @@ public class Login_GUI extends JFrame implements ActionListener {
 
 	private Main_Agario connection;
 	public String email;
+	private Chat_GUI chat;
 	
 
 	
@@ -45,6 +46,7 @@ public class Login_GUI extends JFrame implements ActionListener {
 		setSize(333, 333);
 		setLocationRelativeTo(null);
 		setResizable(false);
+		
 
 		lbTitle = new JLabel("Sing in", SwingConstants.CENTER);
 		lbTitle.setFont(new java.awt.Font("Calibri", 1, 28));
@@ -140,6 +142,8 @@ public class Login_GUI extends JFrame implements ActionListener {
 			String observer = "";
 			if(checkObserver.getState() == true) {
 				observer = "true";
+				chat = new Chat_GUI();
+				chat.setVisible(true);
 			}else {
 				observer = "false";
 			}
