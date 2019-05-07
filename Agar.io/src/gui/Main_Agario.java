@@ -3,6 +3,8 @@ package gui;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
+
+import Client.Client_Play_Game;
 import control.*;
 import model.*;
 
@@ -19,6 +21,9 @@ public class Main_Agario extends JFrame {
 	private Space space;
 	private Controller controller;
 	private ThreadRepaint repaint;
+	
+	private Chat_GUI chat;
+	private Client_Play_Game player;
 
 	public Main_Agario() {
 		controller = new Controller(this);
@@ -104,6 +109,17 @@ public class Main_Agario extends JFrame {
 
 	public void setRepaint(ThreadRepaint repaint) {
 		this.repaint = repaint;
+	}
+	
+	public void receiveMessage(String message) {
+		
+		chat.receiveMessage(message);
+		
+	}
+
+
+	public void sendMessage(String message) {
+		player.sendMessage(message);
 	}
 	
 }

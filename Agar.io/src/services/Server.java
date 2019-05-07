@@ -16,6 +16,7 @@ public class Server {
 	public final static String PLAY = "PLAY";
 	public final static String MUSIC = "MUSIC";
 	public final static String OBSERVE = "OBSERVE";
+	public final static String MUSIC_SERVER = "./resources/music.wav";
 
 	// Answers
 	public final static String LOGIN_OK = "LOGIN_OK";
@@ -23,11 +24,11 @@ public class Server {
 	public final static String SAVE = "SAVE";
 
 	// Ports
-	public static int PORT_CONNECTION = 8000;// tcp
-	public static int PORT_LOGIN = 9000;// ssl
-	public static int PORT_PLAY = 8195;// tcp
-	public static int PORT_MUSIC = 8222;// udp
-	public static int PORT_STREAMING = 8580;// udp
+	public static int PORT_CONNECTION = 46567;// tcp
+	public static int PORT_LOGIN = 38000;// ssl
+	public static int PORT_PLAY = 33000;// tcp
+	public static int PORT_MUSIC = 50000;// udp
+	public static int PORT_STREAMING = 45000;// udp
 
 	public final static int END_TIME = 300000;
 	public final static int WAIT_TIME = 10000;
@@ -35,6 +36,26 @@ public class Server {
 	private static ServerSocket serverSocket;
 	private int gamers;
 	private Game game;
+	private ThreadSendMusic threadSM;
+	private boolean alive;
+
+	private ServerSocket serverSocketChat;
+
+	private boolean runningChatService;
+
+	private ThreadChatMulticast threadCM;
+
+	private ThreadUsersMessages threadUM;
+
+	private ThreadUsersMessagesHandler ThreadUMH;
+
+	private ArrayList<String> messages;
+
+	private ArrayList<String> users;
+
+	private ArrayList<Socket> chatSockets;
+
+	private boolean sendMulticast;
 
 	public Server() throws IOException {
 		System.out.println("****** Server online ******");
@@ -45,8 +66,6 @@ public class Server {
 
 		ThreadInicializate th = new ThreadInicializate(this.game);
 		th.start();
-		
-		
 
 		while (maxGamers < Game.MAX_PLAYERS) {
 			Socket socket;
@@ -181,6 +200,69 @@ public class Server {
 		if (this.game.getAvatar(id) != null) {
 			this.game.updatePlayer(id, x, y, isAlive, radious);
 		}
+	}
+
+	public ServerSocket getServerSocketChat() {
+		return serverSocketChat;
+	}
+
+	public void setServerSocketChat(ServerSocket serverSocketChat) {
+		this.serverSocketChat = serverSocketChat;
+	}
+
+	public boolean isRunningChatService() {
+		return runningChatService;
+	}
+
+	public void setRunningChatService(boolean runningChatService) {
+		this.runningChatService = runningChatService;
+	}
+
+	public ArrayList<String> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(ArrayList<String> messages) {
+		this.messages = messages;
+	}
+
+	public void eraseMessages() {
+
+		messages = new ArrayList<String>();
+		System.out.print("");
+	}
+	public boolean isSendMulticast() {
+		return sendMulticast;
+	}
+
+	public void setSendMulticast(boolean sendMulticast) {
+		this.sendMulticast = sendMulticast;
+	}
+
+	public void addChatSocket(Socket usm) {
+
+		chatSockets.add(usm);
+		
+	}
+	public void newMessage(String userMessage) {
+		
+		messages.add(userMessage);
+		
+	}
+
+	public ArrayList<Socket> getChatSockets() {
+		return chatSockets;
+	}
+
+	public void setChatSockets(ArrayList<Socket> chatSockets) {
+		this.chatSockets = chatSockets;
+	}
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 
 }

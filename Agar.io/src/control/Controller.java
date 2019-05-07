@@ -15,7 +15,7 @@ public class Controller {
 
 	public final static int PORT = 8000;
 	// public final static String SERVER_ADRESS = "172.30.174.251";
-	public final static String SERVER_ADRESS = "localHost";
+	public final static String SERVER_ADRESS = "127.0.0.1";
 
 	private Socket socket;
 	private Game game;
@@ -23,6 +23,14 @@ public class Controller {
 	private String nickName;
 	private int id;
 	private Main_Agario main_Agario;
+
+	public Main_Agario getMain_Agario() {
+		return main_Agario;
+	}
+
+	public void setMain_Agario(Main_Agario main_Agario) {
+		this.main_Agario = main_Agario;
+	}
 
 	public Controller(Main_Agario main_Agario) {
 
