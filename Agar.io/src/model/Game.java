@@ -20,20 +20,16 @@ public class Game implements Serializable {
 	public final static int MIN_PLAYERS = 2;
 	public final static int MAX_PLAYERS = 3;
 
-	
 	private ArrayList<Avatar> food;
 	private ArrayList<Avatar> avatars;
 
 	private boolean isOn;
 	private boolean timeout;
-	
-	private boolean isObserver; 
 
 	private Font font;
 	public Long start;
 
 	public Game() {
-		System.out.println(isObserver + " gameeeeeeeeeeeeeeeeeeeee");
 		this.food = new ArrayList<Avatar>();
 		this.avatars = new ArrayList<Avatar>();
 		isOn = false;
@@ -187,18 +183,16 @@ public class Game implements Serializable {
 		}
 	}
 
-	public ArrayList<String> reportScores() {
+	public String reportScores() {
 
-		ArrayList<String> list = new ArrayList<String>();
-		String  report = "";
-		char sl = 10;
+		String report = "";
+
 		for (int i = 0; i < getTop().size(); i++) {
-			DecimalFormat df = new DecimalFormat("#.#");
-			report +=  getTop().get(i).getNickName() + " " + df.format(getTop().get(i).getRadious())
-					+ sl;
-			list.add(report);
+			DecimalFormat df = new DecimalFormat("#.##");
+			report += (i + 1) + ".  " + getTop().get(i).getNickName() + " " + df.format(getTop().get(i).getRadious())
+					+ "\n";
 		}
-		return list;
+		return report;
 	}
 
 	public void initializeWorld(ArrayList<Avatar> players, ArrayList<Avatar> food) {
@@ -238,14 +232,6 @@ public class Game implements Serializable {
 
 	public boolean calculeWin(int id) {
 		return (getTop().get(0).getId() == id);
-	}
-
-	public boolean isObserver() {
-		return isObserver;
-	}
-
-	public void setObserver(boolean isObserver) {
-		this.isObserver = isObserver;
 	}
 
 }

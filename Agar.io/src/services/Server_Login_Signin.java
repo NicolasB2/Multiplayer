@@ -27,7 +27,6 @@ public class Server_Login_Signin {
 		char Pass[] = Password.toCharArray();
 		KeyStore ks;
 
-		
 		try {
 			ks = KeyStore.getInstance("JKS");
 			ks.load(new FileInputStream(ksName), Pass);
@@ -65,12 +64,7 @@ public class Server_Login_Signin {
 		System.out.println("email: " + email);
 		String password = (String) is.readObject();
 		System.out.println("password: " + password);
-
-		String observer = (String) is.readObject();
-		System.out.print("is Observer: " + observer);
-		
-		
-		log = server.validateLogin(email, password, observer);
+		log = server.validateLogin(email, password);
 
 		if (log>=0) {
 			os.writeObject(Server.LOGIN_OK);

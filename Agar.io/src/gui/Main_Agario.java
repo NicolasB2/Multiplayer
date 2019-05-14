@@ -9,8 +9,8 @@ import model.*;
 public class Main_Agario extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	public static final int WINDOW_WIDTH = 1200;
-	public static final int WINDOW_HEIGHT = 750;
+	public static final int WINDOW_WIDTH = 1400;
+	public static final int WINDOW_HEIGHT = 800;
 	public static final int WINDOW_POS_X = 50;
 	public static final int WINDOW_POS_Y = 50;
 
@@ -27,7 +27,6 @@ public class Main_Agario extends JFrame {
 		this.space = new Space(controller.getGame(), new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 	}
 	
-
 	public void play() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(false);
@@ -36,8 +35,9 @@ public class Main_Agario extends JFrame {
 		this.setFocusable(true);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+		
 		controller.startGame();
-		paintGame();
+		paintGame(controller.getAvatar(),controller.getGame().getFood());
 	}
 
 	private void paintGame(Avatar avatar, ArrayList<Avatar> food) {
@@ -50,15 +50,6 @@ public class Main_Agario extends JFrame {
 		repaint.start();
 	}
 
-	private void paintGame() {
-		// Add player with socket
-		this.space.setFocusable(false);
-		this.setIgnoreRepaint(false);
-		this.add((Component) this.space);
-		
-		repaint= new ThreadRepaint(space);
-		repaint.start();
-	}
 
 	@Override
 	public void paint(Graphics g) {

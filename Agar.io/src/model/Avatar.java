@@ -28,8 +28,6 @@ public class Avatar implements Serializable {
 	private boolean alive;
 	private Color color;
 	private int id;
-	
-	private boolean isObserver; 
 
 	public void set_color() {
 		int r = random.nextInt(MAX_COLOR);
@@ -38,10 +36,6 @@ public class Avatar implements Serializable {
 		this.color = new Color(r, g, b);
 	}
 
-	
-	public Avatar(boolean b) {
-		setObserver(b);
-	}
 	public Avatar() {
 		this.posX = random.nextInt(Main_Agario.WINDOW_WIDTH - 15) + 15;
 		this.posY = random.nextInt(Main_Agario.WINDOW_HEIGHT - 15) + 15;
@@ -49,7 +43,6 @@ public class Avatar implements Serializable {
 		this.alive = true;
 		radious = 5;
 		set_color();
-		setObserver(false); 
 	}
 
 	public Avatar(String nickName, int id) {
@@ -61,7 +54,6 @@ public class Avatar implements Serializable {
 		this.nickName = nickName;
 		set_color();
 		this.radious = 15;
-		setObserver(false);
 	}
 
 	public void move(double x, double y) {
@@ -170,14 +162,6 @@ public class Avatar implements Serializable {
 
 	public void setPosY(double posY) {
 		this.posY = posY;
-	}
-
-	public boolean isObserver() {
-		return isObserver;
-	}
-
-	public void setObserver(boolean isObserver) {
-		this.isObserver = isObserver;
 	}
 
 }

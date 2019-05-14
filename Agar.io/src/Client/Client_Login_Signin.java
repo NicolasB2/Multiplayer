@@ -16,7 +16,6 @@ public class Client_Login_Signin {
 	private String mail;
 	private String password;
 	private String nickname;
-	private String isObserver;
 	private int port;
 	private boolean login;
 
@@ -31,14 +30,12 @@ public class Client_Login_Signin {
 		connectionSSL();
 	}
 	
-	
-	public Client_Login_Signin(Controller controller,String mail,String password,int port, String isObserver) {
+	public Client_Login_Signin(Controller controller,String mail,String password,int port) {
 		this.controller = controller;
 		this.mail = mail;
 		this.password = password;
 		this.port = port;
 		this.login= true;
-		this.isObserver = isObserver;
 		
 		connectionSSL();
 	}
@@ -77,12 +74,9 @@ public class Client_Login_Signin {
 		os.writeObject(Server.LOGIN);
 		os.writeObject(this.mail);
 		os.writeObject(this.password);
-		os.writeObject(this.isObserver);
 		os.flush();
 		System.out.println("email: " + mail);
 		System.out.println("pasword: " + password);
-		System.out.println("observer: " + isObserver);
-		
 		String s = (String) is.readObject();
 		System.out.println(s);
 		System.out.println("*****************");

@@ -10,15 +10,15 @@ import java.net.Socket;
 public class SongUDPServer extends Thread{
 
 
-//		public static void main(String[] args) throws IOException {
-//			new SongUDPServer();
-//		}
+		public static void main(String[] args) throws IOException {
+			new SongUDPServer();
+		}
 
 	public SongUDPServer() {
 		
-	}
+//	}
 
-	public void run() {
+//	public void run() {
 		File soundFile = AudioCorrect.getSoundFile("./resources/music.wav");
 
 		System.out.println("server: " + soundFile);

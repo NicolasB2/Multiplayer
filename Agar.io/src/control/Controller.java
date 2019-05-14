@@ -22,17 +22,14 @@ public class Controller {
 	private boolean correctLogin;
 	private String nickName;
 	private int id;
-	private boolean isObserver;
 	private Main_Agario main_Agario;
 
 	public Controller(Main_Agario main_Agario) {
 
 		this.main_Agario = main_Agario;
 		this.correctLogin = false;
-		this.isObserver = false;
-		
 		this.game = new Game();
-		game.setObserver(false);
+
 		try {
 			this.socket = new Socket(SERVER_ADRESS, PORT);
 		} catch (Exception e) {
@@ -60,9 +57,9 @@ public class Controller {
 		return answer;
 	}
 
-	public void login(String mail, String password, String observer) {
+	public void login(String mail, String password) {
 		int x = answerPort(Server.LOGIN);
-		Client_Login_Signin cls = new Client_Login_Signin(this, mail, password, x, observer);
+		Client_Login_Signin cls = new Client_Login_Signin(this, mail, password, x);
 	}
 
 	public void register(String mail, String password, String nickname) {
@@ -77,12 +74,9 @@ public class Controller {
 	}
 
 	private ArrayList<Avatar> readPlayers(String[] infoPlayers) {
-		
-
 		ArrayList<Avatar> players = new ArrayList<Avatar>();
 
 		for (int i = 0; i < infoPlayers.length; i++) {
-			
 
 			String[] player = infoPlayers[i].split("/");
 			int id = Integer.parseInt(player[0]);
@@ -97,15 +91,13 @@ public class Controller {
 			if (this.id == id && alive == false) {
 				return null;
 			}
-				
-				Avatar player_avatar = new Avatar(nickname, id);
-				player_avatar.setColor(new Color(rgb));
-				player_avatar.setPosX(posX);
-				player_avatar.setPosY(posY);
-				player_avatar.setRadious(radious);
-				player_avatar.setAlive(alive);
-				players.add(player_avatar);
-			
+			Avatar player_avatar = new Avatar(nickname, id);
+			player_avatar.setColor(new Color(rgb));
+			player_avatar.setPosX(posX);
+			player_avatar.setPosY(posY);
+			player_avatar.setRadious(radious);
+			player_avatar.setAlive(alive);
+			players.add(player_avatar);
 		}
 
 		return players;
@@ -202,10 +194,7 @@ public class Controller {
 	public void showLose() {
 		String message = "";
 		message = "¡¡ You Lose !!";
-		if(isObserver) {
-			main_Agario.showMessage(message);
-			
-		}
+		main_Agario.showMessage(message);
 		System.out.println("lose");
 	}
 
@@ -216,11 +205,7 @@ public class Controller {
 
 	public void showWin() {
 		String message = "¡¡ You Win !!";
-		
-		if(isObserver) {
-			
-			System.out.println("win");
-		}
+		System.out.println("win");
 		main_Agario.showMessage(message);
 	}
 
@@ -234,14 +219,5 @@ public class Controller {
 	public void cleanMessage() {
 		main_Agario.showMessage("");
 	}
-
-	public boolean isObserver() {
-		return isObserver;
-	}
-
-	public void setObserver(boolean isObserver) {
-		this.isObserver = isObserver;
-	}
-	
 
 }

@@ -3,7 +3,6 @@ package Client;
 import java.io.*;
 import java.net.Socket;
 import control.Controller;
-import music.SongUDPClient;
 
 public class Client_Play_Game extends Thread {
 
@@ -18,8 +17,6 @@ public class Client_Play_Game extends Thread {
 		this.port = port;
 		try {
 			this.socket = new Socket(Controller.SERVER_ADRESS, port);
-			SongUDPClient song = new SongUDPClient();
-			song.start();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -47,8 +44,6 @@ public class Client_Play_Game extends Thread {
 
 			controller.initializeWorld(infoPlayers, infoBalls);
 			controller.startMoving();
-			
-			
 			
 			boolean control = true;
 			while (control) {
