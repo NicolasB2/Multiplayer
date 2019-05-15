@@ -1,13 +1,13 @@
-package web;
+package web.register;
 
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import gui.Main_Agario;
 
-public class LoginServer {
+public class RegisterServer {
 
-	public LoginServer() {
+
+	public RegisterServer() {
 
 		try {
 			ServerSocket serverSocket = new ServerSocket(8081);
@@ -16,7 +16,7 @@ public class LoginServer {
 			while (true) {
 
 				Socket remote = serverSocket.accept();
-				new Thread(new LoginThread(remote)).start();
+				new Thread(new RegisterThread(remote)).start();
 
 			}
 
@@ -26,7 +26,6 @@ public class LoginServer {
 	}
 
 	public static void main(String[] args) {
-		LoginServer ls = new LoginServer();
+		RegisterServer rs = new RegisterServer();
 	}
-
 }

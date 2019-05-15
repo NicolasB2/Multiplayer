@@ -1,4 +1,4 @@
-package web;
+package web.login;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

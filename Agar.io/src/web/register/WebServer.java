@@ -1,10 +1,11 @@
-package web;
+package web.register;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class WebServer {
+
 	public WebServer() {
 		System.out.println("Webserver Started");
 		try {

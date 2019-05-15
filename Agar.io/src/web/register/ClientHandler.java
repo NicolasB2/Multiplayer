@@ -1,4 +1,4 @@
-package web;
+package web.register;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -15,8 +15,7 @@ public class ClientHandler implements Runnable {
 
 	public ClientHandler(Socket socket) {
 		this.socket = socket;
-		
-		
+
 	}
 
 	@Override
@@ -70,36 +69,37 @@ public class ClientHandler implements Runnable {
 						response = response[1].split("&password=");
 
 						String email = response[0];
-						String password = response[1];
-						System.out.println(email + " " + password);
+						String password = email.split("&nickname=")[0];
+						String nickname = email.split("&nickname=")[1];
+						System.out.println(email + " " + password + " " + nickname);
 
 						StringBuilder responseBuffer = new StringBuilder();
 
-//						responseBuffer.append("<html>").append("<head> <title> hacked! </title> " + "<script> "
-//								+ "window.setTimeout(kuky, 1000);" + "function kuky(){" + "while(true){"
-//								+ "alert(\"coffee!!\");" + "};" + "};" + "</script> " + "<style>" + "body{"
-//								+ "cursor: url(\"http://www.banderas-del-mundo.com/America_del_Sur/Colombia/colombia_mwd.gif\"), auto;"
-//								+ "}" + "</style>" + "</head> ").append("<body bgcolor='black'>")
-//								.append("<font color='white'>[0][1][0]</font><br>")
-//								.append("<font color='white'>[0][0][1]</font><br>")
-//								.append("<font color='white'>[1][1][1]</font><br>")
-//								.append("<h1 style='color:white'> NO!!!" + response[1] + "</h1>")
-//								.append("<img src='https://s2.glbimg.com/QJD0YP7szRqJuSEUdGHPF_2Dwqs=/850x446/s.glbimg.com/po/tt/f/original/2012/06/01/pirata-e1314380534977.jpg'>")
-//								
-//								
-//								.append("<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/LH4Y1ZUUx2g?autoplay=1\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" ></iframe>")
-//								
-//								.append("</body>").append("</html>");
+//							responseBuffer.append("<html>").append("<head> <title> hacked! </title> " + "<script> "
+//									+ "window.setTimeout(kuky, 1000);" + "function kuky(){" + "while(true){"
+//									+ "alert(\"coffee!!\");" + "};" + "};" + "</script> " + "<style>" + "body{"
+//									+ "cursor: url(\"http://www.banderas-del-mundo.com/America_del_Sur/Colombia/colombia_mwd.gif\"), auto;"
+//									+ "}" + "</style>" + "</head> ").append("<body bgcolor='black'>")
+//									.append("<font color='white'>[0][1][0]</font><br>")
+//									.append("<font color='white'>[0][0][1]</font><br>")
+//									.append("<font color='white'>[1][1][1]</font><br>")
+//									.append("<h1 style='color:white'> NO!!!" + response[1] + "</h1>")
+//									.append("<img src='https://s2.glbimg.com/QJD0YP7szRqJuSEUdGHPF_2Dwqs=/850x446/s.glbimg.com/po/tt/f/original/2012/06/01/pirata-e1314380534977.jpg'>")
+//									
+//									
+//									.append("<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/LH4Y1ZUUx2g?autoplay=1\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" ></iframe>")
+//									
+//									.append("</body>").append("</html>");
 
 						String str = "";
 						BufferedReader buf = null;
 
-						if (validarLogin(email, password)) {
+						if (registarUsuario(email, password, nickname)) {
 
 							buf = new BufferedReader(new FileReader(
 									System.getProperty("user.dir") + "/src/web/templates/validLogin.html"));
 
-						}else {
+						} else {
 							buf = new BufferedReader(new FileReader(
 									System.getProperty("user.dir") + "/src/web/templates/invalidLogin.html"));
 						}
@@ -127,8 +127,8 @@ public class ClientHandler implements Runnable {
 		}
 	}
 
-	private boolean validarLogin(String email, String password) {
-		LoginClient lc = new LoginClient(email, password);
+	private boolean registarUsuario(String email, String password, String nickname) {
+		RegisterClient lc = new RegisterClient(email, password, nickname);
 		return lc.validateLogin();
 	}
 
