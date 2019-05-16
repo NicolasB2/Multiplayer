@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 import Client.Client_Login_Signin;
 import Client.Client_Play_Game;
@@ -196,6 +197,13 @@ public class Controller {
 		message = "¡¡ You Lose !!";
 		main_Agario.showMessage(message);
 		System.out.println("lose");
+		
+		String data = "";
+		Avatar a = getAvatar();
+		Date fecha = new Date();
+		
+		data += fecha.toString()+";"+a.getAliment()+";"+a.getRadious()+";"+"no;"+";";
+		DataBase.addScore(a.getEmail(), data);
 	}
 
 	public void showWait() {
@@ -207,6 +215,13 @@ public class Controller {
 		String message = "¡¡ You Win !!";
 		System.out.println("win");
 		main_Agario.showMessage(message);
+		
+		String data = "";
+		Avatar a = getAvatar();
+		Date fecha = new Date();
+		
+		data += fecha.toString()+";"+a.getAliment()+";"+a.getRadious()+";"+"si;"+";";
+		DataBase.addScore(a.getEmail(), data);
 	}
 
 	public boolean youWin() {

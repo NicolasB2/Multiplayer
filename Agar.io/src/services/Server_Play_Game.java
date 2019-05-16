@@ -4,11 +4,14 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import control.DataBase;
+
 public class Server_Play_Game extends Thread {
 
 	private Server server;
 	private ServerSocket serverSocket;
 	private Socket socket;
+	private String id;
 
 	public Server_Play_Game(Server server) {
 		this.server = server;

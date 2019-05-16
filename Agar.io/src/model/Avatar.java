@@ -19,7 +19,9 @@ public class Avatar implements Serializable {
 
 	private static Random random = new Random();
 
+	private int aliment;
 	private String nickName;
+	private String email;
 	private double posX;
 	private double posY;
 	private double radious;
@@ -83,13 +85,15 @@ public class Avatar implements Serializable {
 		return false;
 	}
 
-	public void check_Collision(Avatar other) {
+	public boolean check_Collision(Avatar other) {
 		boolean c = collision(other);
 		if (c == true && other != null) {
-			this.radious += (other.getRadious()/3);
+			this.radious += (other.getRadious() / 3);
 			other.setAlive(false);
+			aliment = aliment++;
+			return true;
 		}
-
+		return false;
 	}
 
 	public double getRadious() {
@@ -162,6 +166,22 @@ public class Avatar implements Serializable {
 
 	public void setPosY(double posY) {
 		this.posY = posY;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public int getAliment() {
+		return aliment;
+	}
+
+	public void setAliment(int aliment) {
+		this.aliment = aliment;
 	}
 
 }

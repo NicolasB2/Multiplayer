@@ -64,6 +64,7 @@ public class Server {
 			gamers++;
 			int id = nextId();
 			game.addAvatar(findNickname(email), id);
+			game.getAvatar(id).setEmail(email);
 			System.out.println("gamers: " + gamers);
 			return id;
 		} else {
