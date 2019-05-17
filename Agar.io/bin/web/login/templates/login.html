@@ -2,56 +2,68 @@
 <html>
 
 <head>
-<style>
+    <style>
+        body {
+            background-image:
+                url("https://backgrounddownload.com/wp-content/uploads/2018/09/agario-background-7.png");
+            height: 100%;
+            background-position: center;
+            background-size: 100%;
+        }
 
-	datos.{
-		order : 7px dotted;
-		margin: 10px;
-		background-color: blue;
-	}
+         .login {
+	        background-color: blue;
+	        margin-left: 350px;
+	        margin-right: 350px;
+	        padding-top: 15px;
+	        padding-bottom: 15px;
+	        padding-left: 10px
+   		}
 
-	body {
-		background-image:
-			url("https://backgrounddownload.com/wp-content/uploads/2018/09/agario-background-7.png");
-		height: 100%;
-		background-repeat: no-repeat;
-		background-size: cover;
+   		.labels{
+   			background-color: green;
+   		}
 
-	}
-	h1{
-		font-size: 50%;
-		text-align: center;
-	}
-
-	form {
-		color: black;
-		text-align: center;
-		display: block;
-	}
-
-</style>
+   		h1{
+   			text-align: center
+   		}
+	    input {
+	        padding-right: 100px;
+	        align-self: center;
+	        justify-self: center;
+	    }
+    </style>
 
 
-<title>Agar.io Login</title>
+    <title>Login Agar.io</title>
 </head>
 
 <body>
-	<div class=datos>
-		<h1>A00137580</h1>
-		<h1>Nicolas Biojo Bermeo</h1>
+    <form method="GET">
 
-		<form method="GET">
-				<p>
-					<b> Ingresar</b>
-				</p>
+        <div class="login">
 
-				<label>Email: </label><br>
-				<input type="text" name="user"><br>
-				<label>Password: </label> <br>
-				<input type="text" name="password"><br>
-				<input type="submit" value="ingresar">
-		</form>
-	</div>
+            <div class="datos">
+                <div class="dato">A00137580</div>
+                <div class="dato">Nicolas Biojo Bermeo</div>
+
+            </div>
+
+            <div class="labels">
+
+                <h1>Username<h1><br>
+                <input type="text" name="user" placeholder="Username or email"><br>
+                <h1>Password<h1><br>
+                <input type="text" name="password" placeholder="Password"><br>
+                <input id="btn-submit" type="submit" value="send">
+
+
+                <br>
+
+            </div>
+        </div>
+
+    </form>
 </body>
 
 </html>
