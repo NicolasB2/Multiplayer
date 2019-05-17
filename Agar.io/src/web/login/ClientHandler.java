@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import control.DataBase;
@@ -75,29 +76,84 @@ public class ClientHandler implements Runnable {
 
 						StringBuilder responseBuffer = new StringBuilder();
 
-//						responseBuffer.append("<html>").append("<head> <title> hacked! </title> " + "<script> "
-//								+ "window.setTimeout(kuky, 1000);" + "function kuky(){" + "while(true){"
-//								+ "alert(\"coffee!!\");" + "};" + "};" + "</script> " + "<style>" + "body{"
-//								+ "cursor: url(\"http://www.banderas-del-mundo.com/America_del_Sur/Colombia/colombia_mwd.gif\"), auto;"
-//								+ "}" + "</style>" + "</head> ").append("<body bgcolor='black'>")
-//								.append("<font color='white'>[0][1][0]</font><br>")
-//								.append("<font color='white'>[0][0][1]</font><br>")
-//								.append("<font color='white'>[1][1][1]</font><br>")
-//								.append("<h1 style='color:white'> NO!!!" + response[1] + "</h1>")
-//								.append("<img src='https://s2.glbimg.com/QJD0YP7szRqJuSEUdGHPF_2Dwqs=/850x446/s.glbimg.com/po/tt/f/original/2012/06/01/pirata-e1314380534977.jpg'>")
-//								
-//								
-//								.append("<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/LH4Y1ZUUx2g?autoplay=1\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" ></iframe>")
-//								
-//								.append("</body>").append("</html>");
-
 						String str = "";
 						BufferedReader buf = null;
 
 						if (validarLogin(email, password)) {
 
-							buf = new BufferedReader(new FileReader(
-									System.getProperty("user.dir") + "/src/web/login/templates/validLogin.html"));
+								DataBase.loadScores();
+								ArrayList<String> data = DataBase.map.get(email);
+								
+								responseBuffer =  new StringBuilder();
+								responseBuffer
+								.append("<html>")
+								.append("<head>")
+								.append("<style>")
+									.append("body{")
+										.append("background-image: url(\"https://backgrounddownload.com/wp-content/uploads/2018/09/agario-background-7.png\");")
+										.append("margin : 0;")
+										.append("background-size: cover;")
+										.append("background-attachment: fixed;")
+										.append("text-align: center;")
+									.append("}")
+									.append(".table_title{")
+										.append("text-align: center;")
+										.append("color:black;")
+										.append("font-size: 30px;")
+									.append("}")
+									.append("table{")
+										.append("margin : auto;")
+										.append("border: 2px solid #000;")
+										.append("border-collapse: collapse;")
+										.append("width: 70%;")
+									.append("}")
+									.append("table th{")
+										.append("padding: 4px;")
+										.append("background-color: blue;")
+										.append("text-align: center;")
+										.append("font-size: 20px;")
+									.append("}")
+									.append("table td{")
+										.append("border: 1px solid #000;")
+										.append("padding: 13px;")
+										.append("background-color: white;")
+										.append("text-align: center;")
+										.append("font-size: 13px;")
+									.append("}")
+									.append("table tr:hover{")
+										.append("background: #666666;")
+									.append("}")
+									.append("table td:hover{")
+									.append("background: #749ff7;")
+									.append("color:white;")
+								.append("}")
+								.append("</style>")
+								.append("<title>Table</title>")
+								.append("</head>")
+								.append("<body>")
+								.append("<h1> Registro del jugador</h1>")
+								.append("<table>")
+								.append("<tr>")
+								.append("<th><strong>Date</strong></th>")
+								.append("<th><strong>comidos</strong></th>")
+								.append("<th><strong>Score</strong></th>")
+								.append("<th><strong>gano</strong></th>");
+								
+								for (int i = 0; i < data.size(); i++) {
+									String[] list = data.get(i).split(";"); 
+									responseBuffer.append("<tr>");
+									responseBuffer.append("<td>"+list[0]+"</td>");
+									responseBuffer.append("<td>"+list[1]+"</td>");
+									responseBuffer.append("<td>"+list[2]+"</td>");
+									responseBuffer.append("<td>"+list[3]+"</td>");
+									responseBuffer.append("<tr>");
+							}
+								responseBuffer.append("<body>")
+								.append("<table>")
+								.append("<body>")
+								.append("</html>");
+								
+								sendResponse(socket, 200, responseBuffer.toString());		
 
 						}else {
 							buf = new BufferedReader(new FileReader(

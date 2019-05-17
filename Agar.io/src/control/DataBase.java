@@ -11,7 +11,7 @@ public class DataBase {
 	public final static String GAME_PATH = "./resources/data/game.txt";
 	public final static String GAME_USER_PATH = "./resources/data/userGame.txt";
 	private static ArrayList<Player> players = new ArrayList<Player>();
-	private static Hashtable<String, ArrayList<String>> map = new Hashtable<String, ArrayList<String>>();
+	public static Hashtable<String, ArrayList<String>> map = new Hashtable<String, ArrayList<String>>();
 
 	public Game loadGame() {
 
@@ -126,10 +126,10 @@ public class DataBase {
 
 	public static void addScore(String email, String data) {
 		loadScores();
-		if(map!=null) {
-			if(map.containsKey(email)) {
+		if (map != null) {
+			if (map.containsKey(email)) {
 				map.get(email).add(data);
-			}else {
+			} else {
 				ArrayList<String> arrayScore = new ArrayList<String>();
 				arrayScore.add(data);
 				map.put(email, arrayScore);
@@ -140,14 +140,18 @@ public class DataBase {
 
 	public static void main(String[] args) {
 
-		DataBase.registerUser("david", "123", "david");
-		DataBase.registerUser("nicolas", "123", "nicolas");
-		DataBase.registerUser("Sara", "123", "Sara");
-		DataBase.registerUser("daniela", "123", "daniela");
-		
-		
-
-//		DataBase.addScore("nicolas", 123454);
+//		DataBase.registerUser("david", "123", "david");
+//		DataBase.registerUser("nicolas", "123", "nicolas");
+//		DataBase.registerUser("Sara", "123", "Sara");
+//		DataBase.registerUser("daniela", "123", "daniela");
+//
+		saveScore();
+		String a = "12/3/2001;" + "56;" + "5678;" + "si";
+		DataBase.addScore("nicolas", a);
+		DataBase.addScore("nicolas", a);
+		DataBase.addScore("nicolas", a);
+		DataBase.addScore("nicolas", a);
+		DataBase.addScore("nicolas", a);
 //		DataBase.addScore("nicolas", 5673);
 //		DataBase.addScore("david", 7653);
 //		DataBase.addScore("david", 9876);
@@ -155,7 +159,7 @@ public class DataBase {
 //		DataBase.addScore("Sara", 67890);
 //		DataBase.addScore("daniela", 34567);
 //		DataBase.addScore("daniela", 5677);
-		
+
 //		DataBase.loadScores();
 //		System.out.println(DataBase.map.get("nicolas").size());
 	}

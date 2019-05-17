@@ -3,14 +3,32 @@
 
 <head>
 <style>
-body {
-	background-image:
-		url("https://backgrounddownload.com/wp-content/uploads/2018/09/agario-background-7.png");
-	height: 100%;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
+
+	datos.{
+		order : 7px dotted;
+		margin: 10px;
+		background-color: blue;
+	}
+
+	body {
+		background-image:
+			url("https://backgrounddownload.com/wp-content/uploads/2018/09/agario-background-7.png");
+		height: 100%;
+		background-repeat: no-repeat;
+		background-size: cover;
+
+	}
+	h1{
+		font-size: 50%;
+		text-align: center;
+	}
+
+	form {
+		color: black;
+		text-align: center;
+		display: block;
+	}
+
 </style>
 
 
@@ -18,18 +36,22 @@ body {
 </head>
 
 <body>
-	<form method="GET">
-		<center>
-			<p>
-				<b> Ingresar</b>
-			</p>
+	<div class=datos>
+		<h1>A00137580</h1>
+		<h1>Nicolas Biojo Bermeo</h1>
 
-			<label>Email: </label><input type="text" name="user"><br>
-			<label>Password: </label> <input type="text" name="password"><br>
-			<br> <input type="submit" value="ingresar">
+		<form method="GET">
+				<p>
+					<b> Ingresar</b>
+				</p>
 
-		</center>
-	</form>
+				<label>Email: </label><br>
+				<input type="text" name="user"><br>
+				<label>Password: </label> <br>
+				<input type="text" name="password"><br>
+				<input type="submit" value="ingresar">
+		</form>
+	</div>
 </body>
 
 </html>

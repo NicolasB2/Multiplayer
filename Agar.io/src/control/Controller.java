@@ -202,7 +202,7 @@ public class Controller {
 		Avatar a = getAvatar();
 		Date fecha = new Date();
 		
-		data += fecha.toString()+";"+a.getAliment()+";"+a.getRadious()+";"+"no;"+";";
+		data += fecha.toString()+";"+a.getAliment()+";"+a.getRadious()+";"+"no;";
 		DataBase.addScore(a.getEmail(), data);
 	}
 
@@ -220,7 +220,7 @@ public class Controller {
 		Avatar a = getAvatar();
 		Date fecha = new Date();
 		
-		data += fecha.toString()+";"+a.getAliment()+";"+a.getRadious()+";"+"si;"+";";
+		data += fecha.toString()+";"+a.getAliment()+";"+a.getRadious()+";"+"si";
 		DataBase.addScore(a.getEmail(), data);
 	}
 
