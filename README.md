@@ -2,7 +2,7 @@
 
 *Multiplayer game with server-client architecture.*
 
-*Developers:*
+**Developers**
 - Nicolas Biojo
 - David Erazo
 - Daniela LLano
